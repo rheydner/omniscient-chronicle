@@ -15,6 +15,7 @@ import {
   Trash2,
 } from 'lucide-react';
 import { useChronicleStore, useEffectiveGM } from '@/store/useChronicleStore';
+import { useConfirmStore } from '@/store/useConfirmStore';
 import {
   deleteRegionalMap,
   moveVTTPlayersToScene,
@@ -793,7 +794,14 @@ export function MapsModule() {
             <button
               type="button"
               onClick={async () => {
-                if (!window.confirm(`Excluir o mapa "${activeMap.name}"?`)) return;
+                const confirmed = await useConfirmStore.getState().ask({
+                  title: 'Excluir Mapa Regional',
+                  message: `Deseja realmente excluir o mapa "${activeMap.name}"? Todos os pontos de interesse e anotações deste mapa serão removidos.`,
+                  confirmLabel: 'Excluir Mapa',
+                  cancelLabel: 'Cancelar',
+                  variant: 'danger',
+                });
+                if (!confirmed) return;
                 await deleteRegionalMap(roomId, activeMap.id);
                 setSelectedMapId(null);
               }}

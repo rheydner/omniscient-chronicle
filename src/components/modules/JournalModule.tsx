@@ -22,6 +22,7 @@ import {
   X,
 } from 'lucide-react';
 import { useChronicleStore, useEffectiveGM } from '@/store/useChronicleStore';
+import { useConfirmStore } from '@/store/useConfirmStore';
 import {
   assignDocumentPossession,
   deleteDocument,
@@ -664,7 +665,14 @@ export function JournalModule() {
                       <button
                         type="button"
                         onClick={async () => {
-                          if (!window.confirm(`Excluir "${activeDoc.title}"?`)) return;
+                          const confirmed = await useConfirmStore.getState().ask({
+                            title: 'Excluir Documento',
+                            message: `Deseja realmente excluir "${activeDoc.title}"? O documento será removido do Chronicle e da biblioteca do VTT.`,
+                            confirmLabel: 'Excluir',
+                            cancelLabel: 'Cancelar',
+                            variant: 'danger',
+                          });
+                          if (!confirmed) return;
                           await deleteDocument(roomId, activeDoc.id);
                           setSelectedDocumentId(null);
                         }}
@@ -754,7 +762,14 @@ export function JournalModule() {
                       <button
                         type="button"
                         onClick={async () => {
-                          if (!window.confirm('Devolver esta carta ao Mestre?')) return;
+                          const confirmed = await useConfirmStore.getState().ask({
+                            title: 'Devolver Carta ao Mestre',
+                            message: 'Deseja devolver esta carta física ao Cofre do Mestre? Ela deixará de estar em suas mãos.',
+                            confirmLabel: 'Devolver',
+                            cancelLabel: 'Cancelar',
+                            variant: 'warning',
+                          });
+                          if (!confirmed) return;
                           await assignDocumentPossession(roomId, activeDoc, 'gm-vault');
                           showToast('Carta devolvida ao Mestre.');
                         }}

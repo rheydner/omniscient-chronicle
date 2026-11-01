@@ -29,6 +29,7 @@ import {
   X,
 } from 'lucide-react';
 import { useChronicleStore, useEffectiveGM } from '@/store/useChronicleStore';
+import { useConfirmStore } from '@/store/useConfirmStore';
 import {
   deleteEntity,
   deleteFolder,
@@ -205,7 +206,14 @@ export function WikiModule() {
 
   const handleDeleteActive = async () => {
     if (!activeEntity) return;
-    if (!window.confirm(`Excluir permanentemente "${activeEntity.title}" do Atlas?`)) return;
+    const confirmed = await useConfirmStore.getState().ask({
+      title: 'Excluir Página do Atlas',
+      message: `Deseja realmente excluir permanentemente "${activeEntity.title}" do Atlas? Todos os vínculos e redações desta entidade serão perdidos.`,
+      confirmLabel: 'Excluir Página',
+      cancelLabel: 'Cancelar',
+      variant: 'danger',
+    });
+    if (!confirmed) return;
     await deleteEntity(roomId, activeEntity.id);
     setIsEditing(false);
     setDraft(null);
@@ -497,7 +505,14 @@ export function WikiModule() {
                   <button
                     type="button"
                     onClick={async () => {
-                      if (window.confirm(`Remover pasta "${fld.name}"?`)) {
+                      const confirmed = await useConfirmStore.getState().ask({
+                        title: 'Remover Pasta',
+                        message: `Deseja remover a pasta "${fld.name}"? Os registros contidos nela não serão apagados.`,
+                        confirmLabel: 'Remover Pasta',
+                        cancelLabel: 'Cancelar',
+                        variant: 'danger',
+                      });
+                      if (confirmed) {
                         await deleteFolder(roomId, fld.id);
                         setSelectedFolderFilter('all');
                       }

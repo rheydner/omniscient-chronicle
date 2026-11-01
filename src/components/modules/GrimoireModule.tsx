@@ -15,6 +15,7 @@ import {
   Trash2,
 } from 'lucide-react';
 import { useChronicleStore, useEffectiveGM } from '@/store/useChronicleStore';
+import { useConfirmStore } from '@/store/useConfirmStore';
 import { deleteBook, saveBook } from '@/lib/chronicle-actions';
 import { RichChronicleRenderer } from '@/components/shared/RichChronicleRenderer';
 import { RichChronicleEditor } from '@/components/shared/RichChronicleEditor';
@@ -279,7 +280,14 @@ export function GrimoireModule() {
                   <button
                     type="button"
                     onClick={async () => {
-                      if (!window.confirm(`Excluir o livro "${activeBook.title}"?`)) return;
+                      const confirmed = await useConfirmStore.getState().ask({
+                        title: 'Excluir Tomo do Grimório',
+                        message: `Deseja realmente excluir o livro "${activeBook.title}"? Todos os capítulos e anotações registrados nele serão removidos.`,
+                        confirmLabel: 'Excluir Tomo',
+                        cancelLabel: 'Cancelar',
+                        variant: 'danger',
+                      });
+                      if (!confirmed) return;
                       await deleteBook(roomId, activeBook.id);
                       setSelectedBookId(null);
                     }}

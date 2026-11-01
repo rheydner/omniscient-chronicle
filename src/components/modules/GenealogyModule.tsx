@@ -24,6 +24,7 @@ import {
   User,
 } from 'lucide-react';
 import { useChronicleStore, useEffectiveGM } from '@/store/useChronicleStore';
+import { useConfirmStore } from '@/store/useConfirmStore';
 import { deleteGenealogyTree, saveGenealogyTree } from '@/lib/chronicle-actions';
 import type {
   GenealogyBond,
@@ -435,7 +436,14 @@ export function GenealogyModule() {
                 <button
                   type="button"
                   onClick={async () => {
-                    if (!window.confirm(`Excluir árvore "${activeTree.name}"?`)) return;
+                    const confirmed = await useConfirmStore.getState().ask({
+                      title: 'Excluir Árvore Genealógica',
+                      message: `Deseja realmente excluir a árvore "${activeTree.name}"? Todos os nós familiares e linhagens desta árvore serão removidos.`,
+                      confirmLabel: 'Excluir Árvore',
+                      cancelLabel: 'Cancelar',
+                      variant: 'danger',
+                    });
+                    if (!confirmed) return;
                     await deleteGenealogyTree(roomId, activeTree.id);
                     setSelectedTreeId(null);
                   }}

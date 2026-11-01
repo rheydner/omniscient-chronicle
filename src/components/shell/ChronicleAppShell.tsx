@@ -32,6 +32,8 @@ import { useChronicleSync } from '@/hooks/useChronicleSync';
 import { useChronicleStore, useEffectiveGM } from '@/store/useChronicleStore';
 import { CommandPaletteModal } from '@/components/shared/CommandPaletteModal';
 import { FloatingSheetViewerModal } from '@/components/shared/FloatingSheetViewerModal';
+import { ConfirmModal } from '@/components/ui/ConfirmModal';
+import { useConfirmStore } from '@/store/useConfirmStore';
 import { WikiModule } from '@/components/modules/WikiModule';
 import { JournalModule } from '@/components/modules/JournalModule';
 import { GraphModule } from '@/components/modules/GraphModule';
@@ -124,7 +126,15 @@ export function ChronicleAppShell() {
   const worldClock = useMemo(() => buildWorldClockPayload(calendar), [calendar]);
 
   const handlePurgeDemo = async () => {
-    if (!confirm('Deseja limpar todos os dados de demonstração (Lorde Valerius, Culto Carmim, etc.) desta sala?')) {
+    const confirmed = await useConfirmStore.getState().ask({
+      title: 'Limpar Dados de Exemplo',
+      message:
+        'Deseja realmente limpar todos os dados de demonstração (Lorde Valerius, Culto Carmim, etc.) desta sala? Esta ação é definitiva.',
+      confirmLabel: 'Limpar Tudo',
+      cancelLabel: 'Cancelar',
+      variant: 'danger',
+    });
+    if (!confirmed) {
       return;
     }
     setIsPurging(true);
@@ -356,6 +366,7 @@ export function ChronicleAppShell() {
       {/* Global Modals */}
       <CommandPaletteModal />
       <FloatingSheetViewerModal />
+      <ConfirmModal />
     </div>
   );
 }

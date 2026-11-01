@@ -8,14 +8,16 @@ import { useAuth } from '@/hooks/useAuth';
 
 export function AuthGuard({ children }: { children: React.ReactNode }) {
   const { status, user } = useAuth();
+  const [authError, setAuthError] = React.useState<string | null>(null);
 
   const handleGoogleLogin = async () => {
     try {
+      setAuthError(null);
       const provider = new GoogleAuthProvider();
       await signInWithPopup(auth, provider);
-    } catch (err) {
+    } catch (err: any) {
       console.error('[Chronicle Auth] Erro no login Google:', err);
-      alert('Falha ao autenticar com o Google. Verifique se pop-ups estão permitidos.');
+      setAuthError('Falha ao autenticar com o Google. Verifique se pop-ups estão permitidos em seu navegador.');
     }
   };
 
@@ -60,6 +62,13 @@ export function AuthGuard({ children }: { children: React.ReactNode }) {
             <p className="text-zinc-400 text-xs mt-1.5 mb-7 text-pretty">
               Arquivo de Campanha & Documentos de Mundo
             </p>
+
+            {/* Error Message */}
+            {authError && (
+              <div className="w-full mb-4 p-3 rounded-xl bg-red-950/50 border border-red-800/60 text-xs text-red-300 text-left">
+                {authError}
+              </div>
+            )}
 
             {/* Google Sign In Action */}
             <button

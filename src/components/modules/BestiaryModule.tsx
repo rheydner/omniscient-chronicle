@@ -17,6 +17,7 @@ import {
   Zap,
 } from 'lucide-react';
 import { useChronicleStore, useEffectiveGM } from '@/store/useChronicleStore';
+import { useConfirmStore } from '@/store/useConfirmStore';
 import {
   deleteCreature,
   saveCreature,
@@ -554,7 +555,14 @@ export function BestiaryModule() {
                     <button
                       type="button"
                       onClick={async () => {
-                        if (!window.confirm(`Excluir "${activeCreature.name}"?`)) return;
+                        const confirmed = await useConfirmStore.getState().ask({
+                          title: 'Excluir Criatura do Bestiário',
+                          message: `Deseja realmente excluir "${activeCreature.name}"? A ficha técnica desta criatura será removida.`,
+                          confirmLabel: 'Excluir Criatura',
+                          cancelLabel: 'Cancelar',
+                          variant: 'danger',
+                        });
+                        if (!confirmed) return;
                         await deleteCreature(roomId, activeCreature.id);
                         setSelectedCreatureId(null);
                       }}
