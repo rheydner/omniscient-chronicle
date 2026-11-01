@@ -262,8 +262,9 @@ export function ChronicleAppShell() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hidden xl:flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-zinc-900 border border-zinc-800 hover:border-cyan-500/50 text-xs text-zinc-400 hover:text-zinc-200 transition-colors"
+                title="Abrir Omniscient ID (Fichas dos Operadores)"
               >
-                <span>Fichas</span>
+                <span>Omniscient ID</span>
                 <ExternalLink className="w-3 h-3 text-cyan-400" />
               </a>
 
