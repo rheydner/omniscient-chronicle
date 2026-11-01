@@ -577,7 +577,7 @@ export function JournalModule() {
                     <div className="flex items-center gap-2">
                       <Hand className="w-4 h-4 text-cyan-400" />
                       <span className="text-xs font-semibold text-zinc-100">
-                        Posse Física do Documento:
+                        Liberar na Biblioteca do VTT:
                       </span>
                       <select
                         value={currentHolderSelectValue}
@@ -585,10 +585,10 @@ export function JournalModule() {
                           const val = e.target.value;
                           if (val === 'gm-vault') {
                             await assignDocumentPossession(roomId, activeDoc, 'gm-vault');
-                            showToast('Documento recolhido para o Cofre do Mestre.');
+                            showToast('Documento recolhido para o Cofre do Mestre (Oculto no VTT).');
                           } else if (val === 'party-public') {
                             await assignDocumentPossession(roomId, activeDoc, 'party-public');
-                            showToast('Documento revelado para toda a mesa!');
+                            showToast('Documento liberado na Biblioteca de todos os jogadores!');
                           } else {
                             const found = holderCandidates.find((c) => c.key === val);
                             if (found) {
@@ -598,19 +598,19 @@ export function JournalModule() {
                                 email: found.email,
                                 name: found.name,
                               });
-                              showToast(`Carta entregue exclusivamente nas mãos de ${found.name}!`);
+                              showToast(`Carta liberada exclusivamente na Biblioteca de ${found.name}!`);
                             }
                           }
                         }}
                         className="px-2.5 py-1.5 text-xs rounded-lg bg-zinc-950 border border-zinc-700 text-zinc-100"
                       >
-                        <option value="gm-vault">Cofre do Mestre (Oculto)</option>
-                        <option value="party-public">Público na Mesa Toda</option>
+                        <option value="gm-vault">Cofre do Mestre (Oculto no VTT)</option>
+                        <option value="party-public">Liberar para Todos os Jogadores</option>
                         {holderCandidates.length > 0 && (
                           <optgroup label="Entregar em Mãos (Posse Exclusiva)">
                             {holderCandidates.map((cand) => (
                               <option key={cand.key} value={cand.key}>
-                                {cand.label}
+                                Entregar para {cand.label}
                               </option>
                             ))}
                           </optgroup>
