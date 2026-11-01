@@ -124,7 +124,7 @@ export type EntityCategory =
   | 'location'
   | 'faction'
   | 'item'
-  | 'ritual'
+  | 'case'
   | 'event'
   | 'custom';
 
@@ -383,11 +383,11 @@ export interface WorldCalendarConfig {
 
 export type ChronosEventCategory =
   | 'session'
-  | 'war'
-  | 'discovery'
-  | 'cataclysm'
-  | 'ritual'
-  | 'foundation';
+  | 'investigation'
+  | 'incident'
+  | 'operation'
+  | 'milestone'
+  | 'document';
 
 export interface ChronosEvent {
   id: string;

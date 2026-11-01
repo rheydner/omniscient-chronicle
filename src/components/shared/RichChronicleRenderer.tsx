@@ -96,8 +96,8 @@ export function RichChronicleRenderer({
               isSepia
                 ? 'bg-[#e5d7b8] text-[#5c3d14] border border-[#bfa77a] hover:bg-[#dcc9a1]'
                 : targetType === 'character'
-                ? 'bg-[#4fa3b8]/15 text-[#7cc6d8] border border-[#4fa3b8]/35 hover:bg-[#4fa3b8]/25'
-                : 'bg-[#d4a359]/15 text-[#e2b56e] border border-[#d4a359]/35 hover:bg-[#d4a359]/25'
+                ? 'bg-cyan-600/15 text-cyan-300 border border-cyan-500/35 hover:bg-cyan-600/25'
+                : 'bg-cyan-600/15 text-cyan-300 border border-cyan-500/35 hover:bg-cyan-600/25'
             }`}
           >
             <span>@{label}</span>
@@ -124,14 +124,14 @@ export function RichChronicleRenderer({
                 isUnlocked
                   ? isSepia
                     ? 'bg-[#dfd2b5] text-[#221b13] border border-[#8c734b]'
-                    : 'bg-[#d4a359]/20 text-[#ece8df] border border-[#d4a359]/50'
-                  : 'bg-[#08090c] text-[#d4a359] border border-dashed border-[#c94a4a]/70 hover:border-[#d4a359]'
+                    : 'bg-cyan-600/20 text-zinc-100 border border-cyan-500/50'
+                  : 'bg-[#08090c] text-cyan-400 border border-dashed border-[#c94a4a]/70 hover:border-cyan-500'
               }`}
             >
               {isUnlocked ? (
-                <Unlock className="w-3 h-3 text-[#d4a359] shrink-0" />
+                <Unlock className="w-3 h-3 text-cyan-400 shrink-0" />
               ) : (
-                <Lock className="w-3 h-3 text-[#c94a4a] shrink-0" />
+                <Lock className="w-3 h-3 text-red-400 shrink-0" />
               )}
               <span>{secretText}</span>
             </button>
@@ -143,7 +143,7 @@ export function RichChronicleRenderer({
               className={`inline-block px-1.5 py-0.5 mx-0.5 rounded text-xs font-medium ${
                 isSepia
                   ? 'bg-[#e4d5b7] text-[#221b13] border-b border-[#8c734b]'
-                  : 'bg-[#d4a359]/15 text-[#ece8df] border-b border-[#d4a359]/50'
+                  : 'bg-cyan-600/15 text-zinc-100 border-b border-cyan-500/50'
               }`}
               title="Trecho desclassificado pelo Mestre"
             >
@@ -160,7 +160,7 @@ export function RichChronicleRenderer({
               className={`inline-block px-1.5 py-0.5 mx-0.5 rounded font-mono text-xs tracking-tight select-none cursor-not-allowed ${
                 isSepia
                   ? 'bg-[#1e1812] text-[#1e1812]'
-                  : 'bg-[#ece8df] text-[#ece8df] opacity-90'
+                  : 'bg-[#ece8df] text-zinc-100 opacity-90'
               }`}
               title="Informação Confidencial Censurada"
               aria-label="Trecho censurado"
@@ -206,7 +206,7 @@ export function RichChronicleRenderer({
               <code
                 key={i}
                 className={`px-1 py-0.5 rounded font-mono text-xs ${
-                  isSepia ? 'bg-[#e3d5b8] text-[#3a2c1a]' : 'bg-[#0e1116] text-[#d4a359]'
+                  isSepia ? 'bg-[#e3d5b8] text-[#3a2c1a]' : 'bg-zinc-950 text-cyan-400'
                 }`}
               >
                 {part.slice(1, -1)}
@@ -246,7 +246,7 @@ export function RichChronicleRenderer({
           className={`my-3 rounded-lg border ${
             isSepia
               ? 'border-[#cbb894] bg-[#eadec4]'
-              : 'border-[#222834] bg-[#0e1116]'
+              : 'border-zinc-800 bg-zinc-950'
           }`}
         >
           <button
@@ -258,9 +258,9 @@ export function RichChronicleRenderer({
           >
             <span className="flex items-center gap-1.5">
               {isOpen ? (
-                <ChevronDown className="w-3.5 h-3.5 text-[#d4a359]" />
+                <ChevronDown className="w-3.5 h-3.5 text-cyan-400" />
               ) : (
-                <ChevronRight className="w-3.5 h-3.5 text-[#d4a359]" />
+                <ChevronRight className="w-3.5 h-3.5 text-cyan-400" />
               )}
               <span>{title}</span>
             </span>
@@ -302,7 +302,7 @@ export function RichChronicleRenderer({
         <div
           key={`tbl-${tableStart}`}
           className={`my-3 overflow-x-auto rounded-lg border ${
-            isSepia ? 'border-[#cbb894]' : 'border-[#222834]'
+            isSepia ? 'border-[#cbb894]' : 'border-zinc-800'
           }`}
         >
           <table className="w-full text-left border-collapse text-xs">
@@ -311,7 +311,7 @@ export function RichChronicleRenderer({
                 className={
                   isSepia
                     ? 'bg-[#e4d5b6] text-[#221b13] border-b border-[#cbb894]'
-                    : 'bg-[#0e1116] text-[#d4a359] border-b border-[#222834]'
+                    : 'bg-zinc-950 text-cyan-400 border-b border-zinc-800'
                 }
               >
                 {headerCells.map((hc, hi) => (
@@ -328,7 +328,7 @@ export function RichChronicleRenderer({
                   className={`border-b last:border-b-0 ${
                     isSepia
                       ? 'border-[#cbb894]/60 odd:bg-[#efe4cc]'
-                      : 'border-[#222834]/70 odd:bg-[#13171e] even:bg-[#10141a]'
+                      : 'border-zinc-800/70 odd:bg-zinc-900 even:bg-[#10141a]'
                   }`}
                 >
                   {row.map((cell, ci) => (
@@ -359,7 +359,7 @@ export function RichChronicleRenderer({
       blocks.push(
         <h3
           key={`h2-${i}`}
-          className="text-base font-bold font-editorial mt-5 mb-2 pb-1 border-b border-current/10"
+          className="text-base font-bold font-sans mt-5 mb-2 pb-1 border-b border-current/10"
         >
           {renderInlineTokens(line.slice(3), `h2-${i}`)}
         </h3>
@@ -369,7 +369,7 @@ export function RichChronicleRenderer({
     }
     if (line.startsWith('# ')) {
       blocks.push(
-        <h2 key={`h1-${i}`} className="text-lg font-bold font-editorial mt-4 mb-2">
+        <h2 key={`h1-${i}`} className="text-lg font-bold font-sans mt-4 mb-2">
           {renderInlineTokens(line.slice(2), `h1-${i}`)}
         </h2>
       );
@@ -385,7 +385,7 @@ export function RichChronicleRenderer({
           className={`my-2.5 pl-3 py-1 border-l italic text-sm ${
             isSepia
               ? 'border-[#8c6d3f] text-[#473826]'
-              : 'border-[#d4a359] text-[#a5a095]'
+              : 'border-cyan-500 text-zinc-400'
           }`}
         >
           {renderInlineTokens(line.slice(2), `bq-${i}`)}
@@ -436,7 +436,7 @@ export function RichChronicleRenderer({
           ? 'text-[#221b13]'
           : isTypewriter
           ? 'text-[#dcd8ce] font-mono'
-          : 'text-[#ece8df]'
+          : 'text-zinc-100'
       }
     >
       {blocks.length > 0 ? (
@@ -449,7 +449,7 @@ export function RichChronicleRenderer({
       {audioClips.length > 0 && (
         <div className="mt-5 pt-4 border-t border-current/15 space-y-2.5">
           <div className="text-xs font-mono uppercase tracking-wider opacity-70 flex items-center gap-1.5">
-            <Volume2 className="w-3.5 h-3.5 text-[#d4a359]" />
+            <Volume2 className="w-3.5 h-3.5 text-cyan-400" />
             <span>Registros de Áudio & Fitas Anexadas</span>
           </div>
           {audioClips.map((clip) => {
@@ -461,7 +461,7 @@ export function RichChronicleRenderer({
                 className={`p-3 rounded-lg border ${
                   isSepia
                     ? 'bg-[#e8dbc0] border-[#cbb894]'
-                    : 'bg-[#0e1116] border-[#222834]'
+                    : 'bg-zinc-950 border-zinc-800'
                 }`}
               >
                 <div className="flex flex-wrap items-center justify-between gap-2">
@@ -477,7 +477,7 @@ export function RichChronicleRenderer({
                     <button
                       type="button"
                       onClick={() => setPlayingClipId(isPlaying ? null : clip.id)}
-                      className="flex items-center gap-1.5 px-2.5 py-1 rounded text-xs font-semibold bg-[#d4a359] text-[#0b0d10] hover:bg-[#e2b56e] transition-colors cursor-pointer"
+                      className="flex items-center gap-1.5 px-2.5 py-1 rounded text-xs font-semibold bg-cyan-600 text-[#0b0d10] hover:bg-cyan-500 transition-colors cursor-pointer"
                     >
                       {isPlaying ? (
                         <>
@@ -525,57 +525,57 @@ export function RichChronicleRenderer({
             <div
               style={{ left: tooltip.x, top: tooltip.y }}
               onClick={(e) => e.stopPropagation()}
-              className="fixed w-76 bg-[#13171e] text-[#ece8df] border border-[#313a4b] rounded-xl p-3.5"
+              className="fixed w-76 bg-zinc-900 text-zinc-100 border border-zinc-700 rounded-xl p-3.5"
             >
               {tooltip.type === 'character' ? (
                 (() => {
                   const ch = characters[tooltip.id];
                   if (!ch) {
                     return (
-                      <div className="text-xs text-[#a5a095]">
+                      <div className="text-xs text-zinc-400">
                         Ficha de <strong>{tooltip.label}</strong> não encontrada no banco.
                       </div>
                     );
                   }
                   return (
                     <div>
-                      <div className="flex items-center gap-2.5 pb-2.5 mb-2.5 border-b border-[#222834]">
-                        <div className="w-10 h-10 rounded-lg bg-[#0e1116] border border-[#313a4b] overflow-hidden shrink-0 flex items-center justify-center">
+                      <div className="flex items-center gap-2.5 pb-2.5 mb-2.5 border-b border-zinc-800">
+                        <div className="w-10 h-10 rounded-lg bg-zinc-950 border border-zinc-700 overflow-hidden shrink-0 flex items-center justify-center">
                           {ch.avatarUrl ? (
                             // eslint-disable-next-line @next/next/no-img-element
                             <img src={ch.avatarUrl} alt="" className="w-full h-full object-cover" />
                           ) : (
-                            <User className="w-4 h-4 text-[#4fa3b8]" />
+                            <User className="w-4 h-4 text-cyan-400" />
                           )}
                         </div>
                         <div className="min-w-0">
-                          <div className="text-xs font-mono text-[#4fa3b8] uppercase">
+                          <div className="text-xs font-mono text-cyan-400 uppercase">
                             Omniscient Sheet Live
                           </div>
                           <div className="text-sm font-bold truncate">{ch.name}</div>
-                          <div className="text-xs text-[#a5a095] truncate">
+                          <div className="text-xs text-zinc-400 truncate">
                             {ch.className || 'Operador'} · Nv. {ch.level}
                           </div>
                         </div>
                       </div>
 
                       <div className="grid grid-cols-3 gap-1.5 text-xs mb-3">
-                        <div className="p-1.5 rounded bg-[#0e1116] border border-[#222834]">
-                          <span className="text-[#a5a095] block">HP</span>
+                        <div className="p-1.5 rounded bg-zinc-950 border border-zinc-800">
+                          <span className="text-zinc-400 block">HP</span>
                           <span className="font-mono font-bold">
                             {ch.hp.current}/{ch.hp.max}
                           </span>
                         </div>
-                        <div className="p-1.5 rounded bg-[#0e1116] border border-[#222834]">
-                          <span className="text-[#a5a095] block">PE</span>
+                        <div className="p-1.5 rounded bg-zinc-950 border border-zinc-800">
+                          <span className="text-zinc-400 block">PE</span>
                           <span className="font-mono font-bold">
                             {ch.energy.current}/{ch.energy.max}
                           </span>
                         </div>
-                        <div className="p-1.5 rounded bg-[#0e1116] border border-[#222834]">
-                          <span className="text-[#a5a095] block">Defesa</span>
+                        <div className="p-1.5 rounded bg-zinc-950 border border-zinc-800">
+                          <span className="text-zinc-400 block">Defesa</span>
                           <span className="font-mono font-bold flex items-center gap-1">
-                            <Shield className="w-3 h-3 text-[#d4a359]" />
+                            <Shield className="w-3 h-3 text-cyan-400" />
                             {ch.defense ?? 10}
                           </span>
                         </div>
@@ -587,7 +587,7 @@ export function RichChronicleRenderer({
                           openFloatingSheet(ch.id);
                           setTooltip(null);
                         }}
-                        className="w-full flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-lg bg-[#4fa3b8] text-[#0b0d10] font-semibold text-xs hover:opacity-90 transition-opacity cursor-pointer"
+                        className="w-full flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-lg bg-cyan-600 text-[#0b0d10] font-semibold text-xs hover:opacity-90 transition-opacity cursor-pointer"
                       >
                         <ExternalLink className="w-3.5 h-3.5" />
                         <span>Abrir Ficha Oficial em Janela</span>
@@ -600,28 +600,28 @@ export function RichChronicleRenderer({
                   const ent = entities[tooltip.id];
                   if (!ent || (!ent.isPublicToPlayers && !isGM)) {
                     return (
-                      <div className="text-xs text-[#a5a095]">
+                      <div className="text-xs text-zinc-400">
                         Registro confidencial ou ainda não publicado pelo Mestre.
                       </div>
                     );
                   }
                   return (
                     <div>
-                      <div className="text-xs font-mono uppercase text-[#d4a359] mb-0.5">
+                      <div className="text-xs font-mono uppercase text-cyan-400 mb-0.5">
                         Atlas · {ent.customCategoryLabel || ent.category}
                       </div>
                       <div className="text-sm font-bold mb-1">{ent.title}</div>
                       {ent.subtitle && (
-                        <p className="text-xs text-[#a5a095] mb-2.5">{ent.subtitle}</p>
+                        <p className="text-xs text-zinc-400 mb-2.5">{ent.subtitle}</p>
                       )}
                       {ent.customFields.length > 0 && (
                         <div className="space-y-1 mb-3 text-xs">
                           {ent.customFields.slice(0, 2).map((cf) => (
                             <div
                               key={cf.id}
-                              className="flex items-center justify-between px-2 py-1 rounded bg-[#0e1116] border border-[#222834]"
+                              className="flex items-center justify-between px-2 py-1 rounded bg-zinc-950 border border-zinc-800"
                             >
-                              <span className="text-[#a5a095]">{cf.label}</span>
+                              <span className="text-zinc-400">{cf.label}</span>
                               <span className="font-medium">{cf.value}</span>
                             </div>
                           ))}
@@ -633,7 +633,7 @@ export function RichChronicleRenderer({
                           navigateToEntity(ent.id);
                           setTooltip(null);
                         }}
-                        className="w-full flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-lg bg-[#d4a359] text-[#0b0d10] font-semibold text-xs hover:bg-[#e2b56e] transition-colors cursor-pointer"
+                        className="w-full flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-lg bg-cyan-600 text-[#0b0d10] font-semibold text-xs hover:bg-cyan-500 transition-colors cursor-pointer"
                       >
                         <FileText className="w-3.5 h-3.5" />
                         <span>Abrir Página no Atlas</span>

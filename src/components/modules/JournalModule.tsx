@@ -253,14 +253,14 @@ export function JournalModule() {
   }, [activeDoc]);
 
   return (
-    <div className="flex flex-col lg:flex-row h-full min-h-0 bg-[#0b0d10]">
+    <div className="flex flex-col lg:flex-row h-full min-h-0 bg-zinc-950">
       {/* Left Document List */}
-      <aside className="w-full lg:w-80 shrink-0 border-b lg:border-b-0 lg:border-r border-[#222834] bg-[#0e1116] flex flex-col max-h-[36vh] lg:max-h-none">
-        <div className="p-3.5 border-b border-[#222834] space-y-2.5">
+      <aside className="w-full lg:w-80 shrink-0 border-b lg:border-b-0 lg:border-r border-zinc-800 bg-zinc-950 flex flex-col max-h-[36vh] lg:max-h-none">
+        <div className="p-3.5 border-b border-zinc-800 space-y-2.5">
           <div className="flex items-center justify-between gap-2">
             <div>
-              <h2 className="text-sm font-bold text-[#ece8df]">Diário, Dossiês & Cartas</h2>
-              <p className="text-xs text-[#a5a095]">
+              <h2 className="text-sm font-bold text-zinc-100">Diário, Dossiês & Cartas</h2>
+              <p className="text-xs text-zinc-400">
                 Posse física de pistas e projeção no VTT
               </p>
             </div>
@@ -269,7 +269,7 @@ export function JournalModule() {
                 <button
                   type="button"
                   onClick={() => setShowFolderInput((p) => !p)}
-                  className="p-1.5 rounded-lg bg-[#13171e] border border-[#222834] hover:border-[#313a4b] text-[#a5a095] hover:text-[#ece8df] cursor-pointer"
+                  className="p-1.5 rounded-lg bg-zinc-900 border border-zinc-800 hover:border-zinc-700 text-zinc-400 hover:text-zinc-100 cursor-pointer"
                   title="Nova Pasta de Dossiês"
                 >
                   <FolderPlus className="w-4 h-4" />
@@ -277,7 +277,7 @@ export function JournalModule() {
                 <button
                   type="button"
                   onClick={handleCreateDocument}
-                  className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-[#d4a359] hover:bg-[#e2b56e] text-[#0b0d10] font-semibold text-xs transition-colors cursor-pointer"
+                  className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-cyan-600 hover:bg-cyan-500 text-[#0b0d10] font-semibold text-xs transition-colors cursor-pointer"
                 >
                   <Plus className="w-3.5 h-3.5" />
                   <span>Carta</span>
@@ -294,12 +294,12 @@ export function JournalModule() {
                 onChange={(e) => setNewFolderName(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleCreateFolder()}
                 placeholder="Nome da pasta..."
-                className="flex-1 px-2.5 py-1.5 text-xs rounded-lg bg-[#13171e] border border-[#313a4b] text-[#ece8df]"
+                className="flex-1 px-2.5 py-1.5 text-xs rounded-lg bg-zinc-900 border border-zinc-700 text-zinc-100"
               />
               <button
                 type="button"
                 onClick={handleCreateFolder}
-                className="px-2.5 py-1.5 rounded-lg bg-[#d4a359] text-[#0b0d10] text-xs font-semibold cursor-pointer"
+                className="px-2.5 py-1.5 rounded-lg bg-cyan-600 text-[#0b0d10] text-xs font-semibold cursor-pointer"
               >
                 Criar
               </button>
@@ -313,8 +313,8 @@ export function JournalModule() {
                 onClick={() => setSelectedFolder('all')}
                 className={`px-2 py-0.5 rounded text-xs font-mono shrink-0 cursor-pointer ${
                   selectedFolder === 'all'
-                    ? 'bg-[#d4a359]/15 text-[#e2b56e] border border-[#d4a359]/35'
-                    : 'text-[#a5a095]'
+                    ? 'bg-cyan-600/15 text-cyan-300 border border-cyan-500/35'
+                    : 'text-zinc-400'
                 }`}
               >
                 Todas
@@ -326,11 +326,11 @@ export function JournalModule() {
                     onClick={() => setSelectedFolder(f.id)}
                     className={`flex items-center gap-1 px-2 py-0.5 rounded text-xs cursor-pointer ${
                       selectedFolder === f.id
-                        ? 'bg-[#191e27] text-[#ece8df] border border-[#313a4b]'
-                        : 'text-[#a5a095]'
+                        ? 'bg-zinc-800 text-zinc-100 border border-zinc-700'
+                        : 'text-zinc-400'
                     }`}
                   >
-                    <Folder className="w-3 h-3 text-[#d4a359]" />
+                    <Folder className="w-3 h-3 text-cyan-400" />
                     <span>{f.name}</span>
                   </button>
                   {isGM && selectedFolder === f.id && (
@@ -340,7 +340,7 @@ export function JournalModule() {
                         await deleteFolder(roomId, f.id);
                         setSelectedFolder('all');
                       }}
-                      className="ml-0.5 p-0.5 text-[#6f6b62] hover:text-[#c94a4a] cursor-pointer"
+                      className="ml-0.5 p-0.5 text-zinc-500 hover:text-red-400 cursor-pointer"
                     >
                       <X className="w-3 h-3" />
                     </button>
@@ -353,7 +353,7 @@ export function JournalModule() {
 
         <div className="flex-1 overflow-y-auto custom-scrollbar p-2 space-y-1">
           {visibleDocuments.length === 0 ? (
-            <div className="p-5 text-center text-xs text-[#6f6b62]">
+            <div className="p-5 text-center text-xs text-zinc-500">
               {isGM
                 ? 'Nenhuma carta ou dossiê registrado.'
                 : 'Você ainda não possui cartas em mãos nem documentos públicos na mesa.'}
@@ -374,29 +374,29 @@ export function JournalModule() {
                   }}
                   className={`w-full text-left px-3 py-2.5 rounded-lg border transition-colors cursor-pointer ${
                     selected
-                      ? 'bg-[#191e27] border-[#313a4b] text-[#ece8df]'
-                      : 'bg-transparent border-transparent hover:bg-[#13171e] text-[#a5a095] hover:text-[#ece8df]'
+                      ? 'bg-zinc-800 border-zinc-700 text-zinc-100'
+                      : 'bg-transparent border-transparent hover:bg-zinc-900 text-zinc-400 hover:text-zinc-100'
                   }`}
                 >
                   <div className="flex items-center justify-between gap-2">
                     <span className="text-xs font-semibold truncate">{d.title}</span>
                     {projectingThis && (
-                      <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-[#4fa3b8]/20 text-[#7cc6d8] shrink-0">
+                      <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-cyan-600/20 text-cyan-300 shrink-0">
                         VTT LIVE
                       </span>
                     )}
                   </div>
                   <div className="flex items-center justify-between gap-2 mt-1">
-                    <span className="text-[11px] font-mono text-[#6f6b62]">
+                    <span className="text-[11px] font-mono text-zinc-500">
                       {d.code || 'DOSSIÊ'}
                     </span>
                     <span
                       className={`text-[10px] font-mono px-1.5 py-0.5 rounded ${
                         d.possessionMode === 'gm-vault'
-                          ? 'bg-[#0b0d10] text-[#a5a095] border border-[#222834]'
+                          ? 'bg-zinc-950 text-zinc-400 border border-zinc-800'
                           : d.possessionMode === 'single-holder'
-                          ? 'bg-[#d4a359]/15 text-[#e2b56e]'
-                          : 'bg-[#4fa3b8]/15 text-[#7cc6d8]'
+                          ? 'bg-cyan-600/15 text-cyan-300'
+                          : 'bg-cyan-600/15 text-cyan-300'
                       }`}
                     >
                       {d.possessionMode === 'gm-vault'
@@ -416,10 +416,10 @@ export function JournalModule() {
       {/* Main Letter / Dossier Desk */}
       <main className="flex-1 overflow-y-auto custom-scrollbar p-5 lg:p-8">
         {!activeDoc && !isEditing ? (
-          <div className="max-w-md mx-auto my-16 p-6 rounded-xl bg-[#13171e] border border-[#222834] text-center space-y-3">
-            <FileText className="w-8 h-8 text-[#d4a359] mx-auto" />
-            <h3 className="text-base font-bold text-[#ece8df]">Mesa de Cartas & Evidências</h3>
-            <p className="text-xs text-[#a5a095] leading-relaxed">
+          <div className="max-w-md mx-auto my-16 p-6 rounded-xl bg-zinc-900 border border-zinc-800 text-center space-y-3">
+            <FileText className="w-8 h-8 text-cyan-400 mx-auto" />
+            <h3 className="text-base font-bold text-zinc-100">Mesa de Cartas & Evidências</h3>
+            <p className="text-xs text-zinc-400 leading-relaxed">
               {isGM
                 ? 'Entregue uma carta selada nas mãos de um único personagem, revele tarjas pretas em tempo real ou projete dossiês diretamente na tela do StarStream VTT.'
                 : 'Quando o Mestre entregar uma carta física ao seu personagem ou revelar um dossiê para o grupo, ele aparecerá aqui.'}
@@ -428,7 +428,7 @@ export function JournalModule() {
               <button
                 type="button"
                 onClick={handleCreateDocument}
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[#d4a359] hover:bg-[#e2b56e] text-[#0b0d10] font-semibold text-xs cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-cyan-600 hover:bg-cyan-500 text-[#0b0d10] font-semibold text-xs cursor-pointer"
               >
                 <Plus className="w-4 h-4" />
                 <span>Redigir Primeira Carta</span>
@@ -437,12 +437,12 @@ export function JournalModule() {
           </div>
         ) : isEditing && draft ? (
           <div className="max-w-4xl mx-auto space-y-5">
-            <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-[#222834]">
+            <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-zinc-800">
               <div>
-                <span className="text-xs font-mono uppercase text-[#d4a359]">
+                <span className="text-xs font-mono uppercase text-cyan-400">
                   Editor de Evidência & Carta Física
                 </span>
-                <h2 className="text-lg font-bold text-[#ece8df]">{draft.title}</h2>
+                <h2 className="text-lg font-bold text-zinc-100">{draft.title}</h2>
               </div>
               <div className="flex items-center gap-2">
                 <button
@@ -451,14 +451,14 @@ export function JournalModule() {
                     setIsEditing(false);
                     setDraft(null);
                   }}
-                  className="px-3 py-1.5 rounded-lg bg-[#13171e] border border-[#222834] text-xs text-[#a5a095] cursor-pointer"
+                  className="px-3 py-1.5 rounded-lg bg-zinc-900 border border-zinc-800 text-xs text-zinc-400 cursor-pointer"
                 >
                   Cancelar
                 </button>
                 <button
                   type="button"
                   onClick={handleSaveDraft}
-                  className="flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-[#d4a359] hover:bg-[#e2b56e] text-[#0b0d10] font-semibold text-xs cursor-pointer"
+                  className="flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-cyan-600 hover:bg-cyan-500 text-[#0b0d10] font-semibold text-xs cursor-pointer"
                 >
                   <Save className="w-3.5 h-3.5" />
                   <span>Salvar Documento</span>
@@ -466,20 +466,20 @@ export function JournalModule() {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 bg-[#13171e] border border-[#222834] rounded-xl p-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 bg-zinc-900 border border-zinc-800 rounded-xl p-4">
               <div className="md:col-span-2">
-                <label className="block text-xs font-medium text-[#a5a095] mb-1">
+                <label className="block text-xs font-medium text-zinc-400 mb-1">
                   Título da Carta / Dossiê
                 </label>
                 <input
                   type="text"
                   value={draft.title}
                   onChange={(e) => setDraft({ ...draft, title: e.target.value })}
-                  className="w-full px-3 py-2 text-sm rounded-lg bg-[#0e1116] border border-[#222834] text-[#ece8df]"
+                  className="w-full px-3 py-2 text-sm rounded-lg bg-zinc-950 border border-zinc-800 text-zinc-100"
                 />
               </div>
               <div>
-                <label className="block text-xs font-medium text-[#a5a095] mb-1">
+                <label className="block text-xs font-medium text-zinc-400 mb-1">
                   Código / Protocolo
                 </label>
                 <input
@@ -487,12 +487,12 @@ export function JournalModule() {
                   value={draft.code || ''}
                   onChange={(e) => setDraft({ ...draft, code: e.target.value })}
                   placeholder="DOSSIÊ #047-B"
-                  className="w-full px-3 py-2 text-sm font-mono rounded-lg bg-[#0e1116] border border-[#222834] text-[#ece8df]"
+                  className="w-full px-3 py-2 text-sm font-mono rounded-lg bg-zinc-950 border border-zinc-800 text-zinc-100"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-[#a5a095] mb-1">
+                <label className="block text-xs font-medium text-zinc-400 mb-1">
                   Estética do Papel
                 </label>
                 <select
@@ -500,7 +500,7 @@ export function JournalModule() {
                   onChange={(e) =>
                     setDraft({ ...draft, paperTheme: e.target.value as DocumentPaperTheme })
                   }
-                  className="w-full px-3 py-2 text-xs rounded-lg bg-[#0e1116] border border-[#222834] text-[#ece8df]"
+                  className="w-full px-3 py-2 text-xs rounded-lg bg-zinc-950 border border-zinc-800 text-zinc-100"
                 >
                   {(Object.keys(PAPER_THEME_LABELS) as DocumentPaperTheme[]).map((th) => (
                     <option key={th} value={th}>
@@ -511,13 +511,13 @@ export function JournalModule() {
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-[#a5a095] mb-1">Pasta</label>
+                <label className="block text-xs font-medium text-zinc-400 mb-1">Pasta</label>
                 <select
                   value={draft.folderId || ''}
                   onChange={(e) =>
                     setDraft({ ...draft, folderId: e.target.value ? e.target.value : null })
                   }
-                  className="w-full px-3 py-2 text-xs rounded-lg bg-[#0e1116] border border-[#222834] text-[#ece8df]"
+                  className="w-full px-3 py-2 text-xs rounded-lg bg-zinc-950 border border-zinc-800 text-zinc-100"
                 >
                   <option value="">Sem Pasta</option>
                   {journalFolders.map((f) => (
@@ -529,7 +529,7 @@ export function JournalModule() {
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-[#a5a095] mb-1">
+                <label className="block text-xs font-medium text-zinc-400 mb-1">
                   Imagem Escaneada / Selo (Opcional)
                 </label>
                 <div className="flex items-center gap-1.5">
@@ -538,10 +538,10 @@ export function JournalModule() {
                     value={draft.imageUrl || ''}
                     onChange={(e) => setDraft({ ...draft, imageUrl: e.target.value || null })}
                     placeholder="https://..."
-                    className="flex-1 px-2.5 py-1.5 text-xs rounded-lg bg-[#0e1116] border border-[#222834] text-[#ece8df]"
+                    className="flex-1 px-2.5 py-1.5 text-xs rounded-lg bg-zinc-950 border border-zinc-800 text-zinc-100"
                   />
-                  <label className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-[#191e27] border border-[#313a4b] text-xs cursor-pointer shrink-0">
-                    <ImagePlus className="w-3.5 h-3.5 text-[#d4a359]" />
+                  <label className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-zinc-800 border border-zinc-700 text-xs cursor-pointer shrink-0">
+                    <ImagePlus className="w-3.5 h-3.5 text-cyan-400" />
                     <span>{isUploading ? '...' : 'Upload'}</span>
                     <input
                       type="file"
@@ -572,11 +572,11 @@ export function JournalModule() {
             <div className="max-w-3xl mx-auto space-y-5">
               {/* Top Action Bar: Physical Possession + Live StarStream VTT Projection */}
               {isGM ? (
-                <div className="p-4 rounded-xl bg-[#13171e] border border-[#222834] space-y-3">
+                <div className="p-4 rounded-xl bg-zinc-900 border border-zinc-800 space-y-3">
                   <div className="flex flex-wrap items-center justify-between gap-3">
                     <div className="flex items-center gap-2">
-                      <Hand className="w-4 h-4 text-[#d4a359]" />
-                      <span className="text-xs font-semibold text-[#ece8df]">
+                      <Hand className="w-4 h-4 text-cyan-400" />
+                      <span className="text-xs font-semibold text-zinc-100">
                         Posse Física do Documento:
                       </span>
                       <select
@@ -602,7 +602,7 @@ export function JournalModule() {
                             }
                           }
                         }}
-                        className="px-2.5 py-1.5 text-xs rounded-lg bg-[#0e1116] border border-[#313a4b] text-[#ece8df]"
+                        className="px-2.5 py-1.5 text-xs rounded-lg bg-zinc-950 border border-zinc-700 text-zinc-100"
                       >
                         <option value="gm-vault">Cofre do Mestre (Oculto)</option>
                         <option value="party-public">Público na Mesa Toda</option>
@@ -626,7 +626,7 @@ export function JournalModule() {
                             await stopVTTProjection(roomId);
                             showToast('Projeção encerrada no StarStream VTT.');
                           }}
-                          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#c94a4a] text-[#ece8df] font-semibold text-xs cursor-pointer"
+                          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#c94a4a] text-zinc-100 font-semibold text-xs cursor-pointer"
                         >
                           <MonitorX className="w-3.5 h-3.5" />
                           <span>Encerrar Projeção VTT</span>
@@ -642,7 +642,7 @@ export function JournalModule() {
                                 : 'Dossiê projetado ao vivo na tela do StarStream VTT!'
                             );
                           }}
-                          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#4fa3b8] text-[#0b0d10] font-semibold text-xs hover:opacity-90 transition-opacity cursor-pointer"
+                          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-cyan-600 text-[#0b0d10] font-semibold text-xs hover:opacity-90 transition-opacity cursor-pointer"
                         >
                           <MonitorPlay className="w-3.5 h-3.5" />
                           <span>Projetar no StarStream VTT</span>
@@ -655,7 +655,7 @@ export function JournalModule() {
                           setDraft({ ...activeDoc });
                           setIsEditing(true);
                         }}
-                        className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-[#191e27] border border-[#313a4b] hover:border-[#d4a359] text-xs text-[#ece8df] cursor-pointer"
+                        className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-zinc-800 border border-zinc-700 hover:border-cyan-500 text-xs text-zinc-100 cursor-pointer"
                       >
                         <Edit3 className="w-3.5 h-3.5" />
                         <span>Editar</span>
@@ -668,7 +668,7 @@ export function JournalModule() {
                           await deleteDocument(roomId, activeDoc.id);
                           setSelectedDocumentId(null);
                         }}
-                        className="p-1.5 rounded-lg bg-[#0e1116] border border-[#222834] hover:border-[#c94a4a] text-[#a5a095] hover:text-[#c94a4a] cursor-pointer"
+                        className="p-1.5 rounded-lg bg-zinc-950 border border-zinc-800 hover:border-[#c94a4a] text-zinc-400 hover:text-red-400 cursor-pointer"
                       >
                         <Trash2 className="w-4 h-4" />
                       </button>
@@ -677,12 +677,12 @@ export function JournalModule() {
 
                   {/* GM Redaction quick actions */}
                   {activeRedactions.length > 0 && (
-                    <div className="pt-2.5 border-t border-[#222834] flex flex-wrap items-center justify-between gap-2 text-xs">
-                      <span className="flex items-center gap-1.5 text-[#a5a095]">
-                        <FileLock2 className="w-3.5 h-3.5 text-[#c94a4a]" />
+                    <div className="pt-2.5 border-t border-zinc-800 flex flex-wrap items-center justify-between gap-2 text-xs">
+                      <span className="flex items-center gap-1.5 text-zinc-400">
+                        <FileLock2 className="w-3.5 h-3.5 text-red-400" />
                         <span>
                           Tarjas Pretas neste documento:{' '}
-                          <strong className="text-[#ece8df]">
+                          <strong className="text-zinc-100">
                             {
                               activeRedactions.filter((r) =>
                                 (activeDoc.unlockedRedactions || []).includes(r.id)
@@ -702,9 +702,9 @@ export function JournalModule() {
                               unlockedRedactions: activeRedactions.map((r) => r.id),
                             })
                           }
-                          className="flex items-center gap-1 px-2 py-1 rounded bg-[#0e1116] border border-[#222834] hover:border-[#d4a359] text-[#ece8df] cursor-pointer"
+                          className="flex items-center gap-1 px-2 py-1 rounded bg-zinc-950 border border-zinc-800 hover:border-cyan-500 text-zinc-100 cursor-pointer"
                         >
-                          <Unlock className="w-3 h-3 text-[#d4a359]" />
+                          <Unlock className="w-3 h-3 text-cyan-400" />
                           <span>Revelar Tudo</span>
                         </button>
                         <button
@@ -715,9 +715,9 @@ export function JournalModule() {
                               unlockedRedactions: [],
                             })
                           }
-                          className="flex items-center gap-1 px-2 py-1 rounded bg-[#0e1116] border border-[#222834] hover:border-[#c94a4a] text-[#ece8df] cursor-pointer"
+                          className="flex items-center gap-1 px-2 py-1 rounded bg-zinc-950 border border-zinc-800 hover:border-[#c94a4a] text-zinc-100 cursor-pointer"
                         >
-                          <Lock className="w-3 h-3 text-[#c94a4a]" />
+                          <Lock className="w-3 h-3 text-red-400" />
                           <span>Censurar Tudo</span>
                         </button>
                       </div>
@@ -728,13 +728,13 @@ export function JournalModule() {
                 /* Exclusive Holding Player Controls */
                 activeDoc.possessionMode === 'single-holder' &&
                 isPlayerHolder(activeDoc) && (
-                  <div className="p-4 rounded-xl bg-[#13171e] border border-[#d4a359]/45 flex flex-wrap items-center justify-between gap-3">
+                  <div className="p-4 rounded-xl bg-zinc-900 border border-cyan-500/45 flex flex-wrap items-center justify-between gap-3">
                     <div>
-                      <div className="text-xs font-semibold text-[#e2b56e] flex items-center gap-1.5">
+                      <div className="text-xs font-semibold text-cyan-300 flex items-center gap-1.5">
                         <Hand className="w-4 h-4" />
                         <span>Esta carta está em sua posse exclusiva ({activeDoc.holderName})</span>
                       </div>
-                      <p className="text-xs text-[#a5a095] mt-0.5">
+                      <p className="text-xs text-zinc-400 mt-0.5">
                         Os outros jogadores não conseguem vê-la até que você decida mostrá-la na
                         mesa.
                       </p>
@@ -746,7 +746,7 @@ export function JournalModule() {
                           await assignDocumentPossession(roomId, activeDoc, 'party-public');
                           showToast('Você colocou a carta aberta sobre a mesa para todo o grupo!');
                         }}
-                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#d4a359] hover:bg-[#e2b56e] text-[#0b0d10] font-semibold text-xs cursor-pointer"
+                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-cyan-600 hover:bg-cyan-500 text-[#0b0d10] font-semibold text-xs cursor-pointer"
                       >
                         <Share2 className="w-3.5 h-3.5" />
                         <span>Revelar para a Mesa</span>
@@ -758,7 +758,7 @@ export function JournalModule() {
                           await assignDocumentPossession(roomId, activeDoc, 'gm-vault');
                           showToast('Carta devolvida ao Mestre.');
                         }}
-                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#191e27] border border-[#313a4b] text-xs text-[#ece8df] cursor-pointer"
+                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-800 border border-zinc-700 text-xs text-zinc-100 cursor-pointer"
                       >
                         <RotateCcw className="w-3.5 h-3.5" />
                         <span>Devolver ao Mestre</span>
@@ -772,17 +772,17 @@ export function JournalModule() {
               <div
                 className={`rounded-xl border p-6 sm:p-9 ${
                   activeDoc.paperTheme === 'sepia-parchment'
-                    ? 'bg-[#f3ead6] text-[#221b13] border-[#cbb894] font-editorial'
+                    ? 'bg-[#f3ead6] text-[#221b13] border-[#cbb894] font-sans'
                     : activeDoc.paperTheme === 'typewriter-report'
-                    ? 'bg-[#12151b] text-[#dcd8ce] border-[#313a4b] font-mono'
-                    : 'bg-[#13171e] text-[#ece8df] border-[#222834]'
+                    ? 'bg-[#12151b] text-[#dcd8ce] border-zinc-700 font-mono'
+                    : 'bg-zinc-900 text-zinc-100 border-zinc-800'
                 }`}
               >
                 <div
                   className={`flex flex-wrap items-center justify-between gap-2 pb-4 mb-5 border-b ${
                     activeDoc.paperTheme === 'sepia-parchment'
                       ? 'border-[#cbb894]'
-                      : 'border-[#222834]'
+                      : 'border-zinc-800'
                   }`}
                 >
                   <div>
@@ -790,7 +790,7 @@ export function JournalModule() {
                       className={`text-xs font-mono uppercase tracking-wider ${
                         activeDoc.paperTheme === 'sepia-parchment'
                           ? 'text-[#6e5227]'
-                          : 'text-[#d4a359]'
+                          : 'text-cyan-400'
                       }`}
                     >
                       {activeDoc.code || 'REGISTRO ARQUIVADO'}

@@ -55,7 +55,7 @@ const CATEGORY_LABELS: Record<EntityCategory, string> = {
   location: 'Local / Distrito',
   faction: 'Facção / Ordem',
   item: 'Item / Relíquia',
-  ritual: 'Ritual / Fenômeno',
+  case: 'Caso / Investigação',
   event: 'Evento Histórico',
   custom: 'Registro Custom',
 };
@@ -370,14 +370,14 @@ export function WikiModule() {
       : null;
 
   return (
-    <div className="flex flex-col lg:flex-row h-full min-h-0 bg-[#0b0d10]">
+    <div className="flex flex-col lg:flex-row h-full min-h-0 bg-zinc-950">
       {/* Left Navigation Column */}
-      <aside className="w-full lg:w-80 shrink-0 border-b lg:border-b-0 lg:border-r border-[#222834] bg-[#0e1116] flex flex-col max-h-[38vh] lg:max-h-none">
-        <div className="p-3.5 border-b border-[#222834] space-y-2.5">
+      <aside className="w-full lg:w-80 shrink-0 border-b lg:border-b-0 lg:border-r border-zinc-800 bg-zinc-950 flex flex-col max-h-[38vh] lg:max-h-none">
+        <div className="p-3.5 border-b border-zinc-800 space-y-2.5">
           <div className="flex items-center justify-between gap-2">
             <div>
-              <h2 className="text-sm font-bold text-[#ece8df]">Atlas & Wiki Modular</h2>
-              <p className="text-xs text-[#a5a095]">
+              <h2 className="text-sm font-bold text-zinc-100">Atlas & Wiki Modular</h2>
+              <p className="text-xs text-zinc-400">
                 {visibleEntities.length} registro(s) acessível(is)
               </p>
             </div>
@@ -386,7 +386,7 @@ export function WikiModule() {
                 <button
                   type="button"
                   onClick={() => setShowFolderInput((p) => !p)}
-                  className="p-1.5 rounded-lg bg-[#13171e] border border-[#222834] hover:border-[#313a4b] text-[#a5a095] hover:text-[#ece8df] transition-colors cursor-pointer"
+                  className="p-1.5 rounded-lg bg-zinc-900 border border-zinc-800 hover:border-zinc-700 text-zinc-400 hover:text-zinc-100 transition-colors cursor-pointer"
                   title="Nova Pasta"
                 >
                   <FolderPlus className="w-4 h-4" />
@@ -394,7 +394,7 @@ export function WikiModule() {
                 <button
                   type="button"
                   onClick={handleCreateEntity}
-                  className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-[#d4a359] hover:bg-[#e2b56e] text-[#0b0d10] font-semibold text-xs transition-colors cursor-pointer"
+                  className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-cyan-600 hover:bg-cyan-500 text-[#0b0d10] font-semibold text-xs transition-colors cursor-pointer"
                 >
                   <Plus className="w-3.5 h-3.5" />
                   <span>Página</span>
@@ -411,12 +411,12 @@ export function WikiModule() {
                 onChange={(e) => setNewFolderName(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleCreateFolder()}
                 placeholder="Nome da pasta..."
-                className="flex-1 px-2.5 py-1.5 text-xs rounded-lg bg-[#13171e] border border-[#313a4b] text-[#ece8df] focus:outline-none focus:border-[#d4a359]"
+                className="flex-1 px-2.5 py-1.5 text-xs rounded-lg bg-zinc-900 border border-zinc-700 text-zinc-100 focus:outline-none focus:border-cyan-500"
               />
               <button
                 type="button"
                 onClick={handleCreateFolder}
-                className="px-2.5 py-1.5 rounded-lg bg-[#d4a359] text-[#0b0d10] text-xs font-semibold cursor-pointer"
+                className="px-2.5 py-1.5 rounded-lg bg-cyan-600 text-[#0b0d10] text-xs font-semibold cursor-pointer"
               >
                 Criar
               </button>
@@ -425,13 +425,13 @@ export function WikiModule() {
 
           {/* Search */}
           <div className="relative">
-            <Search className="w-3.5 h-3.5 text-[#6f6b62] absolute left-2.5 top-1/2 -translate-y-1/2" />
+            <Search className="w-3.5 h-3.5 text-zinc-500 absolute left-2.5 top-1/2 -translate-y-1/2" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Filtrar título ou #tag..."
-              className="w-full pl-8 pr-3 py-1.5 text-xs rounded-lg bg-[#13171e] border border-[#222834] text-[#ece8df] placeholder:text-[#6f6b62] focus:outline-none focus:border-[#d4a359]"
+              className="w-full pl-8 pr-3 py-1.5 text-xs rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-100 placeholder:text-zinc-500 focus:outline-none focus:border-cyan-500"
             />
           </div>
 
@@ -442,8 +442,8 @@ export function WikiModule() {
               onClick={() => setCategoryFilter('all')}
               className={`px-2 py-1 rounded-md text-xs font-medium shrink-0 transition-colors cursor-pointer ${
                 categoryFilter === 'all'
-                  ? 'bg-[#191e27] text-[#ece8df] border border-[#313a4b]'
-                  : 'text-[#a5a095] hover:text-[#ece8df]'
+                  ? 'bg-zinc-800 text-zinc-100 border border-zinc-700'
+                  : 'text-zinc-400 hover:text-zinc-100'
               }`}
             >
               Todas
@@ -455,8 +455,8 @@ export function WikiModule() {
                 onClick={() => setCategoryFilter(cat)}
                 className={`px-2 py-1 rounded-md text-xs font-medium shrink-0 transition-colors cursor-pointer ${
                   categoryFilter === cat
-                    ? 'bg-[#191e27] text-[#d4a359] border border-[#313a4b]'
-                    : 'text-[#a5a095] hover:text-[#ece8df]'
+                    ? 'bg-zinc-800 text-cyan-400 border border-zinc-700'
+                    : 'text-zinc-400 hover:text-zinc-100'
                 }`}
               >
                 {CATEGORY_LABELS[cat].split(' ')[0]}
@@ -467,14 +467,14 @@ export function WikiModule() {
 
         {/* Folder Strip */}
         {wikiFolders.length > 0 && (
-          <div className="px-3 py-2 border-b border-[#222834] flex items-center gap-1.5 overflow-x-auto custom-scrollbar">
+          <div className="px-3 py-2 border-b border-zinc-800 flex items-center gap-1.5 overflow-x-auto custom-scrollbar">
             <button
               type="button"
               onClick={() => setSelectedFolderFilter('all')}
               className={`px-2 py-0.5 rounded text-xs font-mono shrink-0 cursor-pointer ${
                 selectedFolderFilter === 'all'
-                  ? 'bg-[#d4a359]/15 text-[#e2b56e] border border-[#d4a359]/35'
-                  : 'text-[#a5a095] hover:text-[#ece8df]'
+                  ? 'bg-cyan-600/15 text-cyan-300 border border-cyan-500/35'
+                  : 'text-zinc-400 hover:text-zinc-100'
               }`}
             >
               Tudo
@@ -486,11 +486,11 @@ export function WikiModule() {
                   onClick={() => setSelectedFolderFilter(fld.id)}
                   className={`flex items-center gap-1 px-2 py-0.5 rounded text-xs cursor-pointer ${
                     selectedFolderFilter === fld.id
-                      ? 'bg-[#191e27] text-[#ece8df] border border-[#313a4b]'
-                      : 'text-[#a5a095] hover:text-[#ece8df]'
+                      ? 'bg-zinc-800 text-zinc-100 border border-zinc-700'
+                      : 'text-zinc-400 hover:text-zinc-100'
                   }`}
                 >
-                  <Folder className="w-3 h-3 text-[#d4a359]" />
+                  <Folder className="w-3 h-3 text-cyan-400" />
                   <span>{fld.name}</span>
                 </button>
                 {isGM && selectedFolderFilter === fld.id && (
@@ -502,7 +502,7 @@ export function WikiModule() {
                         setSelectedFolderFilter('all');
                       }
                     }}
-                    className="ml-0.5 p-0.5 text-[#6f6b62] hover:text-[#c94a4a] cursor-pointer"
+                    className="ml-0.5 p-0.5 text-zinc-500 hover:text-red-400 cursor-pointer"
                     title="Excluir pasta"
                   >
                     <X className="w-3 h-3" />
@@ -517,22 +517,9 @@ export function WikiModule() {
         <div className="flex-1 overflow-y-auto custom-scrollbar p-2 space-y-1">
           {visibleEntities.length === 0 ? (
             <div className="p-4 text-center space-y-3">
-              <p className="text-xs text-[#6f6b62]">
+              <p className="text-xs text-zinc-500">
                 Nenhuma página encontrada neste filtro do Atlas.
               </p>
-              {isGM && Object.keys(entities).length === 0 && (
-                <button
-                  type="button"
-                  disabled={isSeeding}
-                  onClick={handleSeedWorld}
-                  className="w-full flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-[#191e27] border border-[#d4a359]/45 hover:border-[#d4a359] text-[#e2b56e] text-xs font-semibold transition-colors cursor-pointer"
-                >
-                  <Sparkles className="w-3.5 h-3.5" />
-                  <span>
-                    {isSeeding ? 'Populando Arquivo...' : 'Popular Mundo Demonstrativo'}
-                  </span>
-                </button>
-              )}
             </div>
           ) : (
             visibleEntities.map((ent) => {
@@ -549,8 +536,8 @@ export function WikiModule() {
                   }}
                   className={`w-full text-left px-3 py-2.5 rounded-lg border transition-colors cursor-pointer ${
                     isSelected
-                      ? 'bg-[#191e27] border-[#313a4b] text-[#ece8df]'
-                      : 'bg-transparent border-transparent hover:bg-[#13171e] text-[#a5a095] hover:text-[#ece8df]'
+                      ? 'bg-zinc-800 border-zinc-700 text-zinc-100'
+                      : 'bg-transparent border-transparent hover:bg-zinc-900 text-zinc-400 hover:text-zinc-100'
                   }`}
                 >
                   <div className="flex items-center justify-between gap-2">
@@ -558,7 +545,7 @@ export function WikiModule() {
                     <div className="flex items-center gap-1 shrink-0">
                       {!ent.isPublicToPlayers && (
                         <span
-                          className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-[#0b0d10] border border-[#222834] text-[#a5a095]"
+                          className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-950 border border-zinc-800 text-zinc-400"
                           title="Oculto no Cofre do Mestre"
                         >
                           GM
@@ -566,7 +553,7 @@ export function WikiModule() {
                       )}
                       {isGM && redactionCount > 0 && (
                         <span
-                          className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-[#c94a4a]/15 text-[#e07b7b]"
+                          className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-[#c94a4a]/15 text-red-300"
                           title="Contém Tarjas Pretas"
                         >
                           {redactionCount}
@@ -575,11 +562,11 @@ export function WikiModule() {
                     </div>
                   </div>
                   <div className="flex items-center justify-between gap-2 mt-1">
-                    <span className="text-[11px] text-[#6f6b62] truncate">
+                    <span className="text-[11px] text-zinc-500 truncate">
                       {ent.customCategoryLabel || CATEGORY_LABELS[ent.category]}
                     </span>
                     {ent.linkedCharacterId && (
-                      <span className="text-[10px] font-mono text-[#4fa3b8]">Ficha Live</span>
+                      <span className="text-[10px] font-mono text-cyan-400">Ficha Live</span>
                     )}
                   </div>
                 </button>
@@ -592,13 +579,13 @@ export function WikiModule() {
       {/* Main Content Area */}
       <main className="flex-1 overflow-y-auto custom-scrollbar p-5 lg:p-8">
         {!activeEntity && !isEditing ? (
-          <div className="max-w-lg mx-auto my-16 p-6 rounded-xl bg-[#13171e] border border-[#222834] text-center space-y-4">
-            <BookOpen className="w-8 h-8 text-[#d4a359] mx-auto" />
+          <div className="max-w-lg mx-auto my-16 p-6 rounded-xl bg-zinc-900 border border-zinc-800 text-center space-y-4">
+            <BookOpen className="w-8 h-8 text-cyan-400 mx-auto" />
             <div>
-              <h3 className="text-base font-bold text-[#ece8df]">
+              <h3 className="text-base font-bold text-zinc-100">
                 Arquivo Central Omniscient Chronicle
               </h3>
-              <p className="text-xs text-[#a5a095] mt-1 leading-relaxed">
+              <p className="text-xs text-zinc-400 mt-1 leading-relaxed">
                 {isGM
                   ? 'Crie sua primeira página de lore ou gere um mundo demonstrativo interligado com suas fichas atuais do Omniscient Sheet, cartas com posse exclusiva, grafo, linhagem, calendário e bestiário.'
                   : 'Aguardando o Mestre liberar os primeiros registros públicos da campanha.'}
@@ -609,7 +596,7 @@ export function WikiModule() {
                 <button
                   type="button"
                   onClick={handleCreateEntity}
-                  className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[#d4a359] hover:bg-[#e2b56e] text-[#0b0d10] font-semibold text-xs transition-colors cursor-pointer"
+                  className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-cyan-600 hover:bg-cyan-500 text-[#0b0d10] font-semibold text-xs transition-colors cursor-pointer"
                 >
                   <Plus className="w-4 h-4" />
                   <span>Criar Primeira Página</span>
@@ -618,9 +605,9 @@ export function WikiModule() {
                   type="button"
                   disabled={isSeeding}
                   onClick={handleSeedWorld}
-                  className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[#191e27] border border-[#313a4b] hover:border-[#d4a359] text-[#ece8df] font-semibold text-xs transition-colors cursor-pointer"
+                  className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-zinc-800 border border-zinc-700 hover:border-cyan-500 text-zinc-100 font-semibold text-xs transition-colors cursor-pointer"
                 >
-                  <Sparkles className="w-4 h-4 text-[#d4a359]" />
+                  <Sparkles className="w-4 h-4 text-cyan-400" />
                   <span>
                     {isSeeding ? 'Criando Ecossistema...' : 'Popular Mundo Demonstrativo'}
                   </span>
@@ -631,12 +618,12 @@ export function WikiModule() {
         ) : isEditing && draft ? (
           /* ---------------- EDIT MODE ---------------- */
           <div className="max-w-4xl mx-auto space-y-5">
-            <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-[#222834]">
+            <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-zinc-800">
               <div>
-                <span className="text-xs font-mono uppercase text-[#d4a359]">
+                <span className="text-xs font-mono uppercase text-cyan-400">
                   Modo de Edição do Atlas
                 </span>
-                <h2 className="text-lg font-bold text-[#ece8df]">{draft.title || 'Sem Título'}</h2>
+                <h2 className="text-lg font-bold text-zinc-100">{draft.title || 'Sem Título'}</h2>
               </div>
               <div className="flex items-center gap-2">
                 <button
@@ -645,14 +632,14 @@ export function WikiModule() {
                     setIsEditing(false);
                     setDraft(null);
                   }}
-                  className="px-3 py-1.5 rounded-lg bg-[#13171e] border border-[#222834] text-xs text-[#a5a095] hover:text-[#ece8df] cursor-pointer"
+                  className="px-3 py-1.5 rounded-lg bg-zinc-900 border border-zinc-800 text-xs text-zinc-400 hover:text-zinc-100 cursor-pointer"
                 >
                   Cancelar
                 </button>
                 <button
                   type="button"
                   onClick={handleSaveDraft}
-                  className="flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-[#d4a359] hover:bg-[#e2b56e] text-[#0b0d10] font-semibold text-xs transition-colors cursor-pointer"
+                  className="flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-cyan-600 hover:bg-cyan-500 text-[#0b0d10] font-semibold text-xs transition-colors cursor-pointer"
                 >
                   <Save className="w-3.5 h-3.5" />
                   <span>Salvar Registro</span>
@@ -661,36 +648,36 @@ export function WikiModule() {
             </div>
 
             {/* Primary Meta Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5 bg-[#13171e] border border-[#222834] rounded-xl p-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5 bg-zinc-900 border border-zinc-800 rounded-xl p-4">
               <div>
-                <label className="block text-xs font-medium text-[#a5a095] mb-1">Título</label>
+                <label className="block text-xs font-medium text-zinc-400 mb-1">Título</label>
                 <input
                   type="text"
                   value={draft.title}
                   onChange={(e) => setDraft({ ...draft, title: e.target.value })}
-                  className="w-full px-3 py-2 text-sm rounded-lg bg-[#0e1116] border border-[#222834] text-[#ece8df] focus:outline-none focus:border-[#d4a359]"
+                  className="w-full px-3 py-2 text-sm rounded-lg bg-zinc-950 border border-zinc-800 text-zinc-100 focus:outline-none focus:border-cyan-500"
                 />
               </div>
               <div>
-                <label className="block text-xs font-medium text-[#a5a095] mb-1">
+                <label className="block text-xs font-medium text-zinc-400 mb-1">
                   Subtítulo / Resumo
                 </label>
                 <input
                   type="text"
                   value={draft.subtitle || ''}
                   onChange={(e) => setDraft({ ...draft, subtitle: e.target.value })}
-                  className="w-full px-3 py-2 text-sm rounded-lg bg-[#0e1116] border border-[#222834] text-[#ece8df] focus:outline-none focus:border-[#d4a359]"
+                  className="w-full px-3 py-2 text-sm rounded-lg bg-zinc-950 border border-zinc-800 text-zinc-100 focus:outline-none focus:border-cyan-500"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-[#a5a095] mb-1">Categoria</label>
+                <label className="block text-xs font-medium text-zinc-400 mb-1">Categoria</label>
                 <select
                   value={draft.category}
                   onChange={(e) =>
                     setDraft({ ...draft, category: e.target.value as EntityCategory })
                   }
-                  className="w-full px-3 py-2 text-xs rounded-lg bg-[#0e1116] border border-[#222834] text-[#ece8df]"
+                  className="w-full px-3 py-2 text-xs rounded-lg bg-zinc-950 border border-zinc-800 text-zinc-100"
                 >
                   {(Object.keys(CATEGORY_LABELS) as EntityCategory[]).map((cat) => (
                     <option key={cat} value={cat}>
@@ -701,13 +688,13 @@ export function WikiModule() {
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-[#a5a095] mb-1">Pasta</label>
+                <label className="block text-xs font-medium text-zinc-400 mb-1">Pasta</label>
                 <select
                   value={draft.folderId || ''}
                   onChange={(e) =>
                     setDraft({ ...draft, folderId: e.target.value ? e.target.value : null })
                   }
-                  className="w-full px-3 py-2 text-xs rounded-lg bg-[#0e1116] border border-[#222834] text-[#ece8df]"
+                  className="w-full px-3 py-2 text-xs rounded-lg bg-zinc-950 border border-zinc-800 text-zinc-100"
                 >
                   <option value="">Sem Pasta (Raiz)</option>
                   {wikiFolders.map((f) => (
@@ -720,7 +707,7 @@ export function WikiModule() {
 
               {/* Ecosystem Links: Omniscient Sheet & StarStream VTT */}
               <div>
-                <label className="block text-xs font-medium text-[#4fa3b8] mb-1">
+                <label className="block text-xs font-medium text-cyan-400 mb-1">
                   Vincular Ficha Oficial (Omniscient Sheet)
                 </label>
                 <select
@@ -731,7 +718,7 @@ export function WikiModule() {
                       linkedCharacterId: e.target.value ? e.target.value : null,
                     })
                   }
-                  className="w-full px-3 py-2 text-xs rounded-lg bg-[#0e1116] border border-[#222834] text-[#ece8df]"
+                  className="w-full px-3 py-2 text-xs rounded-lg bg-zinc-950 border border-zinc-800 text-zinc-100"
                 >
                   <option value="">Nenhuma ficha vinculada</option>
                   {Object.values(characters).map((ch) => (
@@ -743,7 +730,7 @@ export function WikiModule() {
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-[#d4a359] mb-1">
+                <label className="block text-xs font-medium text-cyan-400 mb-1">
                   Vincular Cena do Mapa (StarStream VTT)
                 </label>
                 <select
@@ -754,7 +741,7 @@ export function WikiModule() {
                       linkedSceneId: e.target.value ? e.target.value : null,
                     })
                   }
-                  className="w-full px-3 py-2 text-xs rounded-lg bg-[#0e1116] border border-[#222834] text-[#ece8df]"
+                  className="w-full px-3 py-2 text-xs rounded-lg bg-zinc-950 border border-zinc-800 text-zinc-100"
                 >
                   <option value="">Nenhuma cena VTT vinculada</option>
                   {vttScenes.map((sc) => (
@@ -767,7 +754,7 @@ export function WikiModule() {
 
               {/* Images Upload (Supabase vtt-assets) */}
               <div>
-                <label className="block text-xs font-medium text-[#a5a095] mb-1">
+                <label className="block text-xs font-medium text-zinc-400 mb-1">
                   Retrato / Brasão (Supabase Storage ou URL)
                 </label>
                 <div className="flex items-center gap-2">
@@ -778,10 +765,10 @@ export function WikiModule() {
                       setDraft({ ...draft, imageUrl: e.target.value || null })
                     }
                     placeholder="https://..."
-                    className="flex-1 px-2.5 py-1.5 text-xs rounded-lg bg-[#0e1116] border border-[#222834] text-[#ece8df]"
+                    className="flex-1 px-2.5 py-1.5 text-xs rounded-lg bg-zinc-950 border border-zinc-800 text-zinc-100"
                   />
-                  <label className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-[#191e27] border border-[#313a4b] text-xs text-[#ece8df] cursor-pointer shrink-0">
-                    <ImagePlus className="w-3.5 h-3.5 text-[#d4a359]" />
+                  <label className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-zinc-800 border border-zinc-700 text-xs text-zinc-100 cursor-pointer shrink-0">
+                    <ImagePlus className="w-3.5 h-3.5 text-cyan-400" />
                     <span>{isUploadingImage ? '...' : 'Upload'}</span>
                     <input
                       type="file"
@@ -797,7 +784,7 @@ export function WikiModule() {
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-[#a5a095] mb-1">
+                <label className="block text-xs font-medium text-zinc-400 mb-1">
                   Banner Panorâmico (Supabase Storage ou URL)
                 </label>
                 <div className="flex items-center gap-2">
@@ -808,10 +795,10 @@ export function WikiModule() {
                       setDraft({ ...draft, bannerUrl: e.target.value || null })
                     }
                     placeholder="https://..."
-                    className="flex-1 px-2.5 py-1.5 text-xs rounded-lg bg-[#0e1116] border border-[#222834] text-[#ece8df]"
+                    className="flex-1 px-2.5 py-1.5 text-xs rounded-lg bg-zinc-950 border border-zinc-800 text-zinc-100"
                   />
-                  <label className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-[#191e27] border border-[#313a4b] text-xs text-[#ece8df] cursor-pointer shrink-0">
-                    <ImagePlus className="w-3.5 h-3.5 text-[#d4a359]" />
+                  <label className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-zinc-800 border border-zinc-700 text-xs text-zinc-100 cursor-pointer shrink-0">
+                    <ImagePlus className="w-3.5 h-3.5 text-cyan-400" />
                     <span>{isUploadingBanner ? '...' : 'Upload'}</span>
                     <input
                       type="file"
@@ -827,12 +814,12 @@ export function WikiModule() {
               </div>
 
               {/* Visibility & Chronos Date Stamp */}
-              <div className="flex items-center justify-between p-2.5 rounded-lg bg-[#0e1116] border border-[#222834]">
+              <div className="flex items-center justify-between p-2.5 rounded-lg bg-zinc-950 border border-zinc-800">
                 <div>
-                  <div className="text-xs font-semibold text-[#ece8df]">
+                  <div className="text-xs font-semibold text-zinc-100">
                     Visibilidade para Jogadores
                   </div>
-                  <div className="text-[11px] text-[#a5a095]">
+                  <div className="text-[11px] text-zinc-400">
                     {draft.isPublicToPlayers
                       ? 'Visível no Atlas (Tarjas continuam protegidas)'
                       : 'Trancado no Cofre do Mestre'}
@@ -845,17 +832,17 @@ export function WikiModule() {
                   }
                   className={`px-3 py-1 rounded-md text-xs font-semibold cursor-pointer ${
                     draft.isPublicToPlayers
-                      ? 'bg-[#d4a359] text-[#0b0d10]'
-                      : 'bg-[#191e27] text-[#a5a095] border border-[#313a4b]'
+                      ? 'bg-cyan-600 text-[#0b0d10]'
+                      : 'bg-zinc-800 text-zinc-400 border border-zinc-700'
                   }`}
                 >
                   {draft.isPublicToPlayers ? 'Pública' : 'Oculta (GM)'}
                 </button>
               </div>
 
-              <div className="p-2.5 rounded-lg bg-[#0e1116] border border-[#222834]">
+              <div className="p-2.5 rounded-lg bg-zinc-950 border border-zinc-800">
                 <div className="flex items-center justify-between mb-1.5">
-                  <span className="text-xs font-semibold text-[#ece8df]">
+                  <span className="text-xs font-semibold text-zinc-100">
                     Data na Linha do Tempo (Cronos)
                   </span>
                   <button
@@ -871,7 +858,7 @@ export function WikiModule() {
                           };
                       setDraft({ ...draft, eventDate: nextDate });
                     }}
-                    className="text-xs font-mono text-[#d4a359] hover:underline cursor-pointer"
+                    className="text-xs font-mono text-cyan-400 hover:underline cursor-pointer"
                   >
                     {draft.eventDate ? 'Remover Data' : '+ Vincular ao Cronos'}
                   </button>
@@ -891,7 +878,7 @@ export function WikiModule() {
                         })
                       }
                       placeholder="Ano"
-                      className="px-2 py-1 text-xs rounded bg-[#13171e] border border-[#222834] font-mono"
+                      className="px-2 py-1 text-xs rounded bg-zinc-900 border border-zinc-800 font-mono"
                     />
                     <select
                       value={draft.eventDate.monthIndex}
@@ -904,7 +891,7 @@ export function WikiModule() {
                           },
                         })
                       }
-                      className="px-2 py-1 text-xs rounded bg-[#13171e] border border-[#222834]"
+                      className="px-2 py-1 text-xs rounded bg-zinc-900 border border-zinc-800"
                     >
                       {calendar.months.map((m, idx) => (
                         <option key={m.id} value={idx}>
@@ -927,7 +914,7 @@ export function WikiModule() {
                         })
                       }
                       placeholder="Dia"
-                      className="px-2 py-1 text-xs rounded bg-[#13171e] border border-[#222834] font-mono"
+                      className="px-2 py-1 text-xs rounded bg-zinc-900 border border-zinc-800 font-mono"
                     />
                   </div>
                 )}
@@ -936,8 +923,8 @@ export function WikiModule() {
 
             {/* Tags & Custom Metadata Fields */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
-              <div className="bg-[#13171e] border border-[#222834] rounded-xl p-4 space-y-2.5">
-                <label className="block text-xs font-semibold text-[#ece8df]">
+              <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-4 space-y-2.5">
+                <label className="block text-xs font-semibold text-zinc-100">
                   Tags de Indexação
                 </label>
                 <div className="flex items-center gap-1.5">
@@ -956,14 +943,14 @@ export function WikiModule() {
                       }
                     }}
                     placeholder="Digite uma tag e tecle Enter..."
-                    className="flex-1 px-2.5 py-1.5 text-xs rounded-lg bg-[#0e1116] border border-[#222834] text-[#ece8df]"
+                    className="flex-1 px-2.5 py-1.5 text-xs rounded-lg bg-zinc-950 border border-zinc-800 text-zinc-100"
                   />
                 </div>
                 <div className="flex flex-wrap gap-1.5">
                   {draft.tags.map((t) => (
                     <span
                       key={t}
-                      className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#0e1116] border border-[#222834] text-xs font-mono text-[#a5a095]"
+                      className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-zinc-950 border border-zinc-800 text-xs font-mono text-zinc-400"
                     >
                       #{t}
                       <button
@@ -971,7 +958,7 @@ export function WikiModule() {
                         onClick={() =>
                           setDraft({ ...draft, tags: draft.tags.filter((x) => x !== t) })
                         }
-                        className="hover:text-[#c94a4a] cursor-pointer"
+                        className="hover:text-red-400 cursor-pointer"
                       >
                         <X className="w-3 h-3" />
                       </button>
@@ -980,9 +967,9 @@ export function WikiModule() {
                 </div>
               </div>
 
-              <div className="bg-[#13171e] border border-[#222834] rounded-xl p-4 space-y-2.5">
+              <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-4 space-y-2.5">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-semibold text-[#ece8df]">
+                  <span className="text-xs font-semibold text-zinc-100">
                     Campos Técnicos Customizados
                   </span>
                   <button
@@ -998,7 +985,7 @@ export function WikiModule() {
                         customFields: [...draft.customFields, nextField],
                       });
                     }}
-                    className="text-xs text-[#d4a359] hover:underline cursor-pointer"
+                    className="text-xs text-cyan-400 hover:underline cursor-pointer"
                   >
                     + Campo
                   </button>
@@ -1015,7 +1002,7 @@ export function WikiModule() {
                           setDraft({ ...draft, customFields: copy });
                         }}
                         placeholder="Rótulo"
-                        className="w-1/3 px-2 py-1 text-xs rounded bg-[#0e1116] border border-[#222834] text-[#a5a095]"
+                        className="w-1/3 px-2 py-1 text-xs rounded bg-zinc-950 border border-zinc-800 text-zinc-400"
                       />
                       <input
                         type="text"
@@ -1026,7 +1013,7 @@ export function WikiModule() {
                           setDraft({ ...draft, customFields: copy });
                         }}
                         placeholder="Valor"
-                        className="flex-1 px-2 py-1 text-xs rounded bg-[#0e1116] border border-[#222834] text-[#ece8df]"
+                        className="flex-1 px-2 py-1 text-xs rounded bg-zinc-950 border border-zinc-800 text-zinc-100"
                       />
                       <button
                         type="button"
@@ -1036,7 +1023,7 @@ export function WikiModule() {
                             customFields: draft.customFields.filter((x) => x.id !== cf.id),
                           })
                         }
-                        className="text-[#6f6b62] hover:text-[#c94a4a] cursor-pointer"
+                        className="text-zinc-500 hover:text-red-400 cursor-pointer"
                       >
                         <Trash2 className="w-3.5 h-3.5" />
                       </button>
@@ -1048,7 +1035,7 @@ export function WikiModule() {
 
             {/* Rich Chronicle Editor */}
             <div>
-              <label className="block text-xs font-semibold text-[#ece8df] mb-1.5">
+              <label className="block text-xs font-semibold text-zinc-100 mb-1.5">
                 Corpo do Documento (Suporta @Menções, Tarjas Pretas, Spoilers, Tabelas e Fitas YouTube)
               </label>
               <RichChronicleEditor
@@ -1063,8 +1050,8 @@ export function WikiModule() {
             </div>
 
             {/* GM Secret Notes */}
-            <div className="bg-[#13171e] border border-[#c94a4a]/35 rounded-xl p-4">
-              <label className="block text-xs font-mono uppercase text-[#c94a4a] mb-1.5">
+            <div className="bg-zinc-900 border border-[#c94a4a]/35 rounded-xl p-4">
+              <label className="block text-xs font-mono uppercase text-red-400 mb-1.5">
                 Notas Privadas do Mestre (Jamais visíveis para jogadores)
               </label>
               <textarea
@@ -1072,7 +1059,7 @@ export function WikiModule() {
                 value={draft.gmSecretNotes || ''}
                 onChange={(e) => setDraft({ ...draft, gmSecretNotes: e.target.value })}
                 placeholder="Gatilhos de sessão, testes ocultos, verdadeiros culpados..."
-                className="w-full p-2.5 text-xs rounded-lg bg-[#0e1116] border border-[#222834] text-[#ece8df] focus:outline-none focus:border-[#c94a4a]"
+                className="w-full p-2.5 text-xs rounded-lg bg-zinc-950 border border-zinc-800 text-zinc-100 focus:outline-none focus:border-[#c94a4a]"
               />
             </div>
           </div>
@@ -1082,7 +1069,7 @@ export function WikiModule() {
             <article className="max-w-4xl mx-auto space-y-6">
               {/* Optional Panoramic Banner */}
               {activeEntity.bannerUrl && (
-                <div className="w-full h-48 rounded-xl overflow-hidden border border-[#222834] bg-[#13171e]">
+                <div className="w-full h-48 rounded-xl overflow-hidden border border-zinc-800 bg-zinc-900">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={activeEntity.bannerUrl}
@@ -1093,10 +1080,10 @@ export function WikiModule() {
               )}
 
               {/* Header */}
-              <header className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 pb-5 border-b border-[#222834]">
+              <header className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 pb-5 border-b border-zinc-800">
                 <div className="flex items-start gap-4">
                   {activeEntity.imageUrl && (
-                    <div className="w-16 h-16 rounded-xl overflow-hidden border border-[#313a4b] bg-[#13171e] shrink-0">
+                    <div className="w-16 h-16 rounded-xl overflow-hidden border border-zinc-700 bg-zinc-900 shrink-0">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={activeEntity.imageUrl}
@@ -1107,36 +1094,36 @@ export function WikiModule() {
                   )}
                   <div>
                     <div className="flex flex-wrap items-center gap-2 mb-1">
-                      <span className="text-xs font-mono uppercase text-[#d4a359]">
+                      <span className="text-xs font-mono uppercase text-cyan-400">
                         {activeEntity.customCategoryLabel || CATEGORY_LABELS[activeEntity.category]}
                       </span>
                       {!activeEntity.isPublicToPlayers ? (
-                        <span className="inline-flex items-center gap-1 text-[11px] font-mono px-2 py-0.5 rounded bg-[#13171e] border border-[#313a4b] text-[#a5a095]">
+                        <span className="inline-flex items-center gap-1 text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-900 border border-zinc-700 text-zinc-400">
                           <EyeOff className="w-3 h-3" />
                           <span>Oculto (Cofre GM)</span>
                         </span>
                       ) : (
                         isGM && (
-                          <span className="inline-flex items-center gap-1 text-[11px] font-mono px-2 py-0.5 rounded bg-[#d4a359]/15 text-[#e2b56e]">
+                          <span className="inline-flex items-center gap-1 text-[11px] font-mono px-2 py-0.5 rounded bg-cyan-600/15 text-cyan-300">
                             <Eye className="w-3 h-3" />
                             <span>Público na Mesa</span>
                           </span>
                         )
                       )}
                       {activeEntity.eventDate && (
-                        <span className="inline-flex items-center gap-1 text-[11px] font-mono px-2 py-0.5 rounded bg-[#13171e] border border-[#222834] text-[#a5a095]">
-                          <Calendar className="w-3 h-3 text-[#d4a359]" />
+                        <span className="inline-flex items-center gap-1 text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-900 border border-zinc-800 text-zinc-400">
+                          <Calendar className="w-3 h-3 text-cyan-400" />
                           <span>
                             Dia {activeEntity.eventDate.day}, Ano {activeEntity.eventDate.year}
                           </span>
                         </span>
                       )}
                     </div>
-                    <h1 className="text-2xl sm:text-3xl font-bold font-editorial text-[#ece8df] text-balance">
+                    <h1 className="text-2xl sm:text-3xl font-bold font-sans text-zinc-100 text-balance">
                       {activeEntity.title}
                     </h1>
                     {activeEntity.subtitle && (
-                      <p className="text-sm text-[#a5a095] mt-1 text-pretty">
+                      <p className="text-sm text-zinc-400 mt-1 text-pretty">
                         {activeEntity.subtitle}
                       </p>
                     )}
@@ -1145,9 +1132,9 @@ export function WikiModule() {
                         {activeEntity.tags.map((t) => (
                           <span
                             key={t}
-                            className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#13171e] border border-[#222834] text-[11px] font-mono text-[#a5a095]"
+                            className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-zinc-900 border border-zinc-800 text-[11px] font-mono text-zinc-400"
                           >
-                            <Tag className="w-2.5 h-2.5 text-[#d4a359]" />
+                            <Tag className="w-2.5 h-2.5 text-cyan-400" />
                             {t}
                           </span>
                         ))}
@@ -1166,14 +1153,14 @@ export function WikiModule() {
                           isPublicToPlayers: !activeEntity.isPublicToPlayers,
                         })
                       }
-                      className="px-3 py-1.5 rounded-lg bg-[#13171e] border border-[#222834] hover:border-[#313a4b] text-xs text-[#ece8df] transition-colors cursor-pointer"
+                      className="px-3 py-1.5 rounded-lg bg-zinc-900 border border-zinc-800 hover:border-zinc-700 text-xs text-zinc-100 transition-colors cursor-pointer"
                     >
                       {activeEntity.isPublicToPlayers ? 'Ocultar dos Jogadores' : 'Tornar Pública'}
                     </button>
                     <button
                       type="button"
                       onClick={() => startEditing(activeEntity)}
-                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#d4a359] hover:bg-[#e2b56e] text-[#0b0d10] font-semibold text-xs transition-colors cursor-pointer"
+                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-cyan-600 hover:bg-cyan-500 text-[#0b0d10] font-semibold text-xs transition-colors cursor-pointer"
                     >
                       <Edit3 className="w-3.5 h-3.5" />
                       <span>Editar</span>
@@ -1181,7 +1168,7 @@ export function WikiModule() {
                     <button
                       type="button"
                       onClick={handleDeleteActive}
-                      className="p-1.5 rounded-lg bg-[#13171e] border border-[#222834] hover:border-[#c94a4a] text-[#a5a095] hover:text-[#c94a4a] transition-colors cursor-pointer"
+                      className="p-1.5 rounded-lg bg-zinc-900 border border-zinc-800 hover:border-[#c94a4a] text-zinc-400 hover:text-red-400 transition-colors cursor-pointer"
                       title="Excluir Página"
                     >
                       <Trash2 className="w-4 h-4" />
@@ -1194,9 +1181,9 @@ export function WikiModule() {
               {(linkedChar || linkedScene) && (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   {linkedChar && (
-                    <div className="p-3.5 rounded-xl bg-[#13171e] border border-[#4fa3b8]/40 flex items-center justify-between gap-3">
+                    <div className="p-3.5 rounded-xl bg-zinc-900 border border-cyan-500/40 flex items-center justify-between gap-3">
                       <div className="flex items-center gap-3 min-w-0">
-                        <div className="w-11 h-11 rounded-lg bg-[#0e1116] border border-[#313a4b] overflow-hidden shrink-0 flex items-center justify-center">
+                        <div className="w-11 h-11 rounded-lg bg-zinc-950 border border-zinc-700 overflow-hidden shrink-0 flex items-center justify-center">
                           {linkedChar.avatarUrl ? (
                             // eslint-disable-next-line @next/next/no-img-element
                             <img
@@ -1205,17 +1192,17 @@ export function WikiModule() {
                               className="w-full h-full object-cover"
                             />
                           ) : (
-                            <User className="w-5 h-5 text-[#4fa3b8]" />
+                            <User className="w-5 h-5 text-cyan-400" />
                           )}
                         </div>
                         <div className="min-w-0">
-                          <div className="text-[11px] font-mono uppercase text-[#4fa3b8]">
+                          <div className="text-[11px] font-mono uppercase text-cyan-400">
                             Ficha Sincronizada · Omniscient Sheet
                           </div>
-                          <div className="text-sm font-bold text-[#ece8df] truncate">
+                          <div className="text-sm font-bold text-zinc-100 truncate">
                             {linkedChar.name}
                           </div>
-                          <div className="text-xs font-mono text-[#a5a095] flex items-center gap-2">
+                          <div className="text-xs font-mono text-zinc-400 flex items-center gap-2">
                             <span>
                               HP {linkedChar.hp.current}/{linkedChar.hp.max}
                             </span>
@@ -1225,7 +1212,7 @@ export function WikiModule() {
                             </span>
                             <span>·</span>
                             <span className="inline-flex items-center gap-0.5">
-                              <Shield className="w-3 h-3 text-[#d4a359]" />
+                              <Shield className="w-3 h-3 text-cyan-400" />
                               {linkedChar.defense ?? 10}
                             </span>
                           </div>
@@ -1234,7 +1221,7 @@ export function WikiModule() {
                       <button
                         type="button"
                         onClick={() => openFloatingSheet(linkedChar.id)}
-                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#4fa3b8] text-[#0b0d10] font-semibold text-xs hover:opacity-90 transition-opacity cursor-pointer shrink-0"
+                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-cyan-600 text-[#0b0d10] font-semibold text-xs hover:opacity-90 transition-opacity cursor-pointer shrink-0"
                       >
                         <ExternalLink className="w-3.5 h-3.5" />
                         <span>Abrir Ficha</span>
@@ -1243,19 +1230,19 @@ export function WikiModule() {
                   )}
 
                   {linkedScene && (
-                    <div className="p-3.5 rounded-xl bg-[#13171e] border border-[#d4a359]/40 flex items-center justify-between gap-3">
+                    <div className="p-3.5 rounded-xl bg-zinc-900 border border-cyan-500/40 flex items-center justify-between gap-3">
                       <div className="flex items-center gap-3 min-w-0">
-                        <div className="w-11 h-11 rounded-lg bg-[#0e1116] border border-[#313a4b] flex items-center justify-center shrink-0">
-                          <MapPin className="w-5 h-5 text-[#d4a359]" />
+                        <div className="w-11 h-11 rounded-lg bg-zinc-950 border border-zinc-700 flex items-center justify-center shrink-0">
+                          <MapPin className="w-5 h-5 text-cyan-400" />
                         </div>
                         <div className="min-w-0">
-                          <div className="text-[11px] font-mono uppercase text-[#d4a359]">
+                          <div className="text-[11px] font-mono uppercase text-cyan-400">
                             Cena Tática · StarStream VTT
                           </div>
-                          <div className="text-sm font-bold text-[#ece8df] truncate">
+                          <div className="text-sm font-bold text-zinc-100 truncate">
                             {linkedScene.name}
                           </div>
-                          <div className="text-xs text-[#a5a095]">
+                          <div className="text-xs text-zinc-400">
                             {linkedScene.tokenCount} token(s) posicionado(s)
                           </div>
                         </div>
@@ -1271,7 +1258,7 @@ export function WikiModule() {
                                 : 'Falha ao atualizar cena ativa da sala VTT.'
                             );
                           }}
-                          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#d4a359] hover:bg-[#e2b56e] text-[#0b0d10] font-semibold text-xs transition-colors cursor-pointer shrink-0"
+                          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-cyan-600 hover:bg-cyan-500 text-[#0b0d10] font-semibold text-xs transition-colors cursor-pointer shrink-0"
                         >
                           <Send className="w-3.5 h-3.5" />
                           <span>Mover Mesa VTT</span>
@@ -1288,12 +1275,12 @@ export function WikiModule() {
                   {activeEntity.customFields.map((cf) => (
                     <div
                       key={cf.id}
-                      className="px-3.5 py-2.5 rounded-lg bg-[#13171e] border border-[#222834]"
+                      className="px-3.5 py-2.5 rounded-lg bg-zinc-900 border border-zinc-800"
                     >
-                      <div className="text-[11px] font-mono uppercase text-[#6f6b62]">
+                      <div className="text-[11px] font-mono uppercase text-zinc-500">
                         {cf.label}
                       </div>
-                      <div className="text-xs font-semibold text-[#ece8df] mt-0.5">{cf.value}</div>
+                      <div className="text-xs font-semibold text-zinc-100 mt-0.5">{cf.value}</div>
                     </div>
                   ))}
                 </div>
@@ -1301,13 +1288,13 @@ export function WikiModule() {
 
               {/* GM Redaction Control Bar */}
               {isGM && activeRedactions.length > 0 && (
-                <div className="flex flex-wrap items-center justify-between gap-2 px-4 py-2.5 rounded-xl bg-[#13171e] border border-[#c94a4a]/40">
+                <div className="flex flex-wrap items-center justify-between gap-2 px-4 py-2.5 rounded-xl bg-zinc-900 border border-[#c94a4a]/40">
                   <div className="flex items-center gap-2 text-xs">
-                    <FileLock2 className="w-4 h-4 text-[#c94a4a]" />
-                    <span className="text-[#ece8df] font-medium">
+                    <FileLock2 className="w-4 h-4 text-red-400" />
+                    <span className="text-zinc-100 font-medium">
                       Controle de Tarjas Pretas ao Vivo:
                     </span>
-                    <span className="font-mono text-[#a5a095]">
+                    <span className="font-mono text-zinc-400">
                       {
                         activeRedactions.filter((r) =>
                           (activeEntity.unlockedRedactions || []).includes(r.id)
@@ -1325,9 +1312,9 @@ export function WikiModule() {
                           unlockedRedactions: activeRedactions.map((r) => r.id),
                         })
                       }
-                      className="flex items-center gap-1 px-2.5 py-1 rounded bg-[#191e27] border border-[#313a4b] hover:border-[#d4a359] text-xs text-[#ece8df] cursor-pointer"
+                      className="flex items-center gap-1 px-2.5 py-1 rounded bg-zinc-800 border border-zinc-700 hover:border-cyan-500 text-xs text-zinc-100 cursor-pointer"
                     >
-                      <Unlock className="w-3 h-3 text-[#d4a359]" />
+                      <Unlock className="w-3 h-3 text-cyan-400" />
                       <span>Revelar Todas</span>
                     </button>
                     <button
@@ -1338,9 +1325,9 @@ export function WikiModule() {
                           unlockedRedactions: [],
                         })
                       }
-                      className="flex items-center gap-1 px-2.5 py-1 rounded bg-[#191e27] border border-[#313a4b] hover:border-[#c94a4a] text-xs text-[#ece8df] cursor-pointer"
+                      className="flex items-center gap-1 px-2.5 py-1 rounded bg-zinc-800 border border-zinc-700 hover:border-[#c94a4a] text-xs text-zinc-100 cursor-pointer"
                     >
-                      <Lock className="w-3 h-3 text-[#c94a4a]" />
+                      <Lock className="w-3 h-3 text-red-400" />
                       <span>Censurar Todas</span>
                     </button>
                   </div>
@@ -1348,7 +1335,7 @@ export function WikiModule() {
               )}
 
               {/* Main Lore Body */}
-              <div className="p-5 sm:p-6 rounded-xl bg-[#13171e] border border-[#222834]">
+              <div className="p-5 sm:p-6 rounded-xl bg-zinc-900 border border-zinc-800">
                 <RichChronicleRenderer
                   content={activeEntity.content}
                   unlockedRedactions={activeEntity.unlockedRedactions}
@@ -1361,28 +1348,28 @@ export function WikiModule() {
 
               {/* GM Confidential Notes */}
               {isGM && activeEntity.gmSecretNotes && (
-                <div className="p-4 rounded-xl bg-[#13171e] border border-dashed border-[#c94a4a]/50">
-                  <div className="text-xs font-mono uppercase text-[#c94a4a] mb-1">
+                <div className="p-4 rounded-xl bg-zinc-900 border border-dashed border-[#c94a4a]/50">
+                  <div className="text-xs font-mono uppercase text-red-400 mb-1">
                     Anotações Exclusivas do Mestre
                   </div>
-                  <p className="text-xs text-[#ece8df] whitespace-pre-wrap leading-relaxed">
+                  <p className="text-xs text-zinc-100 whitespace-pre-wrap leading-relaxed">
                     {activeEntity.gmSecretNotes}
                   </p>
                 </div>
               )}
 
               {/* Automatic Backlinks */}
-              <section className="pt-4 border-t border-[#222834]">
+              <section className="pt-4 border-t border-zinc-800">
                 <div className="flex items-center gap-2 mb-3">
-                  <Link2 className="w-4 h-4 text-[#d4a359]" />
-                  <h3 className="text-xs font-mono uppercase tracking-wider text-[#a5a095]">
+                  <Link2 className="w-4 h-4 text-cyan-400" />
+                  <h3 className="text-xs font-mono uppercase tracking-wider text-zinc-400">
                     Referências Cruzadas & Backlinks ({backlinks.length})
                   </h3>
                 </div>
                 {backlinks.length === 0 ? (
-                  <p className="text-xs text-[#6f6b62]">
+                  <p className="text-xs text-zinc-500">
                     Nenhum outro documento público menciona esta página ainda. Cite{' '}
-                    <span className="font-mono text-[#a5a095]">@{activeEntity.title}</span> em
+                    <span className="font-mono text-zinc-400">@{activeEntity.title}</span> em
                     outras páginas ou cartas para criar conexões automáticas aqui e no Grafo.
                   </p>
                 ) : (
@@ -1392,15 +1379,15 @@ export function WikiModule() {
                         key={bl.id}
                         type="button"
                         onClick={bl.onOpen}
-                        className="flex items-center justify-between gap-2 px-3 py-2 rounded-lg bg-[#13171e] border border-[#222834] hover:border-[#d4a359] text-left transition-colors cursor-pointer"
+                        className="flex items-center justify-between gap-2 px-3 py-2 rounded-lg bg-zinc-900 border border-zinc-800 hover:border-cyan-500 text-left transition-colors cursor-pointer"
                       >
                         <span className="flex items-center gap-2 min-w-0">
-                          <FileText className="w-3.5 h-3.5 text-[#d4a359] shrink-0" />
-                          <span className="text-xs font-semibold text-[#ece8df] truncate">
+                          <FileText className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+                          <span className="text-xs font-semibold text-zinc-100 truncate">
                             {bl.label}
                           </span>
                         </span>
-                        <span className="text-[11px] font-mono text-[#a5a095] shrink-0">
+                        <span className="text-[11px] font-mono text-zinc-400 shrink-0">
                           {bl.sourceKind}
                         </span>
                       </button>

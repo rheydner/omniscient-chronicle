@@ -409,6 +409,42 @@ export async function deleteBook(roomId: string, bookId: string): Promise<void> 
 }
 
 // ---------------------------------------------------------------------------
+// Limpador de Dados de Demonstração (Permite purgar de vez itens de teste)
+// ---------------------------------------------------------------------------
+
+export async function purgeDemonstrationData(roomId: string): Promise<void> {
+  const idsToDelete: [string, string][] = [
+    ['chronos_events', 'ev-1'],
+    ['chronos_events', 'ev-2'],
+    ['genealogy_trees', 'tree-linhagem-valerius'],
+    ['chronicle_books', 'book-codex-ruptura'],
+    ['bestiary_creatures', 'cr-espreitador'],
+    ['regional_maps', 'map-distrito-velho'],
+    ['chronicle_documents', 'doc-carta-047'],
+    ['chronicle_documents', 'doc-diario-vigilia'],
+    ['chronicle_entities', 'ent-largo-treze'],
+    ['chronicle_entities', 'ent-culto-carmim'],
+    ['chronicle_entities', 'ent-bispo-silencioso'],
+    ['chronicle_folders', 'fld-locais'],
+    ['chronicle_folders', 'fld-faccoes'],
+    ['chronicle_folders', 'fld-dossies'],
+    ['clue_nodes', 'clue-1'],
+    ['clue_nodes', 'clue-2'],
+    ['clue_nodes', 'clue-3'],
+    ['chronicle_edges', 'edge-1'],
+    ['chronicle_edges', 'edge-2'],
+    ['chronicle_edges', 'edge-3'],
+  ];
+
+  await Promise.allSettled(
+    idsToDelete.map(([subcol, id]) => deleteDoc(roomColDoc(roomId, subcol, id)))
+  );
+
+  // Reseta o calendário para o padrão limpo de 12 meses gregorianos sem luas medievais
+  await saveCalendarConfig(roomId, DEFAULT_CALENDAR);
+}
+
+// ---------------------------------------------------------------------------
 // Inicializador de Mundo Demonstrativo Interconectado (1 Clique)
 // ---------------------------------------------------------------------------
 
@@ -644,7 +680,7 @@ export async function seedStarterChronicleWorld(
       year: 389,
       monthIndex: 0,
       day: 19,
-      category: 'war',
+      category: 'incident',
       linkedEntityId: entCulto.id,
       isPublicToPlayers: true,
       createdAt: now,
@@ -707,7 +743,7 @@ export async function seedStarterChronicleWorld(
     title: 'Tratado das Fendas & Exposição Oculta',
     subtitle: 'Manual de Campo para Operadores e Investigadores',
     author: 'Arquivo Central Omniscient',
-    accentColor: '#d4a359',
+    accentColor: '#06b6d4',
     isPublicToPlayers: true,
     chapters: [
       {

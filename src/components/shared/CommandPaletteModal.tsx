@@ -73,7 +73,7 @@ export function CommandPaletteModal() {
         title: e.title,
         subtitle: e.subtitle || e.tags.join(', ') || 'Página do Atlas',
         badge: 'Atlas / Wiki',
-        icon: <BookOpen className="w-4 h-4 text-[#d4a359]" />,
+        icon: <BookOpen className="w-4 h-4 text-cyan-400" />,
         onSelect: () => {
           setActiveTab('wiki');
           setSelectedEntityId(e.id);
@@ -88,7 +88,7 @@ export function CommandPaletteModal() {
         title: c.name,
         subtitle: `${c.className || 'Personagem'} · Nv. ${c.level} · HP ${c.hp.current}/${c.hp.max}`,
         badge: 'Ficha Oficial',
-        icon: <User className="w-4 h-4 text-[#4fa3b8]" />,
+        icon: <User className="w-4 h-4 text-cyan-400" />,
         onSelect: () => openFloatingSheet(c.id),
       });
     });
@@ -109,7 +109,7 @@ export function CommandPaletteModal() {
         title: d.title,
         subtitle: d.code || 'Carta / Dossiê',
         badge: 'Diário & Cartas',
-        icon: <FileText className="w-4 h-4 text-[#d4a359]" />,
+        icon: <FileText className="w-4 h-4 text-cyan-400" />,
         onSelect: () => {
           setActiveTab('journal');
           setSelectedDocumentId(d.id);
@@ -125,7 +125,7 @@ export function CommandPaletteModal() {
         title: cr.name,
         subtitle: `${cr.threatGrade} · ${cr.creatureType}`,
         badge: 'Bestiário',
-        icon: <Skull className="w-4 h-4 text-[#c94a4a]" />,
+        icon: <Skull className="w-4 h-4 text-red-400" />,
         onSelect: () => {
           setActiveTab('bestiary');
           setSelectedCreatureId(cr.id);
@@ -141,7 +141,7 @@ export function CommandPaletteModal() {
         title: b.title,
         subtitle: b.subtitle || `${b.chapters.length} capítulo(s)`,
         badge: 'Grimório',
-        icon: <Library className="w-4 h-4 text-[#d4a359]" />,
+        icon: <Library className="w-4 h-4 text-cyan-400" />,
         onSelect: () => {
           setActiveTab('grimoire');
           setSelectedBookId(b.id);
@@ -153,7 +153,7 @@ export function CommandPaletteModal() {
           title: g.term,
           subtitle: g.definition,
           badge: `Regra · ${g.category}`,
-          icon: <Library className="w-4 h-4 text-[#a5a095]" />,
+          icon: <Library className="w-4 h-4 text-zinc-400" />,
           onSelect: () => {
             setActiveTab('grimoire');
             setSelectedBookId(b.id);
@@ -170,7 +170,7 @@ export function CommandPaletteModal() {
         title: m.name,
         subtitle: `${m.pins.length} marcadores · Cartografia Regional`,
         badge: 'Mapa',
-        icon: <MapIcon className="w-4 h-4 text-[#d4a359]" />,
+        icon: <MapIcon className="w-4 h-4 text-cyan-400" />,
         onSelect: () => {
           setActiveTab('maps');
           setSelectedMapId(m.id);
@@ -186,7 +186,7 @@ export function CommandPaletteModal() {
         title: ev.title,
         subtitle: `Ano ${ev.year} · ${ev.summary}`,
         badge: 'Cronos',
-        icon: <Clock className="w-4 h-4 text-[#a5a095]" />,
+        icon: <Clock className="w-4 h-4 text-zinc-400" />,
         onSelect: () => setActiveTab('chronos'),
       });
     });
@@ -231,22 +231,22 @@ export function CommandPaletteModal() {
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="w-full max-w-xl bg-[#13171e] border border-[#313a4b] rounded-xl overflow-hidden"
+        className="w-full max-w-xl bg-zinc-900 border border-zinc-700 rounded-xl overflow-hidden"
       >
-        <div className="flex items-center gap-2.5 px-4 py-3 border-b border-[#222834] bg-[#0e1116]">
-          <Search className="w-4 h-4 text-[#d4a359] shrink-0" />
+        <div className="flex items-center gap-2.5 px-4 py-3 border-b border-zinc-800 bg-zinc-950">
+          <Search className="w-4 h-4 text-cyan-400 shrink-0" />
           <input
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Buscar páginas da Wiki, fichas, cartas, regras, criaturas ou eventos..."
             autoFocus
-            className="flex-1 bg-transparent text-sm text-[#ece8df] placeholder:text-[#6f6b62] focus:outline-none"
+            className="flex-1 bg-transparent text-sm text-zinc-100 placeholder:text-zinc-500 focus:outline-none"
           />
           <button
             type="button"
             onClick={() => setOpen(false)}
-            className="p-1 rounded text-[#a5a095] hover:text-[#ece8df] cursor-pointer"
+            className="p-1 rounded text-zinc-400 hover:text-zinc-100 cursor-pointer"
           >
             <X className="w-4 h-4" />
           </button>
@@ -254,7 +254,7 @@ export function CommandPaletteModal() {
 
         <div className="max-h-96 overflow-y-auto custom-scrollbar p-2 space-y-1">
           {filtered.length === 0 ? (
-            <div className="py-8 text-center text-xs text-[#6f6b62]">
+            <div className="py-8 text-center text-xs text-zinc-500">
               Nenhum registro encontrado para &ldquo;{query}&rdquo;.
             </div>
           ) : (
@@ -267,20 +267,20 @@ export function CommandPaletteModal() {
                   setOpen(false);
                   setQuery('');
                 }}
-                className="w-full text-left flex items-center justify-between gap-3 px-3 py-2 rounded-lg hover:bg-[#191e27] transition-colors cursor-pointer"
+                className="w-full text-left flex items-center justify-between gap-3 px-3 py-2 rounded-lg hover:bg-zinc-800 transition-colors cursor-pointer"
               >
                 <div className="flex items-center gap-3 min-w-0">
-                  <div className="w-8 h-8 rounded-md bg-[#0e1116] border border-[#222834] flex items-center justify-center shrink-0">
+                  <div className="w-8 h-8 rounded-md bg-zinc-950 border border-zinc-800 flex items-center justify-center shrink-0">
                     {hit.icon}
                   </div>
                   <div className="min-w-0">
-                    <div className="text-xs font-semibold text-[#ece8df] truncate">
+                    <div className="text-xs font-semibold text-zinc-100 truncate">
                       {hit.title}
                     </div>
-                    <div className="text-xs text-[#a5a095] truncate">{hit.subtitle}</div>
+                    <div className="text-xs text-zinc-400 truncate">{hit.subtitle}</div>
                   </div>
                 </div>
-                <span className="text-xs font-mono px-2 py-0.5 rounded bg-[#0e1116] border border-[#222834] text-[#a5a095] shrink-0">
+                <span className="text-xs font-mono px-2 py-0.5 rounded bg-zinc-950 border border-zinc-800 text-zinc-400 shrink-0">
                   {hit.badge}
                 </span>
               </button>

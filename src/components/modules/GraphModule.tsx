@@ -48,12 +48,12 @@ type ChronicleGraphNodeData = {
 type ChronicleFlowNode = Node<ChronicleGraphNodeData, 'chronicleNode'>;
 
 const RELATION_COLORS: Record<RelationKind, string> = {
-  ally: '#4fa3b8',
-  enemy: '#c94a4a',
-  blood: '#d4a359',
-  marriage: '#e2b56e',
-  faction: '#a5a095',
-  suspect: '#c94a4a',
+  ally: '#06b6d4',
+  enemy: '#ef4444',
+  blood: '#06b6d4',
+  marriage: '#22d3ee',
+  faction: '#a1a1aa',
+  suspect: '#ef4444',
   location: '#6f8ab8',
   theory: '#e06c6c',
 };
@@ -77,10 +77,10 @@ function ChronicleCustomNode({ data }: NodeProps<ChronicleFlowNode>) {
     data.tone === 'paper'
       ? 'bg-[#f3ead6] text-[#221b13] border-[#cbb894]'
       : data.tone === 'crimson'
-      ? 'bg-[#231215] text-[#ece8df] border-[#c94a4a]/60'
+      ? 'bg-[#231215] text-zinc-100 border-[#c94a4a]/60'
       : data.tone === 'brass'
-      ? 'bg-[#211b11] text-[#ece8df] border-[#d4a359]/60'
-      : 'bg-[#13171e] text-[#ece8df] border-[#313a4b]';
+      ? 'bg-[#211b11] text-zinc-100 border-cyan-500/60'
+      : 'bg-zinc-900 text-zinc-100 border-zinc-700';
 
   return (
     <div
@@ -88,16 +88,16 @@ function ChronicleCustomNode({ data }: NodeProps<ChronicleFlowNode>) {
         isClue
           ? clueToneClasses
           : data.isHighlighted
-          ? 'bg-[#191e27] border-[#d4a359] text-[#ece8df] ring-2 ring-[#d4a359]/40'
+          ? 'bg-zinc-800 border-cyan-500 text-zinc-100 ring-2 ring-cyan-500/40'
           : isChar
-          ? 'bg-[#13171e] border-[#4fa3b8]/50 text-[#ece8df]'
-          : 'bg-[#13171e] border-[#222834] text-[#ece8df]'
+          ? 'bg-zinc-900 border-cyan-500/50 text-zinc-100'
+          : 'bg-zinc-900 border-zinc-800 text-zinc-100'
       }`}
     >
       <Handle
         type="target"
         position={Position.Left}
-        className="!w-2 !h-2 !bg-[#d4a359] !border-0"
+        className="!w-2 !h-2 !bg-cyan-600 !border-0"
       />
       <div className="flex items-center justify-between gap-1.5 mb-1">
         <span
@@ -105,10 +105,10 @@ function ChronicleCustomNode({ data }: NodeProps<ChronicleFlowNode>) {
             data.tone === 'paper'
               ? 'text-[#6e5227]'
               : isChar
-              ? 'text-[#4fa3b8]'
+              ? 'text-cyan-400'
               : isClue
-              ? 'text-[#e07b7b]'
-              : 'text-[#d4a359]'
+              ? 'text-red-300'
+              : 'text-cyan-400'
           }`}
         >
           {isChar ? (
@@ -131,7 +131,7 @@ function ChronicleCustomNode({ data }: NodeProps<ChronicleFlowNode>) {
 
         <div className="flex items-center gap-1">
           {data.isSecretGM && (
-            <span className="text-[9px] font-mono px-1 rounded bg-[#c94a4a]/20 text-[#e07b7b]">
+            <span className="text-[9px] font-mono px-1 rounded bg-[#c94a4a]/20 text-red-300">
               GM
             </span>
           )}
@@ -155,7 +155,7 @@ function ChronicleCustomNode({ data }: NodeProps<ChronicleFlowNode>) {
                 e.stopPropagation();
                 data.onDeleteClue?.();
               }}
-              className="p-0.5 rounded hover:text-[#c94a4a] cursor-pointer"
+              className="p-0.5 rounded hover:text-red-400 cursor-pointer"
               title="Remover Pista"
             >
               <Trash2 className="w-3 h-3" />
@@ -168,7 +168,7 @@ function ChronicleCustomNode({ data }: NodeProps<ChronicleFlowNode>) {
       {data.subtitle && (
         <div
           className={`text-[11px] mt-1 line-clamp-3 leading-relaxed ${
-            data.tone === 'paper' ? 'text-[#4a3b28]' : 'text-[#a5a095]'
+            data.tone === 'paper' ? 'text-[#4a3b28]' : 'text-zinc-400'
           }`}
         >
           {data.subtitle}
@@ -177,7 +177,7 @@ function ChronicleCustomNode({ data }: NodeProps<ChronicleFlowNode>) {
       <Handle
         type="source"
         position={Position.Right}
-        className="!w-2 !h-2 !bg-[#d4a359] !border-0"
+        className="!w-2 !h-2 !bg-cyan-600 !border-0"
       />
     </div>
   );
@@ -333,7 +333,7 @@ export function GraphModule() {
         source: srcKey,
         target: tgtKey,
         label: ed.isSecretGM ? `[GM] ${ed.label}` : ed.label,
-        color: RELATION_COLORS[ed.kind] || '#d4a359',
+        color: RELATION_COLORS[ed.kind] || '#06b6d4',
         dashed: ed.isSecretGM || ed.isPlayerTheory,
         manualEdge: ed,
       });
@@ -437,7 +437,7 @@ export function GraphModule() {
   const flowEdges = useMemo<Edge[]>(() => {
     return combinedEdges.map((e) => {
       const inBfs = Boolean(bfsPathResult?.edgeSet.has(e.id));
-      const stroke = inBfs ? '#d4a359' : e.color;
+      const stroke = inBfs ? '#06b6d4' : e.color;
       return {
         id: e.id,
         source: e.source,
@@ -450,12 +450,12 @@ export function GraphModule() {
           strokeDasharray: e.dashed ? '6 4' : undefined,
         },
         labelStyle: {
-          fill: '#ece8df',
+          fill: '#f4f4f5',
           fontSize: 10,
           fontFamily: 'var(--font-jetbrains), monospace',
         },
         labelBgStyle: {
-          fill: '#0e1116',
+          fill: '#09090b',
           fillOpacity: 0.9,
         },
         labelBgPadding: [5, 3],
@@ -547,19 +547,19 @@ export function GraphModule() {
   }, [nodeCatalog]);
 
   return (
-    <div className="flex flex-col lg:flex-row h-full min-h-0 bg-[#0b0d10]">
+    <div className="flex flex-col lg:flex-row h-full min-h-0 bg-zinc-950">
       {/* Interactive Canvas */}
       <div className="flex-1 relative min-h-[440px]">
         {/* Top Mode Bar */}
         <div className="absolute top-3 left-3 right-3 z-10 flex flex-wrap items-center justify-between gap-2 pointer-events-none">
-          <div className="pointer-events-auto inline-flex items-center p-1 rounded-xl bg-[#0e1116]/95 border border-[#222834]">
+          <div className="pointer-events-auto inline-flex items-center p-1 rounded-xl bg-zinc-950/95 border border-zinc-800">
             <button
               type="button"
               onClick={() => setBoardMode('canonical')}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors cursor-pointer ${
                 boardMode === 'canonical'
-                  ? 'bg-[#191e27] text-[#d4a359] border border-[#313a4b]'
-                  : 'text-[#a5a095] hover:text-[#ece8df]'
+                  ? 'bg-zinc-800 text-cyan-400 border border-zinc-700'
+                  : 'text-zinc-400 hover:text-zinc-100'
               }`}
             >
               <Network className="w-3.5 h-3.5" />
@@ -570,8 +570,8 @@ export function GraphModule() {
               onClick={() => setBoardMode('detective')}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors cursor-pointer ${
                 boardMode === 'detective'
-                  ? 'bg-[#191e27] text-[#e07b7b] border border-[#313a4b]'
-                  : 'text-[#a5a095] hover:text-[#ece8df]'
+                  ? 'bg-zinc-800 text-red-300 border border-zinc-700'
+                  : 'text-zinc-400 hover:text-zinc-100'
               }`}
             >
               <StickyNote className="w-3.5 h-3.5" />
@@ -579,7 +579,7 @@ export function GraphModule() {
             </button>
           </div>
 
-          <div className="pointer-events-auto px-3 py-1.5 rounded-xl bg-[#0e1116]/95 border border-[#222834] text-xs font-mono text-[#a5a095]">
+          <div className="pointer-events-auto px-3 py-1.5 rounded-xl bg-zinc-950/95 border border-zinc-800 text-xs font-mono text-zinc-400">
             {flowNodes.length} nós · {flowEdges.length} conexões
           </div>
         </div>
@@ -594,18 +594,18 @@ export function GraphModule() {
           maxZoom={1.8}
           proOptions={{ hideAttribution: true }}
         >
-          <Background color="#222834" gap={26} size={1} />
+          <Background color="#27272a" gap={26} size={1} />
           <Controls />
         </ReactFlow>
       </div>
 
       {/* Right Analytical & Authoring Sidebar */}
-      <aside className="w-full lg:w-88 shrink-0 border-t lg:border-t-0 lg:border-l border-[#222834] bg-[#0e1116] overflow-y-auto custom-scrollbar p-4 space-y-5">
+      <aside className="w-full lg:w-88 shrink-0 border-t lg:border-t-0 lg:border-l border-zinc-800 bg-zinc-950 overflow-y-auto custom-scrollbar p-4 space-y-5">
         {/* Detective Mode Clue Creator (Open to Players & GM) */}
         {boardMode === 'detective' && (
-          <section className="p-3.5 rounded-xl bg-[#13171e] border border-[#222834] space-y-2.5">
-            <div className="flex items-center gap-1.5 text-xs font-bold text-[#ece8df]">
-              <StickyNote className="w-4 h-4 text-[#d4a359]" />
+          <section className="p-3.5 rounded-xl bg-zinc-900 border border-zinc-800 space-y-2.5">
+            <div className="flex items-center gap-1.5 text-xs font-bold text-zinc-100">
+              <StickyNote className="w-4 h-4 text-cyan-400" />
               <span>Fixar Nova Pista / Post-it na Mesa</span>
             </div>
             <input
@@ -613,14 +613,14 @@ export function GraphModule() {
               value={clueTitle}
               onChange={(e) => setClueTitle(e.target.value)}
               placeholder="Título da pista ou suspeita..."
-              className="w-full px-2.5 py-1.5 text-xs rounded-lg bg-[#0e1116] border border-[#222834] text-[#ece8df]"
+              className="w-full px-2.5 py-1.5 text-xs rounded-lg bg-zinc-950 border border-zinc-800 text-zinc-100"
             />
             <textarea
               rows={2}
               value={clueBody}
               onChange={(e) => setClueBody(e.target.value)}
               placeholder="Anotação investigativa..."
-              className="w-full px-2.5 py-1.5 text-xs rounded-lg bg-[#0e1116] border border-[#222834] text-[#ece8df]"
+              className="w-full px-2.5 py-1.5 text-xs rounded-lg bg-zinc-950 border border-zinc-800 text-zinc-100"
             />
             <div className="flex items-center justify-between gap-2">
               <select
@@ -628,7 +628,7 @@ export function GraphModule() {
                 onChange={(e) =>
                   setClueTone(e.target.value as 'brass' | 'crimson' | 'slate' | 'paper')
                 }
-                className="px-2 py-1 text-xs rounded bg-[#0e1116] border border-[#222834] text-[#ece8df]"
+                className="px-2 py-1 text-xs rounded bg-zinc-950 border border-zinc-800 text-zinc-100"
               >
                 <option value="paper">Papel Sépia</option>
                 <option value="crimson">Fio Carmim</option>
@@ -636,7 +636,7 @@ export function GraphModule() {
                 <option value="slate">Ardósia</option>
               </select>
               {isGM && (
-                <label className="flex items-center gap-1 text-xs text-[#a5a095] cursor-pointer">
+                <label className="flex items-center gap-1 text-xs text-zinc-400 cursor-pointer">
                   <input
                     type="checkbox"
                     checked={clueSecretGM}
@@ -648,7 +648,7 @@ export function GraphModule() {
               <button
                 type="button"
                 onClick={handleCreateClue}
-                className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-[#d4a359] text-[#0b0d10] font-semibold text-xs cursor-pointer"
+                className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-cyan-600 text-[#0b0d10] font-semibold text-xs cursor-pointer"
               >
                 <Plus className="w-3.5 h-3.5" />
                 <span>Fixar</span>
@@ -658,16 +658,16 @@ export function GraphModule() {
         )}
 
         {/* Shortest Path BFS */}
-        <section className="p-3.5 rounded-xl bg-[#13171e] border border-[#222834] space-y-2.5">
-          <div className="flex items-center gap-1.5 text-xs font-bold text-[#ece8df]">
-            <Route className="w-4 h-4 text-[#d4a359]" />
+        <section className="p-3.5 rounded-xl bg-zinc-900 border border-zinc-800 space-y-2.5">
+          <div className="flex items-center gap-1.5 text-xs font-bold text-zinc-100">
+            <Route className="w-4 h-4 text-cyan-400" />
             <span>Busca de Menor Caminho (BFS)</span>
           </div>
           <div className="grid grid-cols-1 gap-2">
             <select
               value={pathStartKey}
               onChange={(e) => setPathStartKey(e.target.value)}
-              className="w-full px-2.5 py-1.5 text-xs rounded-lg bg-[#0e1116] border border-[#222834] text-[#ece8df]"
+              className="w-full px-2.5 py-1.5 text-xs rounded-lg bg-zinc-950 border border-zinc-800 text-zinc-100"
             >
               <option value="">Origem...</option>
               {nodeCatalog.map((n) => (
@@ -679,7 +679,7 @@ export function GraphModule() {
             <select
               value={pathEndKey}
               onChange={(e) => setPathEndKey(e.target.value)}
-              className="w-full px-2.5 py-1.5 text-xs rounded-lg bg-[#0e1116] border border-[#222834] text-[#ece8df]"
+              className="w-full px-2.5 py-1.5 text-xs rounded-lg bg-zinc-950 border border-zinc-800 text-zinc-100"
             >
               <option value="">Destino...</option>
               {nodeCatalog.map((n) => (
@@ -690,20 +690,20 @@ export function GraphModule() {
             </select>
           </div>
           {bfsPathResult && (
-            <div className="p-2.5 rounded-lg bg-[#0e1116] border border-[#222834] text-xs">
+            <div className="p-2.5 rounded-lg bg-zinc-950 border border-zinc-800 text-xs">
               {bfsPathResult.found ? (
                 <div className="space-y-1">
-                  <div className="font-mono text-[#d4a359]">
+                  <div className="font-mono text-cyan-400">
                     {bfsPathResult.orderedNodes.length - 1} grau(s) de separação:
                   </div>
-                  <div className="text-[#ece8df] leading-relaxed">
+                  <div className="text-zinc-100 leading-relaxed">
                     {bfsPathResult.orderedNodes
                       .map((k) => labelByKey.get(k) || k)
                       .join(' → ')}
                   </div>
                 </div>
               ) : (
-                <span className="text-[#c94a4a]">
+                <span className="text-red-400">
                   Nenhum caminho conhecido conecta estes dois pontos.
                 </span>
               )}
@@ -713,15 +713,15 @@ export function GraphModule() {
 
         {/* Add Connection / Theory */}
         {(isGM || boardMode === 'detective') && (
-          <section className="p-3.5 rounded-xl bg-[#13171e] border border-[#222834] space-y-2.5">
-            <div className="flex items-center gap-1.5 text-xs font-bold text-[#ece8df]">
-              <GitCompareArrows className="w-4 h-4 text-[#d4a359]" />
+          <section className="p-3.5 rounded-xl bg-zinc-900 border border-zinc-800 space-y-2.5">
+            <div className="flex items-center gap-1.5 text-xs font-bold text-zinc-100">
+              <GitCompareArrows className="w-4 h-4 text-cyan-400" />
               <span>{isGM ? 'Traçar Vínculo ou Segredo' : 'Traçar Fio de Teoria'}</span>
             </div>
             <select
               value={sourceNodeKey}
               onChange={(e) => setSourceNodeKey(e.target.value)}
-              className="w-full px-2.5 py-1.5 text-xs rounded-lg bg-[#0e1116] border border-[#222834] text-[#ece8df]"
+              className="w-full px-2.5 py-1.5 text-xs rounded-lg bg-zinc-950 border border-zinc-800 text-zinc-100"
             >
               <option value="">Nó A (Origem)...</option>
               {nodeCatalog.map((n) => (
@@ -733,7 +733,7 @@ export function GraphModule() {
             <select
               value={targetNodeKey}
               onChange={(e) => setTargetNodeKey(e.target.value)}
-              className="w-full px-2.5 py-1.5 text-xs rounded-lg bg-[#0e1116] border border-[#222834] text-[#ece8df]"
+              className="w-full px-2.5 py-1.5 text-xs rounded-lg bg-zinc-950 border border-zinc-800 text-zinc-100"
             >
               <option value="">Nó B (Alvo)...</option>
               {nodeCatalog.map((n) => (
@@ -746,7 +746,7 @@ export function GraphModule() {
               <select
                 value={edgeKind}
                 onChange={(e) => setEdgeKind(e.target.value as RelationKind)}
-                className="px-2 py-1.5 text-xs rounded-lg bg-[#0e1116] border border-[#222834] text-[#ece8df]"
+                className="px-2 py-1.5 text-xs rounded-lg bg-zinc-950 border border-zinc-800 text-zinc-100"
               >
                 {(Object.keys(RELATION_LABELS) as RelationKind[]).map((rk) => (
                   <option key={rk} value={rk}>
@@ -759,11 +759,11 @@ export function GraphModule() {
                 value={edgeLabel}
                 onChange={(e) => setEdgeLabel(e.target.value)}
                 placeholder="Rótulo (opcional)"
-                className="px-2.5 py-1.5 text-xs rounded-lg bg-[#0e1116] border border-[#222834] text-[#ece8df]"
+                className="px-2.5 py-1.5 text-xs rounded-lg bg-zinc-950 border border-zinc-800 text-zinc-100"
               />
             </div>
             {isGM && (
-              <label className="flex items-center gap-2 text-xs text-[#a5a095] cursor-pointer">
+              <label className="flex items-center gap-2 text-xs text-zinc-400 cursor-pointer">
                 <input
                   type="checkbox"
                   checked={edgeSecretGM}
@@ -775,7 +775,7 @@ export function GraphModule() {
             <button
               type="button"
               onClick={handleCreateManualEdge}
-              className="w-full py-1.5 rounded-lg bg-[#d4a359] hover:bg-[#e2b56e] text-[#0b0d10] font-semibold text-xs transition-colors cursor-pointer"
+              className="w-full py-1.5 rounded-lg bg-cyan-600 hover:bg-cyan-500 text-[#0b0d10] font-semibold text-xs transition-colors cursor-pointer"
             >
               Conectar Nós
             </button>
@@ -784,8 +784,8 @@ export function GraphModule() {
 
         {/* Active Manual & Secret Connections List */}
         {Object.keys(edgesMap).length > 0 && (
-          <section className="p-3.5 rounded-xl bg-[#13171e] border border-[#222834] space-y-2">
-            <div className="text-xs font-bold text-[#ece8df]">Vínculos Manuais & Segredos</div>
+          <section className="p-3.5 rounded-xl bg-zinc-900 border border-zinc-800 space-y-2">
+            <div className="text-xs font-bold text-zinc-100">Vínculos Manuais & Segredos</div>
             <div className="space-y-1.5 max-h-44 overflow-y-auto custom-scrollbar">
               {Object.values(edgesMap)
                 .filter((ed) => isGM || !ed.isSecretGM)
@@ -795,13 +795,13 @@ export function GraphModule() {
                   return (
                     <div
                       key={ed.id}
-                      className="flex items-center justify-between gap-2 px-2.5 py-1.5 rounded bg-[#0e1116] border border-[#222834] text-xs"
+                      className="flex items-center justify-between gap-2 px-2.5 py-1.5 rounded bg-zinc-950 border border-zinc-800 text-xs"
                     >
                       <div className="min-w-0">
-                        <div className="font-semibold text-[#ece8df] truncate">
+                        <div className="font-semibold text-zinc-100 truncate">
                           {sLabel} → {tLabel}
                         </div>
-                        <div className="text-[11px] font-mono text-[#a5a095] truncate">
+                        <div className="text-[11px] font-mono text-zinc-400 truncate">
                           {ed.label}
                         </div>
                       </div>
@@ -812,7 +812,7 @@ export function GraphModule() {
                             onClick={() =>
                               saveEdge(roomId, { ...ed, isSecretGM: !ed.isSecretGM })
                             }
-                            className="p-1 rounded hover:bg-[#191e27] text-[#a5a095] cursor-pointer"
+                            className="p-1 rounded hover:bg-zinc-800 text-zinc-400 cursor-pointer"
                             title={
                               ed.isSecretGM
                                 ? 'Secreta (Clique para revelar aos jogadores)'
@@ -820,9 +820,9 @@ export function GraphModule() {
                             }
                           >
                             {ed.isSecretGM ? (
-                              <EyeOff className="w-3.5 h-3.5 text-[#c94a4a]" />
+                              <EyeOff className="w-3.5 h-3.5 text-red-400" />
                             ) : (
-                              <Eye className="w-3.5 h-3.5 text-[#d4a359]" />
+                              <Eye className="w-3.5 h-3.5 text-cyan-400" />
                             )}
                           </button>
                         )}
@@ -830,7 +830,7 @@ export function GraphModule() {
                           <button
                             type="button"
                             onClick={() => deleteEdge(roomId, ed.id)}
-                            className="p-1 rounded hover:text-[#c94a4a] text-[#6f6b62] cursor-pointer"
+                            className="p-1 rounded hover:text-red-400 text-zinc-500 cursor-pointer"
                           >
                             <Trash2 className="w-3.5 h-3.5" />
                           </button>
@@ -844,16 +844,16 @@ export function GraphModule() {
         )}
 
         {/* Orphan Detector */}
-        <section className="p-3.5 rounded-xl bg-[#13171e] border border-[#222834] space-y-2">
+        <section className="p-3.5 rounded-xl bg-zinc-900 border border-zinc-800 space-y-2">
           <div className="flex items-center justify-between">
-            <span className="flex items-center gap-1.5 text-xs font-bold text-[#ece8df]">
-              <AlertCircle className="w-4 h-4 text-[#d4a359]" />
+            <span className="flex items-center gap-1.5 text-xs font-bold text-zinc-100">
+              <AlertCircle className="w-4 h-4 text-cyan-400" />
               <span>Detector de Páginas Órfãs</span>
             </span>
-            <span className="text-xs font-mono text-[#a5a095]">{orphanEntities.length}</span>
+            <span className="text-xs font-mono text-zinc-400">{orphanEntities.length}</span>
           </div>
           {orphanEntities.length === 0 ? (
-            <p className="text-xs text-[#6f6b62]">
+            <p className="text-xs text-zinc-500">
               Todas as páginas visíveis do Atlas estão conectadas à teia.
             </p>
           ) : (
@@ -863,7 +863,7 @@ export function GraphModule() {
                   key={ent.id}
                   type="button"
                   onClick={() => navigateToEntity(ent.id)}
-                  className="w-full text-left px-2.5 py-1.5 rounded bg-[#0e1116] border border-[#222834] hover:border-[#d4a359] text-xs text-[#ece8df] truncate cursor-pointer"
+                  className="w-full text-left px-2.5 py-1.5 rounded bg-zinc-950 border border-zinc-800 hover:border-cyan-500 text-xs text-zinc-100 truncate cursor-pointer"
                 >
                   {ent.title}
                 </button>

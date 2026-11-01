@@ -107,7 +107,7 @@ export function parseObsidianNoteFile(
           else if (v.includes('local') || v.includes('cidade') || v.includes('loc')) category = 'location';
           else if (v.includes('fac') || v.includes('org') || v.includes('culto')) category = 'faction';
           else if (v.includes('item') || v.includes('arma') || v.includes('reliq')) category = 'item';
-          else if (v.includes('ritual') || v.includes('magia') || v.includes('maldi')) category = 'ritual';
+          else if (v.includes('caso') || v.includes('investig') || v.includes('ritual') || v.includes('anomalia')) category = 'case';
           else if (v.includes('event') || v.includes('sess')) category = 'event';
         } else if (key === 'tags' && val) {
           const cleaned = val.replace(/^\[|\]$/g, '');

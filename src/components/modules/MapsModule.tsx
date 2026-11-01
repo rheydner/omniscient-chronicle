@@ -39,11 +39,11 @@ const TRAVEL_SPEED_KMH: Record<TravelMode, { label: string; kmh: number }> = {
 };
 
 const PIN_COLORS: Record<MapPinKind, string> = {
-  city: '#d4a359',
-  dungeon: '#c94a4a',
-  landmark: '#4fa3b8',
+  city: '#06b6d4',
+  dungeon: '#ef4444',
+  landmark: '#06b6d4',
   danger: '#e05252',
-  hq: '#e2b56e',
+  hq: '#22d3ee',
 };
 
 export function MapsModule() {
@@ -81,7 +81,7 @@ export function MapsModule() {
   // Region & Route in-progress points
   const [workingPoints, setWorkingPoints] = useState<MapCoord[]>([]);
   const [regionLabel, setRegionLabel] = useState('Território');
-  const [regionColor, setRegionColor] = useState('#d4a359');
+  const [regionColor, setRegionColor] = useState('#06b6d4');
   const [routeLabel, setRouteLabel] = useState('Rota de Incursão');
   const [routeMode, setRouteMode] = useState<TravelMode>('foot');
 
@@ -235,13 +235,13 @@ export function MapsModule() {
   };
 
   return (
-    <div className="flex flex-col lg:flex-row h-full min-h-0 bg-[#0b0d10]">
+    <div className="flex flex-col lg:flex-row h-full min-h-0 bg-zinc-950">
       {/* Map Viewport */}
       <div className="flex-1 flex flex-col min-h-0 relative">
         {/* Top Toolbar */}
-        <div className="px-4 py-2.5 border-b border-[#222834] bg-[#0e1116] flex flex-wrap items-center justify-between gap-2">
+        <div className="px-4 py-2.5 border-b border-zinc-800 bg-zinc-950 flex flex-wrap items-center justify-between gap-2">
           <div className="flex flex-wrap items-center gap-2">
-            <MapIcon className="w-4 h-4 text-[#d4a359]" />
+            <MapIcon className="w-4 h-4 text-cyan-400" />
             {visibleMaps.length > 0 ? (
               <select
                 value={activeMap?.id || ''}
@@ -249,7 +249,7 @@ export function MapsModule() {
                   setSelectedMapId(e.target.value);
                   setSelectedPinId(null);
                 }}
-                className="px-2.5 py-1.5 text-xs font-semibold rounded-lg bg-[#13171e] border border-[#313a4b] text-[#ece8df]"
+                className="px-2.5 py-1.5 text-xs font-semibold rounded-lg bg-zinc-900 border border-zinc-700 text-zinc-100"
               >
                 {visibleMaps.map((m) => (
                   <option key={m.id} value={m.id}>
@@ -258,14 +258,14 @@ export function MapsModule() {
                 ))}
               </select>
             ) : (
-              <span className="text-xs text-[#a5a095]">Nenhum mapa cadastrado</span>
+              <span className="text-xs text-zinc-400">Nenhum mapa cadastrado</span>
             )}
 
             {isGM && (
               <button
                 type="button"
                 onClick={() => setShowNewMap((p) => !p)}
-                className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-[#d4a359] text-[#0b0d10] font-semibold text-xs cursor-pointer"
+                className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-cyan-600 text-[#0b0d10] font-semibold text-xs cursor-pointer"
               >
                 <Plus className="w-3.5 h-3.5" />
                 <span>Novo Mapa</span>
@@ -285,8 +285,8 @@ export function MapsModule() {
                     }}
                     className={`flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs cursor-pointer ${
                       tool === 'explore'
-                        ? 'bg-[#191e27] text-[#ece8df] border border-[#313a4b]'
-                        : 'text-[#a5a095]'
+                        ? 'bg-zinc-800 text-zinc-100 border border-zinc-700'
+                        : 'text-zinc-400'
                     }`}
                   >
                     <Compass className="w-3.5 h-3.5" />
@@ -300,8 +300,8 @@ export function MapsModule() {
                     }}
                     className={`flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs cursor-pointer ${
                       tool === 'pin'
-                        ? 'bg-[#d4a359]/20 text-[#e2b56e] border border-[#d4a359]'
-                        : 'text-[#a5a095]'
+                        ? 'bg-cyan-600/20 text-cyan-300 border border-cyan-500'
+                        : 'text-zinc-400'
                     }`}
                   >
                     <MapPinIcon className="w-3.5 h-3.5" />
@@ -315,8 +315,8 @@ export function MapsModule() {
                     }}
                     className={`flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs cursor-pointer ${
                       tool === 'region'
-                        ? 'bg-[#d4a359]/20 text-[#e2b56e] border border-[#d4a359]'
-                        : 'text-[#a5a095]'
+                        ? 'bg-cyan-600/20 text-cyan-300 border border-cyan-500'
+                        : 'text-zinc-400'
                     }`}
                   >
                     <Pentagon className="w-3.5 h-3.5" />
@@ -330,8 +330,8 @@ export function MapsModule() {
                     }}
                     className={`flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs cursor-pointer ${
                       tool === 'route'
-                        ? 'bg-[#4fa3b8]/20 text-[#7cc6d8] border border-[#4fa3b8]'
-                        : 'text-[#a5a095]'
+                        ? 'bg-cyan-600/20 text-cyan-300 border border-cyan-500'
+                        : 'text-zinc-400'
                     }`}
                   >
                     <Navigation className="w-3.5 h-3.5" />
@@ -340,21 +340,21 @@ export function MapsModule() {
                 </>
               )}
 
-              <div className="flex items-center gap-1 ml-2 bg-[#13171e] border border-[#222834] rounded-lg px-1.5 py-0.5">
+              <div className="flex items-center gap-1 ml-2 bg-zinc-900 border border-zinc-800 rounded-lg px-1.5 py-0.5">
                 <button
                   type="button"
                   onClick={() => setZoom((z) => Math.max(0.5, Number((z - 0.2).toFixed(2))))}
-                  className="p-1 text-[#a5a095] hover:text-[#ece8df] cursor-pointer"
+                  className="p-1 text-zinc-400 hover:text-zinc-100 cursor-pointer"
                 >
                   <Minus className="w-3 h-3" />
                 </button>
-                <span className="text-xs font-mono text-[#ece8df] px-1">
+                <span className="text-xs font-mono text-zinc-100 px-1">
                   {Math.round(zoom * 100)}%
                 </span>
                 <button
                   type="button"
                   onClick={() => setZoom((z) => Math.min(3, Number((z + 0.2).toFixed(2))))}
-                  className="p-1 text-[#a5a095] hover:text-[#ece8df] cursor-pointer"
+                  className="p-1 text-zinc-400 hover:text-zinc-100 cursor-pointer"
                 >
                   <Plus className="w-3 h-3" />
                 </button>
@@ -365,13 +365,13 @@ export function MapsModule() {
 
         {/* New Map Drawer */}
         {showNewMap && isGM && (
-          <div className="p-4 border-b border-[#222834] bg-[#13171e] grid grid-cols-1 md:grid-cols-4 gap-2.5">
+          <div className="p-4 border-b border-zinc-800 bg-zinc-900 grid grid-cols-1 md:grid-cols-4 gap-2.5">
             <input
               type="text"
               value={newMapName}
               onChange={(e) => setNewMapName(e.target.value)}
               placeholder="Nome (ex.: Região Metropolitana Sul)"
-              className="px-3 py-1.5 text-xs rounded-lg bg-[#0e1116] border border-[#222834] text-[#ece8df]"
+              className="px-3 py-1.5 text-xs rounded-lg bg-zinc-950 border border-zinc-800 text-zinc-100"
             />
             <div className="flex items-center gap-1.5 md:col-span-2">
               <input
@@ -379,10 +379,10 @@ export function MapsModule() {
                 value={newMapUrl}
                 onChange={(e) => setNewMapUrl(e.target.value)}
                 placeholder="URL da imagem ou faça Upload ao lado..."
-                className="flex-1 px-3 py-1.5 text-xs rounded-lg bg-[#0e1116] border border-[#222834] text-[#ece8df]"
+                className="flex-1 px-3 py-1.5 text-xs rounded-lg bg-zinc-950 border border-zinc-800 text-zinc-100"
               />
-              <label className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-[#191e27] border border-[#313a4b] text-xs cursor-pointer shrink-0">
-                <ImagePlus className="w-3.5 h-3.5 text-[#d4a359]" />
+              <label className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-zinc-800 border border-zinc-700 text-xs cursor-pointer shrink-0">
+                <ImagePlus className="w-3.5 h-3.5 text-cyan-400" />
                 <span>{isUploading ? '...' : 'Upload'}</span>
                 <input
                   type="file"
@@ -401,14 +401,14 @@ export function MapsModule() {
                 min={1}
                 value={newMapScale}
                 onChange={(e) => setNewMapScale(Number(e.target.value))}
-                className="w-20 px-2 py-1.5 text-xs font-mono rounded-lg bg-[#0e1116] border border-[#222834] text-[#ece8df]"
+                className="w-20 px-2 py-1.5 text-xs font-mono rounded-lg bg-zinc-950 border border-zinc-800 text-zinc-100"
                 title="Quilômetros a cada 100 pixels"
               />
-              <span className="text-xs text-[#a5a095]">km/100px</span>
+              <span className="text-xs text-zinc-400">km/100px</span>
               <button
                 type="button"
                 onClick={handleCreateMap}
-                className="px-3 py-1.5 rounded-lg bg-[#d4a359] text-[#0b0d10] font-semibold text-xs cursor-pointer ml-auto"
+                className="px-3 py-1.5 rounded-lg bg-cyan-600 text-[#0b0d10] font-semibold text-xs cursor-pointer ml-auto"
               >
                 Salvar
               </button>
@@ -419,10 +419,10 @@ export function MapsModule() {
         {/* Map Canvas Scroll Container */}
         <div className="flex-1 overflow-auto custom-scrollbar p-6 flex items-center justify-center bg-[#080a0d]">
           {!activeMap ? (
-            <div className="max-w-md p-6 rounded-xl bg-[#13171e] border border-[#222834] text-center space-y-3">
-              <MapIcon className="w-8 h-8 text-[#d4a359] mx-auto" />
-              <h3 className="text-base font-bold text-[#ece8df]">Cartografia Regional</h3>
-              <p className="text-xs text-[#a5a095] leading-relaxed">
+            <div className="max-w-md p-6 rounded-xl bg-zinc-900 border border-zinc-800 text-center space-y-3">
+              <MapIcon className="w-8 h-8 text-cyan-400 mx-auto" />
+              <h3 className="text-base font-bold text-zinc-100">Cartografia Regional</h3>
+              <p className="text-xs text-zinc-400 leading-relaxed">
                 Envie o mapa de continente, cidade ou distrito para fixar pinos conectados à Wiki,
                 demarcar territórios de facções, calcular tempo de viagem e mover os jogadores
                 diretamente para cenas do StarStream VTT.
@@ -436,7 +436,7 @@ export function MapsModule() {
                 width: imgNatural.width * zoom,
                 height: imgNatural.height * zoom,
               }}
-              className={`relative shrink-0 rounded-xl overflow-hidden border border-[#313a4b] select-none ${
+              className={`relative shrink-0 rounded-xl overflow-hidden border border-zinc-700 select-none ${
                 tool !== 'explore' ? 'cursor-crosshair' : 'cursor-default'
               }`}
             >
@@ -485,7 +485,7 @@ export function MapsModule() {
                       key={rt.id}
                       points={rt.points.map((p) => `${p.xPercent},${p.yPercent}`).join(' ')}
                       fill="none"
-                      stroke="#4fa3b8"
+                      stroke="#06b6d4"
                       strokeWidth={0.6}
                       strokeDasharray="1.4 0.9"
                     />
@@ -496,7 +496,7 @@ export function MapsModule() {
                     points={workingPoints.map((p) => `${p.xPercent},${p.yPercent}`).join(' ')}
                     fill={tool === 'region' ? regionColor : 'none'}
                     fillOpacity={0.2}
-                    stroke="#d4a359"
+                    stroke="#06b6d4"
                     strokeWidth={0.6}
                   />
                 )}
@@ -524,8 +524,8 @@ export function MapsModule() {
                       <div
                         className={`flex items-center gap-1 px-2 py-0.5 rounded-md text-[11px] font-semibold border shadow-md whitespace-nowrap ${
                           isSel
-                            ? 'bg-[#d4a359] text-[#0b0d10] border-[#ece8df]'
-                            : 'bg-[#0e1116]/95 text-[#ece8df] border-[#313a4b]'
+                            ? 'bg-cyan-600 text-[#0b0d10] border-[#ece8df]'
+                            : 'bg-zinc-950/95 text-zinc-100 border-zinc-700'
                         }`}
                       >
                         <span
@@ -544,11 +544,11 @@ export function MapsModule() {
 
       {/* Right Cartography Inspector */}
       {activeMap && (
-        <aside className="w-full lg:w-84 shrink-0 border-t lg:border-t-0 lg:border-l border-[#222834] bg-[#0e1116] overflow-y-auto custom-scrollbar p-4 space-y-4">
+        <aside className="w-full lg:w-84 shrink-0 border-t lg:border-t-0 lg:border-l border-zinc-800 bg-zinc-950 overflow-y-auto custom-scrollbar p-4 space-y-4">
           {/* Active Tool Authoring Box */}
           {isGM && tool === 'pin' && (
-            <section className="p-3.5 rounded-xl bg-[#13171e] border border-[#d4a359]/50 space-y-2.5">
-              <div className="text-xs font-bold text-[#e2b56e]">
+            <section className="p-3.5 rounded-xl bg-zinc-900 border border-cyan-500/50 space-y-2.5">
+              <div className="text-xs font-bold text-cyan-300">
                 Modo Pino: Configure e clique no mapa
               </div>
               <input
@@ -556,12 +556,12 @@ export function MapsModule() {
                 value={draftPinLabel}
                 onChange={(e) => setDraftPinLabel(e.target.value)}
                 placeholder="Nome do local..."
-                className="w-full px-2.5 py-1.5 text-xs rounded-lg bg-[#0e1116] border border-[#222834] text-[#ece8df]"
+                className="w-full px-2.5 py-1.5 text-xs rounded-lg bg-zinc-950 border border-zinc-800 text-zinc-100"
               />
               <select
                 value={draftPinKind}
                 onChange={(e) => setDraftPinKind(e.target.value as MapPinKind)}
-                className="w-full px-2.5 py-1.5 text-xs rounded-lg bg-[#0e1116] border border-[#222834] text-[#ece8df]"
+                className="w-full px-2.5 py-1.5 text-xs rounded-lg bg-zinc-950 border border-zinc-800 text-zinc-100"
               >
                 <option value="city">Cidade / Distrito</option>
                 <option value="dungeon">Zona de Ruptura / Masmorra</option>
@@ -572,7 +572,7 @@ export function MapsModule() {
               <select
                 value={draftPinEntityId}
                 onChange={(e) => setDraftPinEntityId(e.target.value)}
-                className="w-full px-2.5 py-1.5 text-xs rounded-lg bg-[#0e1116] border border-[#222834] text-[#ece8df]"
+                className="w-full px-2.5 py-1.5 text-xs rounded-lg bg-zinc-950 border border-zinc-800 text-zinc-100"
               >
                 <option value="">Vincular Página do Atlas (opcional)...</option>
                 {Object.values(entities).map((en) => (
@@ -584,7 +584,7 @@ export function MapsModule() {
               <select
                 value={draftPinSceneId}
                 onChange={(e) => setDraftPinSceneId(e.target.value)}
-                className="w-full px-2.5 py-1.5 text-xs rounded-lg bg-[#0e1116] border border-[#222834] text-[#ece8df]"
+                className="w-full px-2.5 py-1.5 text-xs rounded-lg bg-zinc-950 border border-zinc-800 text-zinc-100"
               >
                 <option value="">Vincular Cena do StarStream VTT (opcional)...</option>
                 {vttScenes.map((sc) => (
@@ -593,7 +593,7 @@ export function MapsModule() {
                   </option>
                 ))}
               </select>
-              <label className="flex items-center gap-2 text-xs text-[#a5a095] cursor-pointer">
+              <label className="flex items-center gap-2 text-xs text-zinc-400 cursor-pointer">
                 <input
                   type="checkbox"
                   checked={draftPinPublic}
@@ -605,8 +605,8 @@ export function MapsModule() {
           )}
 
           {isGM && tool === 'region' && (
-            <section className="p-3.5 rounded-xl bg-[#13171e] border border-[#d4a359]/50 space-y-2.5">
-              <div className="text-xs font-bold text-[#e2b56e]">
+            <section className="p-3.5 rounded-xl bg-zinc-900 border border-cyan-500/50 space-y-2.5">
+              <div className="text-xs font-bold text-cyan-300">
                 Desenhando Território ({workingPoints.length} vértices)
               </div>
               <input
@@ -614,19 +614,19 @@ export function MapsModule() {
                 value={regionLabel}
                 onChange={(e) => setRegionLabel(e.target.value)}
                 placeholder="Nome da Zona / Facção"
-                className="w-full px-2.5 py-1.5 text-xs rounded-lg bg-[#0e1116] border border-[#222834] text-[#ece8df]"
+                className="w-full px-2.5 py-1.5 text-xs rounded-lg bg-zinc-950 border border-zinc-800 text-zinc-100"
               />
               <div className="flex items-center justify-between gap-2">
                 <input
                   type="color"
                   value={regionColor}
                   onChange={(e) => setRegionColor(e.target.value)}
-                  className="h-8 w-14 rounded bg-[#0e1116] border border-[#222834]"
+                  className="h-8 w-14 rounded bg-zinc-950 border border-zinc-800"
                 />
                 <button
                   type="button"
                   onClick={handleFinishRegion}
-                  className="flex-1 py-1.5 rounded-lg bg-[#d4a359] text-[#0b0d10] font-semibold text-xs cursor-pointer"
+                  className="flex-1 py-1.5 rounded-lg bg-cyan-600 text-[#0b0d10] font-semibold text-xs cursor-pointer"
                 >
                   Concluir Território
                 </button>
@@ -635,8 +635,8 @@ export function MapsModule() {
           )}
 
           {isGM && tool === 'route' && (
-            <section className="p-3.5 rounded-xl bg-[#13171e] border border-[#4fa3b8]/50 space-y-2.5">
-              <div className="text-xs font-bold text-[#7cc6d8]">
+            <section className="p-3.5 rounded-xl bg-zinc-900 border border-cyan-500/50 space-y-2.5">
+              <div className="text-xs font-bold text-cyan-300">
                 Traçando Rota ({workingPoints.length} pontos)
               </div>
               <input
@@ -644,12 +644,12 @@ export function MapsModule() {
                 value={routeLabel}
                 onChange={(e) => setRouteLabel(e.target.value)}
                 placeholder="Nome da rota..."
-                className="w-full px-2.5 py-1.5 text-xs rounded-lg bg-[#0e1116] border border-[#222834] text-[#ece8df]"
+                className="w-full px-2.5 py-1.5 text-xs rounded-lg bg-zinc-950 border border-zinc-800 text-zinc-100"
               />
               <select
                 value={routeMode}
                 onChange={(e) => setRouteMode(e.target.value as TravelMode)}
-                className="w-full px-2.5 py-1.5 text-xs rounded-lg bg-[#0e1116] border border-[#222834] text-[#ece8df]"
+                className="w-full px-2.5 py-1.5 text-xs rounded-lg bg-zinc-950 border border-zinc-800 text-zinc-100"
               >
                 {(Object.keys(TRAVEL_SPEED_KMH) as TravelMode[]).map((m) => (
                   <option key={m} value={m}>
@@ -658,7 +658,7 @@ export function MapsModule() {
                 ))}
               </select>
               {workingPoints.length >= 2 && (
-                <div className="text-xs font-mono text-[#ece8df]">
+                <div className="text-xs font-mono text-zinc-100">
                   Prévia:{' '}
                   {
                     computeRouteMetrics(workingPoints, routeMode, activeMap.scaleKmPer100Px)
@@ -675,7 +675,7 @@ export function MapsModule() {
               <button
                 type="button"
                 onClick={handleFinishRoute}
-                className="w-full py-1.5 rounded-lg bg-[#4fa3b8] text-[#0b0d10] font-semibold text-xs cursor-pointer"
+                className="w-full py-1.5 rounded-lg bg-cyan-600 text-[#0b0d10] font-semibold text-xs cursor-pointer"
               >
                 Salvar Rota Calculada
               </button>
@@ -684,13 +684,13 @@ export function MapsModule() {
 
           {/* Selected Pin Details */}
           {selectedPin && (
-            <section className="p-3.5 rounded-xl bg-[#13171e] border border-[#313a4b] space-y-3">
+            <section className="p-3.5 rounded-xl bg-zinc-900 border border-zinc-700 space-y-3">
               <div className="flex items-start justify-between gap-2">
                 <div>
-                  <span className="text-[10px] font-mono uppercase text-[#d4a359]">
+                  <span className="text-[10px] font-mono uppercase text-cyan-400">
                     Marcador Selecionado
                   </span>
-                  <h4 className="text-sm font-bold text-[#ece8df]">{selectedPin.label}</h4>
+                  <h4 className="text-sm font-bold text-zinc-100">{selectedPin.label}</h4>
                 </div>
                 {isGM && (
                   <button
@@ -702,7 +702,7 @@ export function MapsModule() {
                       });
                       setSelectedPinId(null);
                     }}
-                    className="p-1 text-[#6f6b62] hover:text-[#c94a4a] cursor-pointer"
+                    className="p-1 text-zinc-500 hover:text-red-400 cursor-pointer"
                   >
                     <Trash2 className="w-3.5 h-3.5" />
                   </button>
@@ -713,12 +713,12 @@ export function MapsModule() {
                 <button
                   type="button"
                   onClick={() => navigateToEntity(selectedPin.entityId!)}
-                  className="w-full flex items-center justify-between px-3 py-2 rounded-lg bg-[#0e1116] border border-[#222834] hover:border-[#d4a359] text-xs cursor-pointer"
+                  className="w-full flex items-center justify-between px-3 py-2 rounded-lg bg-zinc-950 border border-zinc-800 hover:border-cyan-500 text-xs cursor-pointer"
                 >
-                  <span className="font-semibold text-[#ece8df] truncate">
+                  <span className="font-semibold text-zinc-100 truncate">
                     {entities[selectedPin.entityId].title}
                   </span>
-                  <ExternalLink className="w-3.5 h-3.5 text-[#d4a359] shrink-0" />
+                  <ExternalLink className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
                 </button>
               )}
 
@@ -733,7 +733,7 @@ export function MapsModule() {
                         : 'Erro ao mover cena ativa no VTT.'
                     );
                   }}
-                  className="w-full flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-[#d4a359] hover:bg-[#e2b56e] text-[#0b0d10] font-semibold text-xs cursor-pointer"
+                  className="w-full flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-cyan-600 hover:bg-cyan-500 text-[#0b0d10] font-semibold text-xs cursor-pointer"
                 >
                   <Send className="w-3.5 h-3.5" />
                   <span>Mover Jogadores no StarStream VTT</span>
@@ -743,12 +743,12 @@ export function MapsModule() {
           )}
 
           {/* Saved Travel Routes Summary */}
-          <section className="p-3.5 rounded-xl bg-[#13171e] border border-[#222834] space-y-2">
-            <div className="text-xs font-bold text-[#ece8df]">
+          <section className="p-3.5 rounded-xl bg-zinc-900 border border-zinc-800 space-y-2">
+            <div className="text-xs font-bold text-zinc-100">
               Rotas & Distâncias ({activeMap.routes.length})
             </div>
             {activeMap.routes.length === 0 ? (
-              <p className="text-xs text-[#6f6b62]">
+              <p className="text-xs text-zinc-500">
                 Nenhuma rota medida neste mapa ainda.
               </p>
             ) : (
@@ -761,11 +761,11 @@ export function MapsModule() {
                 return (
                   <div
                     key={rt.id}
-                    className="flex items-center justify-between gap-2 px-2.5 py-2 rounded-lg bg-[#0e1116] border border-[#222834] text-xs"
+                    className="flex items-center justify-between gap-2 px-2.5 py-2 rounded-lg bg-zinc-950 border border-zinc-800 text-xs"
                   >
                     <div className="min-w-0">
-                      <div className="font-semibold text-[#ece8df] truncate">{rt.label}</div>
-                      <div className="font-mono text-[11px] text-[#4fa3b8]">
+                      <div className="font-semibold text-zinc-100 truncate">{rt.label}</div>
+                      <div className="font-mono text-[11px] text-cyan-400">
                         {metrics.km} km · {metrics.timeLabel}
                       </div>
                     </div>
@@ -778,7 +778,7 @@ export function MapsModule() {
                             routes: activeMap.routes.filter((x) => x.id !== rt.id),
                           })
                         }
-                        className="text-[#6f6b62] hover:text-[#c94a4a] cursor-pointer"
+                        className="text-zinc-500 hover:text-red-400 cursor-pointer"
                       >
                         <Trash2 className="w-3.5 h-3.5" />
                       </button>
@@ -797,7 +797,7 @@ export function MapsModule() {
                 await deleteRegionalMap(roomId, activeMap.id);
                 setSelectedMapId(null);
               }}
-              className="w-full py-2 rounded-lg bg-[#13171e] border border-[#222834] hover:border-[#c94a4a] text-xs text-[#a5a095] hover:text-[#c94a4a] cursor-pointer"
+              className="w-full py-2 rounded-lg bg-zinc-900 border border-zinc-800 hover:border-[#c94a4a] text-xs text-zinc-400 hover:text-red-400 cursor-pointer"
             >
               Excluir Este Mapa Regional
             </button>

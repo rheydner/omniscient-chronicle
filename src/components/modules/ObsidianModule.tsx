@@ -180,39 +180,39 @@ export function ObsidianModule() {
   const visibleEntities = Object.values(entities).filter((e) => isGM || e.isPublicToPlayers);
 
   return (
-    <div className="h-full overflow-y-auto custom-scrollbar p-5 lg:p-8 bg-[#0b0d10]">
+    <div className="h-full overflow-y-auto custom-scrollbar p-5 lg:p-8 bg-zinc-950">
       <div className="max-w-4xl mx-auto space-y-6">
-        <header className="pb-4 border-b border-[#222834]">
-          <div className="flex items-center gap-2 text-xs font-mono uppercase text-[#d4a359]">
+        <header className="pb-4 border-b border-zinc-800">
+          <div className="flex items-center gap-2 text-xs font-mono uppercase text-cyan-400">
             <FolderSync className="w-3.5 h-3.5" />
             <span>Ponte Bidirecional · Obsidian Vault (.md)</span>
           </div>
-          <h1 className="text-2xl font-bold font-editorial text-[#ece8df] mt-1">
+          <h1 className="text-2xl font-bold font-sans text-zinc-100 mt-1">
             Sincronização de Notas Markdown, WikiLinks & Segredos
           </h1>
-          <p className="text-xs text-[#a5a095] mt-1 leading-relaxed">
-            Importe seus arquivos <code className="text-[#ece8df]">.md</code> do Obsidian: os links{' '}
-            <code className="text-[#d4a359]">[[Página]]</code> viram conexões vivas no Atlas e no
+          <p className="text-xs text-zinc-400 mt-1 leading-relaxed">
+            Importe seus arquivos <code className="text-zinc-100">.md</code> do Obsidian: os links{' '}
+            <code className="text-cyan-400">[[Página]]</code> viram conexões vivas no Atlas e no
             Grafo (incluindo fichas do Omniscient Sheet com mesmo nome), e comentários{' '}
-            <code className="text-[#c94a4a]">%%segredo%%</code> tornam-se automaticamente Tarjas
+            <code className="text-red-400">%%segredo%%</code> tornam-se automaticamente Tarjas
             Pretas trancadas.
           </p>
         </header>
 
         {/* Importer Section (GM Only) */}
         {isGM && (
-          <section className="p-5 rounded-xl bg-[#13171e] border border-[#222834] space-y-4">
+          <section className="p-5 rounded-xl bg-zinc-900 border border-zinc-800 space-y-4">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div>
-                <h2 className="text-sm font-bold text-[#ece8df]">
+                <h2 className="text-sm font-bold text-zinc-100">
                   Importar Notas do Seu Cofre Obsidian
                 </h2>
-                <p className="text-xs text-[#a5a095]">
+                <p className="text-xs text-zinc-400">
                   Selecione múltiplos arquivos .md para converter frontmatter YAML, tags, links e
                   tarjas.
                 </p>
               </div>
-              <label className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#d4a359] hover:bg-[#e2b56e] text-[#0b0d10] font-semibold text-xs transition-colors cursor-pointer">
+              <label className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-cyan-600 hover:bg-cyan-500 text-[#0b0d10] font-semibold text-xs transition-colors cursor-pointer">
                 <Upload className="w-4 h-4" />
                 <span>Selecionar Arquivos .md</span>
                 <input
@@ -226,12 +226,12 @@ export function ObsidianModule() {
             </div>
 
             {stagedNotes.length > 0 && (
-              <div className="space-y-3 pt-3 border-t border-[#222834]">
+              <div className="space-y-3 pt-3 border-t border-zinc-800">
                 <div className="flex flex-wrap items-center justify-between gap-2">
-                  <span className="text-xs font-mono text-[#d4a359]">
+                  <span className="text-xs font-mono text-cyan-400">
                     {stagedNotes.length} arquivo(s) analisado(s) e pronto(s):
                   </span>
-                  <label className="flex items-center gap-2 text-xs text-[#ece8df] cursor-pointer">
+                  <label className="flex items-center gap-2 text-xs text-zinc-100 cursor-pointer">
                     <input
                       type="checkbox"
                       checked={importAsPublic}
@@ -247,23 +247,23 @@ export function ObsidianModule() {
                     return (
                       <div
                         key={idx}
-                        className="flex flex-wrap items-center justify-between gap-2 px-3 py-2 rounded-lg bg-[#0e1116] border border-[#222834] text-xs"
+                        className="flex flex-wrap items-center justify-between gap-2 px-3 py-2 rounded-lg bg-zinc-950 border border-zinc-800 text-xs"
                       >
                         <div className="flex items-center gap-2 min-w-0">
-                          <FileCode2 className="w-4 h-4 text-[#d4a359] shrink-0" />
-                          <span className="font-semibold text-[#ece8df] truncate">{n.title}</span>
+                          <FileCode2 className="w-4 h-4 text-cyan-400 shrink-0" />
+                          <span className="font-semibold text-zinc-100 truncate">{n.title}</span>
                           {n.folderName && (
-                            <span className="text-[11px] font-mono text-[#6f6b62]">
+                            <span className="text-[11px] font-mono text-zinc-500">
                               /{n.folderName}
                             </span>
                           )}
                         </div>
                         <div className="flex items-center gap-2 font-mono text-[11px]">
-                          <span className="inline-flex items-center gap-1 text-[#4fa3b8]">
+                          <span className="inline-flex items-center gap-1 text-cyan-400">
                             <Link2 className="w-3 h-3" />
                             {n.unresolvedWikiLinks.length} [[links]]
                           </span>
-                          <span className="inline-flex items-center gap-1 text-[#e07b7b]">
+                          <span className="inline-flex items-center gap-1 text-red-300">
                             <FileLock2 className="w-3 h-3" />
                             {redactionsCount} tarja(s)
                           </span>
@@ -277,7 +277,7 @@ export function ObsidianModule() {
                   <button
                     type="button"
                     onClick={() => setStagedNotes([])}
-                    className="px-3 py-1.5 rounded-lg bg-[#0e1116] border border-[#222834] text-xs text-[#a5a095] cursor-pointer"
+                    className="px-3 py-1.5 rounded-lg bg-zinc-950 border border-zinc-800 text-xs text-zinc-400 cursor-pointer"
                   >
                     Limpar Lista
                   </button>
@@ -285,7 +285,7 @@ export function ObsidianModule() {
                     type="button"
                     disabled={isImporting}
                     onClick={handleCommitImport}
-                    className="flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-[#4fa3b8] text-[#0b0d10] font-semibold text-xs cursor-pointer"
+                    className="flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-cyan-600 text-[#0b0d10] font-semibold text-xs cursor-pointer"
                   >
                     <CheckCircle2 className="w-4 h-4" />
                     <span>
@@ -299,24 +299,24 @@ export function ObsidianModule() {
         )}
 
         {/* Exporter Section */}
-        <section className="p-5 rounded-xl bg-[#13171e] border border-[#222834] space-y-4">
+        <section className="p-5 rounded-xl bg-zinc-900 border border-zinc-800 space-y-4">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div>
-              <h2 className="text-sm font-bold text-[#ece8df]">
+              <h2 className="text-sm font-bold text-zinc-100">
                 Exportar Atlas de Volta para Sintaxe Obsidian (.md)
               </h2>
-              <p className="text-xs text-[#a5a095]">
-                Converte @Menções em <code className="text-[#ece8df]">[[WikiLinks]]</code>, gera
+              <p className="text-xs text-zinc-400">
+                Converte @Menções em <code className="text-zinc-100">[[WikiLinks]]</code>, gera
                 frontmatter YAML e preserva segredos trancados em{' '}
-                <code className="text-[#ece8df]">%%comentários%%</code>.
+                <code className="text-zinc-100">%%comentários%%</code>.
               </p>
             </div>
             <button
               type="button"
               onClick={handleExportVaultBundle}
-              className="flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-[#191e27] border border-[#313a4b] hover:border-[#d4a359] text-xs font-semibold text-[#ece8df] cursor-pointer"
+              className="flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-zinc-800 border border-zinc-700 hover:border-cyan-500 text-xs font-semibold text-zinc-100 cursor-pointer"
             >
-              <Download className="w-3.5 h-3.5 text-[#d4a359]" />
+              <Download className="w-3.5 h-3.5 text-cyan-400" />
               <span>Baixar Compilado Completo (.md)</span>
             </button>
           </div>
@@ -325,15 +325,15 @@ export function ObsidianModule() {
             {visibleEntities.map((ent) => (
               <div
                 key={ent.id}
-                className="flex items-center justify-between gap-2 px-3 py-2 rounded-lg bg-[#0e1116] border border-[#222834] text-xs"
+                className="flex items-center justify-between gap-2 px-3 py-2 rounded-lg bg-zinc-950 border border-zinc-800 text-xs"
               >
-                <span className="font-semibold text-[#ece8df] truncate">{ent.title}</span>
+                <span className="font-semibold text-zinc-100 truncate">{ent.title}</span>
                 <button
                   type="button"
                   onClick={() => handleExportSingle(ent)}
-                  className="inline-flex items-center gap-1 px-2 py-1 rounded bg-[#13171e] border border-[#222834] hover:border-[#d4a359] text-[#a5a095] hover:text-[#ece8df] shrink-0 cursor-pointer"
+                  className="inline-flex items-center gap-1 px-2 py-1 rounded bg-zinc-900 border border-zinc-800 hover:border-cyan-500 text-zinc-400 hover:text-zinc-100 shrink-0 cursor-pointer"
                 >
-                  <Download className="w-3 h-3 text-[#d4a359]" />
+                  <Download className="w-3 h-3 text-cyan-400" />
                   <span>.md</span>
                 </button>
               </div>

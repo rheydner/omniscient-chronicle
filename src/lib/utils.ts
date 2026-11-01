@@ -74,37 +74,40 @@ export function getMoonPhaseLabel(
 export function buildWorldClockPayload(cal: WorldCalendarConfig): WorldClockPayload {
   const month = cal.months[cal.currentMonthIndex] || cal.months[0] || {
     id: 'm1',
-    name: 'Bruma',
-    days: 30,
+    name: 'Março',
+    days: 31,
     season: 'Outono',
   };
   const era = cal.eras.find((e) => e.id === cal.currentEraId) || cal.eras[0] || {
-    id: 'era-1',
-    name: 'Era Atual',
-    abbreviation: 'E.A.',
+    id: 'era-padrao',
+    name: 'Calendário Padrão',
+    abbreviation: '',
     startYear: 1,
   };
   const absDay = getAbsoluteDayCount(cal, cal.currentYear, cal.currentMonthIndex, cal.currentDay);
-  const weekdayList = cal.weekdays.length > 0 ? cal.weekdays : ['1º Dia'];
+  const weekdayList = cal.weekdays.length > 0 ? cal.weekdays : ['Domingo'];
   const weekdayName = weekdayList[((absDay % weekdayList.length) + weekdayList.length) % weekdayList.length];
 
-  const moonParts = cal.moons.map((m) => {
+  const moonParts = (cal.moons || []).map((m) => {
     const phase = getMoonPhaseLabel(absDay, m.cycleDays, m.offsetDays);
     return `${m.name}: ${phase.phaseName}`;
   });
 
+  const dateSuffix = era.abbreviation ? ` ${era.abbreviation}` : '';
+  const dateLabel = `${cal.currentDay} de ${month.name} de ${cal.currentYear}${dateSuffix}`;
+
   return {
-    worldName: cal.worldName,
-    dateLabel: `Dia ${cal.currentDay} de ${month.name}, Ano ${cal.currentYear} ${era.abbreviation}`,
+    worldName: cal.worldName || 'Calendário da Campanha',
+    dateLabel,
     eraAbbreviation: era.abbreviation,
     year: cal.currentYear,
     monthIndex: cal.currentMonthIndex,
     monthName: month.name,
     day: cal.currentDay,
     weekdayName,
-    season: month.season,
-    moonSummary: moonParts.join(' · ') || 'Céu encoberto',
-    weather: cal.currentWeather || 'Neblina fria',
+    season: month.season || '',
+    moonSummary: moonParts.length > 0 ? moonParts.join(' · ') : '',
+    weather: cal.currentWeather || 'Céu nublado e garoa fina',
     updatedAt: Date.now(),
   };
 }

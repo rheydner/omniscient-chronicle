@@ -99,7 +99,7 @@ export function GrimoireModule() {
       title: 'Novo Tomo / Manual de Sistema',
       subtitle: 'Compêndio de regras, rituais e lore',
       author: 'Arquivo Central',
-      accentColor: '#d4a359',
+      accentColor: '#06b6d4',
       isPublicToPlayers: true,
       chapters: [
         {
@@ -189,21 +189,21 @@ export function GrimoireModule() {
     fontScale === 'sm' ? 'text-xs' : fontScale === 'lg' ? 'text-base' : 'text-sm';
 
   return (
-    <div className="flex flex-col lg:flex-row h-full min-h-0 bg-[#0b0d10]">
+    <div className="flex flex-col lg:flex-row h-full min-h-0 bg-zinc-950">
       {/* Left Books & Chapters TOC */}
       {!focusMode && (
-        <aside className="w-full lg:w-72 shrink-0 border-b lg:border-b-0 lg:border-r border-[#222834] bg-[#0e1116] flex flex-col max-h-[34vh] lg:max-h-none">
-          <div className="p-3.5 border-b border-[#222834] space-y-2.5">
+        <aside className="w-full lg:w-72 shrink-0 border-b lg:border-b-0 lg:border-r border-zinc-800 bg-zinc-950 flex flex-col max-h-[34vh] lg:max-h-none">
+          <div className="p-3.5 border-b border-zinc-800 space-y-2.5">
             <div className="flex items-center justify-between gap-2">
               <div className="flex items-center gap-1.5">
-                <Library className="w-4 h-4 text-[#d4a359]" />
-                <h2 className="text-sm font-bold text-[#ece8df]">Grimório & Tomos</h2>
+                <Library className="w-4 h-4 text-cyan-400" />
+                <h2 className="text-sm font-bold text-zinc-100">Grimório & Tomos</h2>
               </div>
               {isGM && (
                 <button
                   type="button"
                   onClick={handleCreateBook}
-                  className="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-[#d4a359] text-[#0b0d10] font-semibold text-xs cursor-pointer"
+                  className="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-cyan-600 text-[#0b0d10] font-semibold text-xs cursor-pointer"
                 >
                   <Plus className="w-3.5 h-3.5" />
                   <span>Livro</span>
@@ -219,7 +219,7 @@ export function GrimoireModule() {
                   setChapterIdx(0);
                   setIsEditingChapter(false);
                 }}
-                className="w-full px-2.5 py-1.5 text-xs font-semibold rounded-lg bg-[#13171e] border border-[#313a4b] text-[#ece8df]"
+                className="w-full px-2.5 py-1.5 text-xs font-semibold rounded-lg bg-zinc-900 border border-zinc-700 text-zinc-100"
               >
                 {visibleBooks.map((b) => (
                   <option key={b.id} value={b.id}>
@@ -233,12 +233,12 @@ export function GrimoireModule() {
           {activeBook && (
             <div className="flex-1 overflow-y-auto custom-scrollbar p-2.5 space-y-1">
               <div className="flex items-center justify-between px-2 py-1">
-                <span className="text-[11px] font-mono uppercase text-[#6f6b62]">Sumário</span>
+                <span className="text-[11px] font-mono uppercase text-zinc-500">Sumário</span>
                 {isGM && (
                   <button
                     type="button"
                     onClick={handleAddChapter}
-                    className="text-xs text-[#d4a359] hover:underline cursor-pointer"
+                    className="text-xs text-cyan-400 hover:underline cursor-pointer"
                   >
                     + Capítulo
                   </button>
@@ -254,8 +254,8 @@ export function GrimoireModule() {
                   }}
                   className={`w-full text-left px-3 py-2 rounded-lg text-xs transition-colors cursor-pointer ${
                     idx === safeIdx
-                      ? 'bg-[#191e27] text-[#d4a359] font-semibold border border-[#313a4b]'
-                      : 'text-[#a5a095] hover:bg-[#13171e] hover:text-[#ece8df]'
+                      ? 'bg-zinc-800 text-cyan-400 font-semibold border border-zinc-700'
+                      : 'text-zinc-400 hover:bg-zinc-900 hover:text-zinc-100'
                   }`}
                 >
                   {ch.title}
@@ -263,7 +263,7 @@ export function GrimoireModule() {
               ))}
 
               {isGM && (
-                <div className="pt-4 mt-4 border-t border-[#222834] px-2 flex items-center justify-between">
+                <div className="pt-4 mt-4 border-t border-zinc-800 px-2 flex items-center justify-between">
                   <button
                     type="button"
                     onClick={() =>
@@ -272,7 +272,7 @@ export function GrimoireModule() {
                         isPublicToPlayers: !activeBook.isPublicToPlayers,
                       })
                     }
-                    className="text-xs text-[#a5a095] hover:text-[#ece8df] cursor-pointer"
+                    className="text-xs text-zinc-400 hover:text-zinc-100 cursor-pointer"
                   >
                     {activeBook.isPublicToPlayers ? 'Livro Público' : 'Livro Oculto (GM)'}
                   </button>
@@ -283,7 +283,7 @@ export function GrimoireModule() {
                       await deleteBook(roomId, activeBook.id);
                       setSelectedBookId(null);
                     }}
-                    className="text-xs text-[#6f6b62] hover:text-[#c94a4a] cursor-pointer"
+                    className="text-xs text-zinc-500 hover:text-red-400 cursor-pointer"
                   >
                     Excluir Tomo
                   </button>
@@ -298,7 +298,7 @@ export function GrimoireModule() {
       <main className="flex-1 flex flex-col min-h-0">
         {/* Reader Controls Strip */}
         {activeBook && (
-          <div className="px-4 py-2 border-b border-[#222834] bg-[#0e1116] flex flex-wrap items-center justify-between gap-2">
+          <div className="px-4 py-2 border-b border-zinc-800 bg-zinc-950 flex flex-wrap items-center justify-between gap-2">
             <div className="flex items-center gap-1.5">
               {(['dark', 'sepia', 'light'] as const).map((th) => (
                 <button
@@ -307,8 +307,8 @@ export function GrimoireModule() {
                   onClick={() => setReaderTheme(th)}
                   className={`px-2.5 py-1 rounded text-xs cursor-pointer ${
                     readerTheme === th
-                      ? 'bg-[#191e27] text-[#d4a359] border border-[#313a4b]'
-                      : 'text-[#a5a095]'
+                      ? 'bg-zinc-800 text-cyan-400 border border-zinc-700'
+                      : 'text-zinc-400'
                   }`}
                 >
                   {th === 'dark' ? 'Noturno' : th === 'sepia' ? 'Sépia' : 'Papel Claro'}
@@ -317,12 +317,12 @@ export function GrimoireModule() {
             </div>
 
             <div className="flex items-center gap-2">
-              <div className="flex items-center gap-1 bg-[#13171e] border border-[#222834] rounded-lg px-1.5 py-0.5 text-xs">
+              <div className="flex items-center gap-1 bg-zinc-900 border border-zinc-800 rounded-lg px-1.5 py-0.5 text-xs">
                 <button
                   type="button"
                   onClick={() => setFontScale('sm')}
                   className={`px-1.5 cursor-pointer ${
-                    fontScale === 'sm' ? 'text-[#d4a359] font-bold' : 'text-[#a5a095]'
+                    fontScale === 'sm' ? 'text-cyan-400 font-bold' : 'text-zinc-400'
                   }`}
                 >
                   A-
@@ -331,7 +331,7 @@ export function GrimoireModule() {
                   type="button"
                   onClick={() => setFontScale('base')}
                   className={`px-1.5 cursor-pointer ${
-                    fontScale === 'base' ? 'text-[#d4a359] font-bold' : 'text-[#a5a095]'
+                    fontScale === 'base' ? 'text-cyan-400 font-bold' : 'text-zinc-400'
                   }`}
                 >
                   A
@@ -340,7 +340,7 @@ export function GrimoireModule() {
                   type="button"
                   onClick={() => setFontScale('lg')}
                   className={`px-1.5 cursor-pointer ${
-                    fontScale === 'lg' ? 'text-[#d4a359] font-bold' : 'text-[#a5a095]'
+                    fontScale === 'lg' ? 'text-cyan-400 font-bold' : 'text-zinc-400'
                   }`}
                 >
                   A+
@@ -352,7 +352,7 @@ export function GrimoireModule() {
                 onChange={(e) =>
                   setMeasureWidth(e.target.value as 'narrow' | 'normal' | 'wide')
                 }
-                className="px-2 py-1 text-xs rounded-lg bg-[#13171e] border border-[#222834] text-[#ece8df]"
+                className="px-2 py-1 text-xs rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-100"
               >
                 <option value="narrow">Coluna Estreita</option>
                 <option value="normal">Coluna Editorial</option>
@@ -362,16 +362,16 @@ export function GrimoireModule() {
               <button
                 type="button"
                 onClick={() => setFocusMode((f) => !f)}
-                className="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-[#13171e] border border-[#222834] text-xs text-[#ece8df] cursor-pointer"
+                className="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-zinc-900 border border-zinc-800 text-xs text-zinc-100 cursor-pointer"
               >
                 {focusMode ? (
                   <>
-                    <Minimize2 className="w-3.5 h-3.5 text-[#d4a359]" />
+                    <Minimize2 className="w-3.5 h-3.5 text-cyan-400" />
                     <span>Sair do Foco</span>
                   </>
                 ) : (
                   <>
-                    <Maximize2 className="w-3.5 h-3.5 text-[#a5a095]" />
+                    <Maximize2 className="w-3.5 h-3.5 text-zinc-400" />
                     <span>Modo Foco</span>
                   </>
                 )}
@@ -382,10 +382,10 @@ export function GrimoireModule() {
 
         <div className="flex-1 overflow-y-auto custom-scrollbar p-5 lg:p-8">
           {!activeBook ? (
-            <div className="max-w-md mx-auto my-16 p-6 rounded-xl bg-[#13171e] border border-[#222834] text-center space-y-3">
-              <BookMarked className="w-8 h-8 text-[#d4a359] mx-auto" />
-              <h3 className="text-base font-bold text-[#ece8df]">Grimório & Regras</h3>
-              <p className="text-xs text-[#a5a095]">
+            <div className="max-w-md mx-auto my-16 p-6 rounded-xl bg-zinc-900 border border-zinc-800 text-center space-y-3">
+              <BookMarked className="w-8 h-8 text-cyan-400 mx-auto" />
+              <h3 className="text-base font-bold text-zinc-100">Grimório & Regras</h3>
+              <p className="text-xs text-zinc-400">
                 Publique livros in-universe, tratados ocultistas ou o manual de regras do seu
                 sistema com glossário lateral integrado.
               </p>
@@ -399,19 +399,19 @@ export function GrimoireModule() {
                   onChange={(e) =>
                     setChapterDraft({ ...chapterDraft, title: e.target.value })
                   }
-                  className="flex-1 px-3 py-2 text-sm font-bold rounded-lg bg-[#13171e] border border-[#313a4b] text-[#ece8df]"
+                  className="flex-1 px-3 py-2 text-sm font-bold rounded-lg bg-zinc-900 border border-zinc-700 text-zinc-100"
                 />
                 <button
                   type="button"
                   onClick={() => setIsEditingChapter(false)}
-                  className="px-3 py-2 rounded-lg bg-[#13171e] border border-[#222834] text-xs text-[#a5a095] cursor-pointer"
+                  className="px-3 py-2 rounded-lg bg-zinc-900 border border-zinc-800 text-xs text-zinc-400 cursor-pointer"
                 >
                   Cancelar
                 </button>
                 <button
                   type="button"
                   onClick={handleSaveChapterDraft}
-                  className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[#d4a359] text-[#0b0d10] font-semibold text-xs cursor-pointer"
+                  className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-cyan-600 text-[#0b0d10] font-semibold text-xs cursor-pointer"
                 >
                   <Save className="w-3.5 h-3.5" />
                   <span>Salvar Capítulo</span>
@@ -431,10 +431,10 @@ export function GrimoireModule() {
                 <article
                   className={`rounded-xl border p-6 sm:p-10 ${scaleClass} ${
                     readerTheme === 'sepia'
-                      ? 'bg-[#f3ead6] text-[#221b13] border-[#cbb894] font-editorial'
+                      ? 'bg-[#f3ead6] text-[#221b13] border-[#cbb894] font-sans'
                       : readerTheme === 'light'
-                      ? 'bg-[#f4f3ef] text-[#181a1f] border-[#d5d2c8] font-editorial'
-                      : 'bg-[#13171e] text-[#ece8df] border-[#222834] font-editorial'
+                      ? 'bg-[#f4f3ef] text-[#181a1f] border-[#d5d2c8] font-sans'
+                      : 'bg-zinc-900 text-zinc-100 border-zinc-800 font-sans'
                   }`}
                 >
                   <div className="flex items-start justify-between gap-3 pb-4 mb-6 border-b border-current/15">
@@ -507,8 +507,8 @@ export function GrimoireModule() {
                 </article>
 
                 {/* Personal Margin Note */}
-                <div className="p-4 rounded-xl bg-[#13171e] border border-[#222834] space-y-1.5">
-                  <div className="text-xs font-mono uppercase text-[#a5a095]">
+                <div className="p-4 rounded-xl bg-zinc-900 border border-zinc-800 space-y-1.5">
+                  <div className="text-xs font-mono uppercase text-zinc-400">
                     Suas Notas Pessoais de Margem neste Capítulo (Salvas Localmente)
                   </div>
                   <textarea
@@ -516,7 +516,7 @@ export function GrimoireModule() {
                     value={marginNote}
                     onChange={(e) => handleSaveMarginNote(e.target.value)}
                     placeholder="Anote lembretes de regra, pistas ou dúvidas sobre este capítulo..."
-                    className="w-full p-2.5 text-xs rounded-lg bg-[#0e1116] border border-[#222834] text-[#ece8df] focus:outline-none focus:border-[#d4a359]"
+                    className="w-full p-2.5 text-xs rounded-lg bg-zinc-950 border border-zinc-800 text-zinc-100 focus:outline-none focus:border-cyan-500"
                   />
                 </div>
               </div>
@@ -527,19 +527,19 @@ export function GrimoireModule() {
 
       {/* Right Side Live Glossary */}
       {!focusMode && activeBook && (
-        <aside className="w-full lg:w-76 shrink-0 border-t lg:border-t-0 lg:border-l border-[#222834] bg-[#0e1116] flex flex-col max-h-[34vh] lg:max-h-none">
-          <div className="p-3.5 border-b border-[#222834] space-y-2">
-            <div className="text-xs font-bold text-[#ece8df]">
+        <aside className="w-full lg:w-76 shrink-0 border-t lg:border-t-0 lg:border-l border-zinc-800 bg-zinc-950 flex flex-col max-h-[34vh] lg:max-h-none">
+          <div className="p-3.5 border-b border-zinc-800 space-y-2">
+            <div className="text-xs font-bold text-zinc-100">
               Glossário Rápido ({activeBook.glossary.length})
             </div>
             <div className="relative">
-              <Search className="w-3.5 h-3.5 text-[#6f6b62] absolute left-2.5 top-1/2 -translate-y-1/2" />
+              <Search className="w-3.5 h-3.5 text-zinc-500 absolute left-2.5 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
                 value={glossaryQuery}
                 onChange={(e) => setGlossaryQuery(e.target.value)}
                 placeholder="Filtrar termo ou regra..."
-                className="w-full pl-8 pr-2.5 py-1.5 text-xs rounded-lg bg-[#13171e] border border-[#222834] text-[#ece8df]"
+                className="w-full pl-8 pr-2.5 py-1.5 text-xs rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-100"
               />
             </div>
           </div>
@@ -548,12 +548,12 @@ export function GrimoireModule() {
             {filteredGlossary.map((g) => (
               <div
                 key={g.id}
-                className="p-2.5 rounded-lg bg-[#13171e] border border-[#222834] space-y-1"
+                className="p-2.5 rounded-lg bg-zinc-900 border border-zinc-800 space-y-1"
               >
                 <div className="flex items-center justify-between gap-2">
-                  <span className="text-xs font-bold text-[#d4a359]">{g.term}</span>
+                  <span className="text-xs font-bold text-cyan-400">{g.term}</span>
                   <div className="flex items-center gap-1">
-                    <span className="text-[10px] font-mono text-[#6f6b62]">{g.category}</span>
+                    <span className="text-[10px] font-mono text-zinc-500">{g.category}</span>
                     {isGM && (
                       <button
                         type="button"
@@ -563,35 +563,35 @@ export function GrimoireModule() {
                             glossary: activeBook.glossary.filter((x) => x.id !== g.id),
                           })
                         }
-                        className="text-[#6f6b62] hover:text-[#c94a4a] cursor-pointer"
+                        className="text-zinc-500 hover:text-red-400 cursor-pointer"
                       >
                         <Trash2 className="w-3 h-3" />
                       </button>
                     )}
                   </div>
                 </div>
-                <p className="text-xs text-[#a5a095] leading-relaxed">{g.definition}</p>
+                <p className="text-xs text-zinc-400 leading-relaxed">{g.definition}</p>
               </div>
             ))}
           </div>
 
           {isGM && (
-            <div className="p-3 border-t border-[#222834] bg-[#13171e] space-y-1.5">
-              <div className="text-[11px] font-semibold text-[#ece8df]">+ Novo Verbete</div>
+            <div className="p-3 border-t border-zinc-800 bg-zinc-900 space-y-1.5">
+              <div className="text-[11px] font-semibold text-zinc-100">+ Novo Verbete</div>
               <div className="flex items-center gap-1.5">
                 <input
                   type="text"
                   value={newTerm}
                   onChange={(e) => setNewTerm(e.target.value)}
                   placeholder="Termo"
-                  className="flex-1 px-2 py-1 text-xs rounded bg-[#0e1116] border border-[#222834]"
+                  className="flex-1 px-2 py-1 text-xs rounded bg-zinc-950 border border-zinc-800"
                 />
                 <input
                   type="text"
                   value={newTermCat}
                   onChange={(e) => setNewTermCat(e.target.value)}
                   placeholder="Tipo"
-                  className="w-20 px-2 py-1 text-xs rounded bg-[#0e1116] border border-[#222834]"
+                  className="w-20 px-2 py-1 text-xs rounded bg-zinc-950 border border-zinc-800"
                 />
               </div>
               <textarea
@@ -599,12 +599,12 @@ export function GrimoireModule() {
                 value={newTermDef}
                 onChange={(e) => setNewTermDef(e.target.value)}
                 placeholder="Definição..."
-                className="w-full px-2 py-1 text-xs rounded bg-[#0e1116] border border-[#222834]"
+                className="w-full px-2 py-1 text-xs rounded bg-zinc-950 border border-zinc-800"
               />
               <button
                 type="button"
                 onClick={handleAddGlossaryTerm}
-                className="w-full py-1 rounded bg-[#d4a359] text-[#0b0d10] font-semibold text-xs cursor-pointer"
+                className="w-full py-1 rounded bg-cyan-600 text-[#0b0d10] font-semibold text-xs cursor-pointer"
               >
                 Adicionar ao Glossário
               </button>

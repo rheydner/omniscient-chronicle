@@ -116,7 +116,7 @@ export function FloatingSheetViewerModal() {
                 willChange: isDragging ? 'transform' : 'auto',
               }
         }
-        className={`fixed z-[9990] flex flex-col bg-[#0e1116] border border-[#313a4b] rounded-xl overflow-hidden select-none ${
+        className={`fixed z-[9990] flex flex-col bg-zinc-950 border border-zinc-700 rounded-xl overflow-hidden select-none ${
           isDragging ? 'transition-none' : 'transition-[width,height] duration-150'
         }`}
       >
@@ -134,14 +134,14 @@ export function FloatingSheetViewerModal() {
               y: e.clientY - currentPosRef.current.y,
             };
           }}
-          className="flex items-center justify-between px-3.5 py-2.5 bg-[#13171e] border-b border-[#222834] cursor-grab active:cursor-grabbing shrink-0"
+          className="flex items-center justify-between px-3.5 py-2.5 bg-zinc-900 border-b border-zinc-800 cursor-grab active:cursor-grabbing shrink-0"
         >
           <div className="flex items-center gap-2">
-            <GripHorizontal className="w-4 h-4 text-[#6f6b62]" />
-            <span className="text-xs font-bold text-[#ece8df]">
+            <GripHorizontal className="w-4 h-4 text-zinc-500" />
+            <span className="text-xs font-bold text-zinc-100">
               {character?.name || 'Ficha Omniscient'}
             </span>
-            <span className="text-xs font-mono px-1.5 py-0.5 rounded bg-[#4fa3b8]/15 text-[#7cc6d8] border border-[#4fa3b8]/35">
+            <span className="text-xs font-mono px-1.5 py-0.5 rounded bg-cyan-600/15 text-cyan-300 border border-cyan-500/35">
               OMNISCIENT SHEET
             </span>
           </div>
@@ -152,7 +152,7 @@ export function FloatingSheetViewerModal() {
                 setIsLoading(true);
                 setIframeKey((k) => k + 1);
               }}
-              className="p-1.5 rounded-md text-[#a5a095] hover:text-[#ece8df] hover:bg-[#191e27] transition-colors cursor-pointer"
+              className="p-1.5 rounded-md text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800 transition-colors cursor-pointer"
               title="Recarregar Ficha"
             >
               <RotateCw className="w-3.5 h-3.5" />
@@ -161,7 +161,7 @@ export function FloatingSheetViewerModal() {
               href={`https://omniscient-rpg.web.app/sheet/${charId}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-1.5 rounded-md text-[#a5a095] hover:text-[#4fa3b8] hover:bg-[#191e27] transition-colors"
+              className="p-1.5 rounded-md text-zinc-400 hover:text-cyan-400 hover:bg-zinc-800 transition-colors"
               title="Abrir em Nova Aba"
             >
               <ExternalLink className="w-3.5 h-3.5" />
@@ -169,25 +169,25 @@ export function FloatingSheetViewerModal() {
             <button
               type="button"
               onClick={() => setIsMaximized((m) => !m)}
-              className="p-1.5 rounded-md text-[#a5a095] hover:text-[#ece8df] hover:bg-[#191e27] transition-colors cursor-pointer"
+              className="p-1.5 rounded-md text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800 transition-colors cursor-pointer"
             >
               {isMaximized ? <Minimize2 className="w-3.5 h-3.5" /> : <Maximize2 className="w-3.5 h-3.5" />}
             </button>
             <button
               type="button"
               onClick={() => openFloatingSheet(null)}
-              className="p-1.5 rounded-md text-[#a5a095] hover:text-[#c94a4a] hover:bg-[#c94a4a]/15 transition-colors cursor-pointer"
+              className="p-1.5 rounded-md text-zinc-400 hover:text-red-400 hover:bg-[#c94a4a]/15 transition-colors cursor-pointer"
             >
               <X className="w-4 h-4" />
             </button>
           </div>
         </div>
 
-        <div className="relative flex-1 bg-[#0b0d10]">
+        <div className="relative flex-1 bg-zinc-950">
           {isLoading && (
-            <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-2 bg-[#0b0d10]/90">
-              <Loader2 className="w-5 h-5 text-[#4fa3b8] motion-safe:animate-spin" />
-              <span className="text-xs font-mono text-[#a5a095]">
+            <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-2 bg-zinc-950/90">
+              <Loader2 className="w-5 h-5 text-cyan-400 motion-safe:animate-spin" />
+              <span className="text-xs font-mono text-zinc-400">
                 Conectando ao Omniscient Sheet...
               </span>
             </div>

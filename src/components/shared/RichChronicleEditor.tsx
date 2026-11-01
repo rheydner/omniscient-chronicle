@@ -210,9 +210,9 @@ export function RichChronicleEditor({
   };
 
   return (
-    <div className="rounded-xl border border-[#222834] bg-[#10141a]">
+    <div className="rounded-xl border border-zinc-800 bg-[#10141a]">
       {/* Toolbar */}
-      <div className="flex flex-wrap items-center justify-between gap-1.5 px-3 py-2 border-b border-[#222834] bg-[#0e1116] rounded-t-xl">
+      <div className="flex flex-wrap items-center justify-between gap-1.5 px-3 py-2 border-b border-zinc-800 bg-zinc-950 rounded-t-xl">
         <div className="flex flex-wrap items-center gap-1.5">
           {/* @Mention Picker */}
           <div className="relative">
@@ -222,26 +222,26 @@ export function RichChronicleEditor({
                 setShowMentionMenu((p) => !p);
                 setShowTableMenu(false);
               }}
-              className="flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-medium bg-[#13171e] border border-[#222834] hover:border-[#d4a359] text-[#ece8df] transition-colors cursor-pointer"
+              className="flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-medium bg-zinc-900 border border-zinc-800 hover:border-cyan-500 text-zinc-100 transition-colors cursor-pointer"
               title="Citar Ficha do Omniscient Sheet ou Página da Wiki (@)"
             >
-              <AtSign className="w-3.5 h-3.5 text-[#d4a359]" />
+              <AtSign className="w-3.5 h-3.5 text-cyan-400" />
               <span>Mencionar</span>
             </button>
 
             {showMentionMenu && (
-              <div className="absolute left-0 top-full mt-1.5 w-72 bg-[#13171e] border border-[#313a4b] rounded-xl p-2 z-50">
+              <div className="absolute left-0 top-full mt-1.5 w-72 bg-zinc-900 border border-zinc-700 rounded-xl p-2 z-50">
                 <input
                   type="text"
                   value={mentionQuery}
                   onChange={(e) => setMentionQuery(e.target.value)}
                   placeholder="Filtrar personagem ou página..."
                   autoFocus
-                  className="w-full px-2.5 py-1.5 mb-1.5 text-xs rounded-md bg-[#0e1116] border border-[#222834] text-[#ece8df] focus:outline-none focus:border-[#d4a359]"
+                  className="w-full px-2.5 py-1.5 mb-1.5 text-xs rounded-md bg-zinc-950 border border-zinc-800 text-zinc-100 focus:outline-none focus:border-cyan-500"
                 />
                 <div className="max-h-48 overflow-y-auto custom-scrollbar space-y-1">
                   {mentionCandidates.length === 0 ? (
-                    <div className="text-xs text-[#6f6b62] px-2 py-2">Nenhum item encontrado.</div>
+                    <div className="text-xs text-zinc-500 px-2 py-2">Nenhum item encontrado.</div>
                   ) : (
                     mentionCandidates.slice(0, 20).map((cand) => (
                       <button
@@ -252,10 +252,10 @@ export function RichChronicleEditor({
                           setShowMentionMenu(false);
                           setMentionQuery('');
                         }}
-                        className="w-full text-left px-2.5 py-1.5 rounded-md hover:bg-[#191e27] transition-colors cursor-pointer flex items-center justify-between gap-2"
+                        className="w-full text-left px-2.5 py-1.5 rounded-md hover:bg-zinc-800 transition-colors cursor-pointer flex items-center justify-between gap-2"
                       >
                         <span className="text-xs font-semibold truncate">{cand.label}</span>
-                        <span className="text-xs font-mono text-[#a5a095] shrink-0">
+                        <span className="text-xs font-mono text-zinc-400 shrink-0">
                           {cand.type === 'character' ? 'Ficha' : 'Atlas'}
                         </span>
                       </button>
@@ -270,10 +270,10 @@ export function RichChronicleEditor({
           <button
             type="button"
             onClick={handleApplyRedaction}
-            className="flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-medium bg-[#13171e] border border-[#c94a4a]/45 hover:border-[#c94a4a] text-[#ece8df] transition-colors cursor-pointer"
+            className="flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-medium bg-zinc-900 border border-[#c94a4a]/45 hover:border-[#c94a4a] text-zinc-100 transition-colors cursor-pointer"
             title="Selecione um trecho do texto e clique para aplicar Tarja Preta censurada"
           >
-            <FileLock2 className="w-3.5 h-3.5 text-[#c94a4a]" />
+            <FileLock2 className="w-3.5 h-3.5 text-red-400" />
             <span>Tarja Preta</span>
           </button>
 
@@ -281,7 +281,7 @@ export function RichChronicleEditor({
           <button
             type="button"
             onClick={handleInsertSpoiler}
-            className="flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-medium bg-[#13171e] border border-[#222834] hover:border-[#313a4b] text-[#a5a095] hover:text-[#ece8df] transition-colors cursor-pointer"
+            className="flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-medium bg-zinc-900 border border-zinc-800 hover:border-zinc-700 text-zinc-400 hover:text-zinc-100 transition-colors cursor-pointer"
           >
             <EyeOff className="w-3.5 h-3.5" />
             <span>Spoiler</span>
@@ -295,13 +295,13 @@ export function RichChronicleEditor({
                 setShowTableMenu((p) => !p);
                 setShowMentionMenu(false);
               }}
-              className="flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-medium bg-[#13171e] border border-[#222834] hover:border-[#313a4b] text-[#a5a095] hover:text-[#ece8df] transition-colors cursor-pointer"
+              className="flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-medium bg-zinc-900 border border-zinc-800 hover:border-zinc-700 text-zinc-400 hover:text-zinc-100 transition-colors cursor-pointer"
             >
               <Table2 className="w-3.5 h-3.5" />
               <span>Tabela RPG</span>
             </button>
             {showTableMenu && (
-              <div className="absolute left-0 top-full mt-1.5 w-52 bg-[#13171e] border border-[#313a4b] rounded-xl p-1.5 z-50 space-y-1">
+              <div className="absolute left-0 top-full mt-1.5 w-52 bg-zinc-900 border border-zinc-700 rounded-xl p-1.5 z-50 space-y-1">
                 {[
                   { key: 'atributos', label: 'Bloco de Atributos' },
                   { key: 'inventario', label: 'Tabela de Inventário / Relíquias' },
@@ -315,7 +315,7 @@ export function RichChronicleEditor({
                       insertAtCursor(`\n${RPG_TABLE_TEMPLATES[tpl.key]}\n`);
                       setShowTableMenu(false);
                     }}
-                    className="w-full text-left px-2.5 py-1.5 text-xs rounded-md hover:bg-[#191e27] transition-colors cursor-pointer"
+                    className="w-full text-left px-2.5 py-1.5 text-xs rounded-md hover:bg-zinc-800 transition-colors cursor-pointer"
                   >
                     {tpl.label}
                   </button>
@@ -329,9 +329,9 @@ export function RichChronicleEditor({
             <button
               type="button"
               onClick={() => setShowAudioAdder((p) => !p)}
-              className="flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-medium bg-[#13171e] border border-[#222834] hover:border-[#d4a359] text-[#a5a095] hover:text-[#ece8df] transition-colors cursor-pointer"
+              className="flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-medium bg-zinc-900 border border-zinc-800 hover:border-cyan-500 text-zinc-400 hover:text-zinc-100 transition-colors cursor-pointer"
             >
-              <Volume2 className="w-3.5 h-3.5 text-[#d4a359]" />
+              <Volume2 className="w-3.5 h-3.5 text-cyan-400" />
               <span>Fita Áudio (YouTube)</span>
             </button>
           )}
@@ -342,12 +342,12 @@ export function RichChronicleEditor({
             onClick={toggleVoiceDictation}
             className={`flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-medium border transition-colors cursor-pointer ${
               isDictating
-                ? 'bg-[#c94a4a]/20 border-[#c94a4a] text-[#ece8df]'
-                : 'bg-[#13171e] border-[#222834] text-[#a5a095] hover:text-[#ece8df]'
+                ? 'bg-[#c94a4a]/20 border-[#c94a4a] text-zinc-100'
+                : 'bg-zinc-900 border-zinc-800 text-zinc-400 hover:text-zinc-100'
             }`}
             title="Ditar Lore por Voz (Português)"
           >
-            {isDictating ? <MicOff className="w-3.5 h-3.5 text-[#c94a4a]" /> : <Mic className="w-3.5 h-3.5" />}
+            {isDictating ? <MicOff className="w-3.5 h-3.5 text-red-400" /> : <Mic className="w-3.5 h-3.5" />}
             <span>{isDictating ? 'Ouvindo...' : 'Ditar'}</span>
           </button>
         </div>
@@ -358,8 +358,8 @@ export function RichChronicleEditor({
           onClick={() => setShowPreview((p) => !p)}
           className={`flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-medium border transition-colors cursor-pointer ${
             showPreview
-              ? 'bg-[#d4a359]/20 border-[#d4a359] text-[#e2b56e]'
-              : 'bg-[#13171e] border-[#222834] text-[#a5a095] hover:text-[#ece8df]'
+              ? 'bg-cyan-600/20 border-cyan-500 text-cyan-300'
+              : 'bg-zinc-900 border-zinc-800 text-zinc-400 hover:text-zinc-100'
           }`}
         >
           <Eye className="w-3.5 h-3.5" />
@@ -369,8 +369,8 @@ export function RichChronicleEditor({
 
       {/* Add YouTube Audio Clip Drawer */}
       {showAudioAdder && onChangeAudioClips && (
-        <div className="p-3 bg-[#13171e] border-b border-[#222834] space-y-2">
-          <div className="text-xs font-semibold text-[#d4a359]">
+        <div className="p-3 bg-zinc-900 border-b border-zinc-800 space-y-2">
+          <div className="text-xs font-semibold text-cyan-400">
             Anexar Fita K7 / Trecho de Áudio via YouTube (Zero Storage)
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-4 gap-2">
@@ -379,39 +379,39 @@ export function RichChronicleEditor({
               value={clipTitle}
               onChange={(e) => setClipTitle(e.target.value)}
               placeholder="Título (ex.: Fita #12 - Interrogatório)"
-              className="sm:col-span-2 px-2.5 py-1.5 text-xs rounded-md bg-[#0e1116] border border-[#222834] text-[#ece8df]"
+              className="sm:col-span-2 px-2.5 py-1.5 text-xs rounded-md bg-zinc-950 border border-zinc-800 text-zinc-100"
             />
             <input
               type="text"
               value={clipUrl}
               onChange={(e) => setClipUrl(e.target.value)}
               placeholder="Link do YouTube..."
-              className="sm:col-span-2 px-2.5 py-1.5 text-xs rounded-md bg-[#0e1116] border border-[#222834] text-[#ece8df]"
+              className="sm:col-span-2 px-2.5 py-1.5 text-xs rounded-md bg-zinc-950 border border-zinc-800 text-zinc-100"
             />
           </div>
           <div className="flex flex-wrap items-center justify-between gap-2">
             <div className="flex items-center gap-2 text-xs">
-              <label className="text-[#a5a095]">Início (seg):</label>
+              <label className="text-zinc-400">Início (seg):</label>
               <input
                 type="number"
                 min={0}
                 value={clipStart}
                 onChange={(e) => setClipStart(Number(e.target.value))}
-                className="w-20 px-2 py-1 rounded bg-[#0e1116] border border-[#222834] font-mono"
+                className="w-20 px-2 py-1 rounded bg-zinc-950 border border-zinc-800 font-mono"
               />
-              <label className="text-[#a5a095]">Fim (seg):</label>
+              <label className="text-zinc-400">Fim (seg):</label>
               <input
                 type="number"
                 min={0}
                 value={clipEnd}
                 onChange={(e) => setClipEnd(Number(e.target.value))}
-                className="w-20 px-2 py-1 rounded bg-[#0e1116] border border-[#222834] font-mono"
+                className="w-20 px-2 py-1 rounded bg-zinc-950 border border-zinc-800 font-mono"
               />
             </div>
             <button
               type="button"
               onClick={handleAddAudioClip}
-              className="flex items-center gap-1 px-3 py-1 rounded-md text-xs font-semibold bg-[#d4a359] text-[#0b0d10] hover:bg-[#e2b56e] cursor-pointer"
+              className="flex items-center gap-1 px-3 py-1 rounded-md text-xs font-semibold bg-cyan-600 text-[#0b0d10] hover:bg-cyan-500 cursor-pointer"
             >
               <Plus className="w-3.5 h-3.5" />
               <span>Anexar Fita</span>
@@ -428,11 +428,11 @@ export function RichChronicleEditor({
           value={value}
           onChange={(e) => onChange(e.target.value)}
           placeholder={placeholder}
-          className="w-full p-3.5 bg-transparent text-sm text-[#ece8df] placeholder:text-[#6f6b62] focus:outline-none resize-y font-sans leading-relaxed"
+          className="w-full p-3.5 bg-transparent text-sm text-zinc-100 placeholder:text-zinc-500 focus:outline-none resize-y font-sans leading-relaxed"
         />
         {showPreview && (
-          <div className="p-3.5 bg-[#13171e]/60 max-h-[380px] overflow-y-auto custom-scrollbar">
-            <div className="text-xs font-mono uppercase text-[#6f6b62] mb-2">
+          <div className="p-3.5 bg-zinc-900/60 max-h-[380px] overflow-y-auto custom-scrollbar">
+            <div className="text-xs font-mono uppercase text-zinc-500 mb-2">
               Prévia Interativa
             </div>
             <RichChronicleRenderer
@@ -446,21 +446,21 @@ export function RichChronicleEditor({
 
       {/* Attached Audio Clips List in Editor */}
       {audioClips.length > 0 && onChangeAudioClips && (
-        <div className="px-3.5 py-2.5 border-t border-[#222834] bg-[#0e1116]/70 flex flex-wrap gap-2 rounded-b-xl">
+        <div className="px-3.5 py-2.5 border-t border-zinc-800 bg-zinc-950/70 flex flex-wrap gap-2 rounded-b-xl">
           {audioClips.map((c) => (
             <div
               key={c.id}
-              className="flex items-center gap-2 px-2.5 py-1 rounded-md bg-[#13171e] border border-[#222834] text-xs"
+              className="flex items-center gap-2 px-2.5 py-1 rounded-md bg-zinc-900 border border-zinc-800 text-xs"
             >
-              <Volume2 className="w-3.5 h-3.5 text-[#d4a359]" />
+              <Volume2 className="w-3.5 h-3.5 text-cyan-400" />
               <span className="font-medium">{c.title}</span>
-              <span className="font-mono text-[#a5a095]">
+              <span className="font-mono text-zinc-400">
                 ({c.startSec}s-{c.endSec}s)
               </span>
               <button
                 type="button"
                 onClick={() => onChangeAudioClips(audioClips.filter((x) => x.id !== c.id))}
-                className="text-[#a5a095] hover:text-[#c94a4a] cursor-pointer"
+                className="text-zinc-400 hover:text-red-400 cursor-pointer"
                 title="Remover fita"
               >
                 <Trash2 className="w-3.5 h-3.5" />
