@@ -153,7 +153,7 @@ interface ChronicleState {
   showToast: (msg: string) => void;
 }
 
-export const useChronicleStore = create<ChronicleState>()((set) => ({
+export const useChronicleStore = create<ChronicleState>()((set, get) => ({
   roomId: 'global-room',
   isEmbeddedVTT: false,
   activeTab: 'wiki',
@@ -223,7 +223,27 @@ export const useChronicleStore = create<ChronicleState>()((set) => ({
   setSelectedMapId: (selectedMapId) => set({ selectedMapId }),
   setSelectedCreatureId: (selectedCreatureId) => set({ selectedCreatureId }),
   setSelectedBookId: (selectedBookId) => set({ selectedBookId }),
-  openFloatingSheet: (floatingSheetCharacterId) => set({ floatingSheetCharacterId }),
+  openFloatingSheet: (floatingSheetCharacterId) => {
+    if (
+      floatingSheetCharacterId &&
+      get().isEmbeddedVTT &&
+      typeof window !== 'undefined' &&
+      window.parent &&
+      window.parent !== window
+    ) {
+      const charName = get().characters[floatingSheetCharacterId]?.name || 'Personagem';
+      window.parent.postMessage(
+        {
+          type: 'CHRONICLE_OPEN_SHEET',
+          characterId: floatingSheetCharacterId,
+          characterName: charName,
+        },
+        '*'
+      );
+      return;
+    }
+    set({ floatingSheetCharacterId });
+  },
 
   setHydrated: (isHydrated) => set({ isHydrated }),
   setCharacters: (characters) => set({ characters }),

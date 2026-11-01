@@ -6,7 +6,7 @@ import {
   updateDoc,
   serverTimestamp,
 } from 'firebase/firestore';
-import { db } from './firebase';
+import { auth, db } from './firebase';
 import { buildWorldClockPayload, sanitizeForFirestore } from './utils';
 import { createMentionSyntax } from './markdown-engine';
 import { DEFAULT_CALENDAR, useChronicleStore } from '@/store/useChronicleStore';
@@ -232,15 +232,17 @@ export async function deleteRegionalMap(roomId: string, mapId: string): Promise<
 export async function moveVTTPlayersToScene(roomId: string, sceneId: string): Promise<boolean> {
   try {
     const safeRoom = roomId || 'global-room';
-    await setDoc(
-      doc(db, 'rooms', safeRoom),
-      {
-        playerSceneId: sceneId,
-        activeSceneId: sceneId,
-        updatedAt: Date.now(),
-      },
-      { merge: true }
-    );
+    const roomRef = doc(db, 'rooms', safeRoom);
+    const existing = await getDoc(roomRef);
+    const payload: Record<string, unknown> = {
+      playerSceneId: sceneId,
+      activeSceneId: sceneId,
+      updatedAt: Date.now(),
+    };
+    if (!existing.exists() && auth.currentUser?.uid) {
+      payload.gmId = auth.currentUser.uid;
+    }
+    await setDoc(roomRef, payload, { merge: true });
     return true;
   } catch (err) {
     console.warn('[Chronicle -> VTT] Falha ao mover jogadores para cena:', err);
@@ -327,6 +329,18 @@ export async function deleteCreature(roomId: string, creatureId: string): Promis
   await deleteDoc(roomColDoc(roomId, 'chronicle_creatures', creatureId));
 }
 
+function buildFallbackCreatureTokenDataUri(creature: BestiaryCreature): string {
+  const words = creature.name.trim().split(/\s+/).filter(Boolean);
+  const initials = (
+    words.length >= 2
+      ? `${words[0][0]}${words[1][0]}`
+      : (creature.name.slice(0, 2) || 'CR')
+  ).toUpperCase();
+  const gradeShort = (creature.threatGrade || 'Ameaça').slice(0, 10).toUpperCase();
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256"><defs><radialGradient id="g" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#1d222d"/><stop offset="100%" stop-color="#0b0d10"/></radialGradient></defs><circle cx="128" cy="128" r="120" fill="url(#g)" stroke="#d4953a" stroke-width="10"/><circle cx="128" cy="128" r="104" fill="none" stroke="#c94a4a" stroke-opacity="0.55" stroke-width="3" stroke-dasharray="10 6"/><text x="128" y="138" text-anchor="middle" fill="#ece8df" font-family="sans-serif" font-weight="800" font-size="74">${initials.replace(/[<>&"']/g, '')}</text><text x="128" y="188" text-anchor="middle" fill="#d4953a" font-family="monospace" font-weight="700" font-size="22">${gradeShort.replace(/[<>&"']/g, '')}</text></svg>`;
+  return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+}
+
 export async function spawnCreatureToVTTScene(
   sceneId: string,
   creature: BestiaryCreature,
@@ -348,6 +362,8 @@ export async function spawnCreatureToVTTScene(
   const count = Math.max(1, Math.min(8, options.count));
   const cellPx = 70;
   const sizePx = cellPx * (creature.sizeCells || 1);
+  const resolvedTokenImg =
+    creature.tokenUrl || creature.imageUrl || buildFallbackCreatureTokenDataUri(creature);
 
   for (let i = 0; i < count; i++) {
     const tokenId = crypto.randomUUID();
@@ -356,7 +372,7 @@ export async function spawnCreatureToVTTScene(
       id: tokenId,
       type: 'generic',
       characterId: null,
-      imgUrl: creature.tokenUrl || creature.imageUrl || null,
+      imgUrl: resolvedTokenImg,
       ownerId: null,
       allowedUsers: [],
       name: tokenName,

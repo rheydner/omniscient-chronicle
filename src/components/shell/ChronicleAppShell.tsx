@@ -103,6 +103,21 @@ export function ChronicleAppShell() {
     void pingSupabaseKeepAlive();
   }, []);
 
+  // Zero-reload postMessage bridge when embedded inside StarStream VTT
+  useEffect(() => {
+    const onMessage = (event: MessageEvent) => {
+      const data = event.data as { type?: string; tab?: ChronicleTabId } | null;
+      if (!data || typeof data !== 'object') return;
+      if (data.type === 'CHRONICLE_SWITCH_TAB' && data.tab) {
+        if (NAV_ITEMS.some((n) => n.id === data.tab)) {
+          setActiveTab(data.tab);
+        }
+      }
+    };
+    window.addEventListener('message', onMessage);
+    return () => window.removeEventListener('message', onMessage);
+  }, [setActiveTab]);
+
   const worldClock = useMemo(() => buildWorldClockPayload(calendar), [calendar]);
 
   return (
